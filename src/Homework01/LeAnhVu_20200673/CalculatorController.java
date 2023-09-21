@@ -17,13 +17,15 @@ public class CalculatorController {
         this.theView.acceptCalculateListener(new AcceptListener());
         this.theView.subtractCalculateListener(new SubtractListener());
         this.theView.divideCalculateListener(new DivideListener());
+        this.theView.rCalculateListener(new RListener());
+        this.theView.clearCalculateListener(new ClearListener());
     }
 
     class AddListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
 
-            float firstNumber, secondNumber ;
+            int firstNumber, secondNumber ;
 
 
             try{
@@ -39,7 +41,7 @@ public class CalculatorController {
 
             catch(NumberFormatException ex){
 
-                theView.displayErrorMessage("You Need to Enter 2 floategers");
+                theView.displayErrorMessage("You Need to Enter 2 integers");
 
             }
 
@@ -50,7 +52,7 @@ public class CalculatorController {
 
         public void actionPerformed(ActionEvent e) {
 
-            float firstNumber, secondNumber ;
+            int firstNumber, secondNumber ;
 
             try{
 
@@ -66,7 +68,7 @@ public class CalculatorController {
             }
 
             catch(NumberFormatException ex){
-                theView.displayErrorMessage("You Need to Enter 2 floategers");
+                theView.displayErrorMessage("You Need to Enter 2 integers");
 
             }
 
@@ -77,7 +79,7 @@ public class CalculatorController {
 
         public void actionPerformed(ActionEvent e) {
 
-            float firstNumber, secondNumber ;
+            int firstNumber, secondNumber ;
 
             try{
 
@@ -91,7 +93,7 @@ public class CalculatorController {
             }
 
             catch(NumberFormatException ex){
-                theView.displayErrorMessage("You Need to Enter 2 floategers");
+                theView.displayErrorMessage("You Need to Enter 2 integers");
 
             }
 
@@ -102,7 +104,7 @@ public class CalculatorController {
 
         public void actionPerformed(ActionEvent e) {
 
-            float firstNumber, secondNumber;
+            int firstNumber, secondNumber;
 
 
             try{
@@ -117,10 +119,43 @@ public class CalculatorController {
             }
 
             catch(NumberFormatException ex){
-                theView.displayErrorMessage("You Need to Enter 2 floategers");
+                theView.displayErrorMessage("You Need to Enter 2 integers");
 
             }
 
+        }
+
+    }
+    class RListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+
+            int firstNumber, secondNumber;
+
+
+            try{
+
+                firstNumber = theView.getFirstNumber();
+                secondNumber = theView.getSecondNumber();
+
+                theModel.rTwoNumbers(firstNumber, secondNumber);
+
+                theView.setCalcSolution(theModel.getCalculationValue());
+
+            }
+
+            catch(NumberFormatException ex){
+                theView.displayErrorMessage("You Need to Enter 2 integers");
+
+            }
+
+        }
+
+    }
+    class ClearListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            theView.getClearSolution();
         }
 
     }

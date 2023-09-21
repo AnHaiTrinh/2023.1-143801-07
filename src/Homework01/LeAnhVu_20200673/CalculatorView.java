@@ -20,6 +20,8 @@ public class CalculatorView extends JFrame{
     //private JButton buttonResult = new JButton("=");
     private JLabel jLabelEmpty = new JLabel("Result");
     private JLabel jLabelResult = new JLabel("");
+     private  JButton rButton = new JButton("%");
+     private JButton clearButton = new JButton("CLEAR");
     CalculatorView(){
 
         // Sets up the view and adds the components
@@ -39,22 +41,23 @@ public class CalculatorView extends JFrame{
         calcPanel.add(subtractButton);
         calcPanel.add(acceptButton);
         calcPanel.add(devideButton);
+        calcPanel.add(rButton);
+        calcPanel.add(clearButton);
         //calcPanel.add(buttonResult);
         this.add(calcPanel);
-
         // End of setting up the components --------
 
     }
 
-    public float getFirstNumber(){
+    public int getFirstNumber(){
 
-        return Float.parseFloat(firstNumber.getText());
+        return Integer.parseInt(firstNumber.getText());
 
     }
 
-    public float getSecondNumber(){
+    public int getSecondNumber(){
 
-        return Float.parseFloat(secondNumber.getText());
+        return Integer.parseInt(secondNumber.getText());
 
     }
 
@@ -69,7 +72,6 @@ public class CalculatorView extends JFrame{
         jLabelResult.setText(Double.toString(solution));
 
     }
-
     // If the calculateButton is clicked execute a method
     // in the Controller named actionPerformed
 
@@ -94,6 +96,14 @@ public class CalculatorView extends JFrame{
 
     }
 
+    void rCalculateListener( ActionListener listenForCalcButton){
+        rButton.addActionListener(listenForCalcButton);
+    }
+
+    void clearCalculateListener( ActionListener listenForCalcButton){
+        clearButton.addActionListener(listenForCalcButton);
+    }
+
     // Open a popup that contains the error message passed
 
     void displayErrorMessage(String errorMessage){
@@ -102,4 +112,10 @@ public class CalculatorView extends JFrame{
 
     }
 
+
+    public void getClearSolution() {
+        firstNumber.setText("");
+        secondNumber.setText("");
+        jLabelResult.setText("");
+    }
 }

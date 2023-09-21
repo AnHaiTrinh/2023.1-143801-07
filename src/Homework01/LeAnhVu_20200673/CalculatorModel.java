@@ -5,27 +5,38 @@ public class CalculatorModel {
     // Holds the value of the sum of the numbers
     // entered the view
 
-    private float calculationValue;
+    private int calculationValue;
 
-    public void addTwoNumbers(float firstNumber, float secondNumber){
+    public void addTwoNumbers(int firstNumber, int secondNumber){
 
         calculationValue = firstNumber + secondNumber;
 
     }
-    public void acceptTwoNumbers(float firstNumber, float secondNumber){
+    public void acceptTwoNumbers(int firstNumber, int secondNumber){
 
         calculationValue = firstNumber * secondNumber;
 
     }
-    public void divideTwoNumbers(float firstNumber, float secondNumber){
+    public void divideTwoNumbers(int firstNumber, int secondNumber){
         calculationValue =  firstNumber /secondNumber;
     }
-    public void subtractTwoNumbers(float firstNumber, float secondNumber){
+    public void subtractTwoNumbers(int firstNumber, int secondNumber){
 
         calculationValue = firstNumber - secondNumber;
 
     }
-    public float getCalculationValue(){
+    public void rTwoNumbers(int firstNumber, int secondNumber){
+
+        calculationValue = firstNumber % secondNumber;
+
+    }
+    public void clearTwoNumbers(){
+
+        calculationValue = 0;
+
+    }
+    
+    public int getCalculationValue(){
 
         return calculationValue;
 
