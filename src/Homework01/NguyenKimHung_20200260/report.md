@@ -14,4 +14,4 @@ Link to [Main.java](./Calculator/Main.java)
 ![git_files_2](./file_git_bash2.png)
 
 ##### Git branch
-![git branch](./branch_git_bash.png)
+![git_branch](./branch_git_bash.png)
