@@ -1,3 +1,5 @@
+package Homework01.NguyenKimHung_20200260;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
