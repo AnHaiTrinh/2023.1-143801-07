@@ -1,6 +1,6 @@
-package Homework01.All;
+package Homework01.LeAnhVu_20200673.Calculator;
 
-public class MVCCalculator {
+public class CalculatorMain {
 
     public static void main(String[] args) {
 
