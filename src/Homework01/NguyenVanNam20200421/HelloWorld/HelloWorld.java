@@ -1,3 +1,5 @@
+package Homework01.NguyenVanNam20200421.HelloWorld;
+
 import java.util.Scanner;
 
 public class HelloWorld {

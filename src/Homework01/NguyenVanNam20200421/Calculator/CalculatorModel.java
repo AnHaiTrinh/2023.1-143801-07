@@ -1,4 +1,4 @@
-package Calculator;
+package Homework01.NguyenVanNam20200421.Calculator;
 
 public class CalculatorModel {
     private double result;
