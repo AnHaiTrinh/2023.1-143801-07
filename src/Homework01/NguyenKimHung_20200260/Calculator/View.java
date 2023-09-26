@@ -78,7 +78,7 @@ public class View {
             public void actionPerformed(ActionEvent e) {
                 String s1 = txtFirstNumber.getText();
                 String s2 = txtSecondNumber.getText();
-                var res = controller.handleUserInput(s1, "+", s2);
+                int res = controller.handleUserInput(s1, "+", s2);
                 result.setText(String.valueOf(res));
             }
         });
@@ -87,7 +87,7 @@ public class View {
             public void actionPerformed(ActionEvent e) {
                 String s1 = txtFirstNumber.getText();
                 String s2 = txtSecondNumber.getText();
-                var res = controller.handleUserInput(s1, "-", s2);
+                int res = controller.handleUserInput(s1, "-", s2);
                 result.setText(String.valueOf(res));
             }
         });
@@ -96,7 +96,7 @@ public class View {
             public void actionPerformed(ActionEvent e) {
                 String s1 = txtFirstNumber.getText();
                 String s2 = txtSecondNumber.getText();
-                var res = controller.handleUserInput(s1, "x", s2);
+                int res = controller.handleUserInput(s1, "x", s2);
                 result.setText(String.valueOf(res));
             }
         });
@@ -105,7 +105,7 @@ public class View {
             public void actionPerformed(ActionEvent e) {
                 String s1 = txtFirstNumber.getText();
                 String s2 = txtSecondNumber.getText();
-                var res = controller.handleUserInput(s1, "/", s2);
+                int res = controller.handleUserInput(s1, "/", s2);
                 result.setText(String.valueOf(res));
             }
         });
@@ -114,7 +114,7 @@ public class View {
             public void actionPerformed(ActionEvent e) {
                 String s1 = txtFirstNumber.getText();
                 String s2 = txtSecondNumber.getText();
-                var res = controller.handleUserInput(s1, "%", s2);
+                int res = controller.handleUserInput(s1, "%", s2);
                 result.setText(String.valueOf(res));
             }
         });
