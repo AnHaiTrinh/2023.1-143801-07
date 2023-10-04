@@ -37,6 +37,9 @@ public class CalculatorController {
                     } catch (IllegalStateException illegalStateException) {
                         illegalStateException.printStackTrace();
                         theView.displayErrorMessage(illegalStateException.getMessage());
+                    } catch (ArithmeticException arithmeticException) {
+                        arithmeticException.printStackTrace();
+                        theView.displayErrorMessage(arithmeticException.getMessage());
                     }
                 }
             });
