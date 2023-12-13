@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<AnchorPane prefHeight="559.0" prefWidth="864.0" stylesheets="@HomeImportThongTin.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom7.importData.ImportDataController">
+   <children>
+      <fx:include source="../home/HomePage.fxml"/>
+      <Label layoutX="176.0" layoutY="25.0" prefHeight="22.0" prefWidth="199.0" text="Lịch sử import thông tin" />
+      <Button layoutX="176.0" layoutY="86.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="178.0" text="30/10/2023 - 06/11/2023" />
+      <TextField layoutX="536.0" layoutY="89.0" prefHeight="22.0" prefWidth="170.0" />
+      <Button layoutX="775.0" layoutY="89.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" text="Import" />
+      <TableView layoutX="176.0" layoutY="149.0" prefHeight="406.0" prefWidth="678.0">
+        <columns>
+          <TableColumn prefWidth="103.199951171875" text="Thứ" />
+          <TableColumn prefWidth="127.20001220703125" text="Ngày" />
+            <TableColumn prefWidth="205.60000610351562" text="Giờ" />
+            <TableColumn prefWidth="117.60003662109375" text="Số bản ghi" />
+            <TableColumn prefWidth="126.39996337890625" text="Trạng thái" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
