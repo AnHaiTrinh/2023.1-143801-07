@@ -13,4 +13,6 @@ module com.example.btl {
 
     opens com.nhom7.main to javafx.fxml;
     exports com.nhom7.main;
+    opens com.nhom7.menu to javafx.fxml;
+    exports com.nhom7.menu;
 }
