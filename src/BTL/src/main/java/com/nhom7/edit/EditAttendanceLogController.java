@@ -4,6 +4,7 @@ import com.nhom7.dbsubsystem.IDBSubSystem;
 import com.nhom7.entity.AttendanceLog;
 import com.nhom7.entity.Employee;
 import com.nhom7.hrsubsystem.IHRSubSystem;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -11,7 +12,7 @@ import javafx.scene.input.KeyCode;
 import java.net.URL;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -32,13 +33,11 @@ public class EditAttendanceLogController implements Initializable {
 
     private final IHRSubSystem hrSubSystem;
 
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-    private static final ArrayList<String> attendanceLogTypes = new ArrayList<>(
-            List.of("CHECKIN", "CHECKOUT")
-    );
+    public static final List<String> attendanceLogTypes = Arrays.asList("CHECKIN", "CHECKOUT");
 
     public EditAttendanceLogController(AttendanceLog attendanceLog, IDBSubSystem dbSubSystem, IHRSubSystem hrSubSystem) {
         this.attendanceLog = attendanceLog;
@@ -82,17 +81,15 @@ public class EditAttendanceLogController implements Initializable {
         cancel();
     }
 
-    public boolean validateInput() {
-        String attendanceLogType = typeComboBox.getValue();
-        if (!attendanceLogTypes.contains(attendanceLogType)) {
-            return false;
-        }
+    private boolean validateInput() {
+        String updatedTime = timeTextField.getText();
         try {
-            LocalTime.parse(timeTextField.getText(), TIME_FORMATTER);
+            LocalTime.parse(updatedTime, TIME_FORMATTER);
         } catch (Exception e) {
             return false;
         }
-        return true;
+        String updatedType = typeComboBox.getValue();
+        return attendanceLogTypes.contains(updatedType);
     }
 
     public boolean save() {

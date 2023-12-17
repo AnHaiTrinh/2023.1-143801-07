@@ -5,10 +5,11 @@ import com.nhom7.entity.AttendanceLog;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MemoryDBSubsystem implements IDBSubSystem {
-    private static List<AttendanceLog> attendanceLogList = new ArrayList<>(List.of(new AttendanceLog[]{
+    private static final List<AttendanceLog> attendanceLogList = Arrays.asList(
             new AttendanceLog(
                     1,
                     "20200673",
@@ -57,7 +58,7 @@ public class MemoryDBSubsystem implements IDBSubSystem {
                     "CHECKOUT",
                     "2"
             )
-    }));
+    );
     @Override
     public List<AttendanceLog> getAllAttendanceLogs() {
         return new ArrayList<>(attendanceLogList);

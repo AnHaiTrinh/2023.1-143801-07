@@ -3,11 +3,12 @@ package com.nhom7.hrsubsystem;
 import com.nhom7.entity.Employee;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MemoryHRSubSystem implements IHRSubSystem {
 
-    private static List<Employee> employeeList = new ArrayList<>(List.of(new Employee[]{
+    private static final List<Employee> employeeList = Arrays.asList(
             new Employee(
                     "20200673",
                     "Le Anh Vu",
@@ -31,8 +32,8 @@ public class MemoryHRSubSystem implements IHRSubSystem {
                     "Trinh An Hai",
                     "Officer",
                     "Accounting"
-            ),
-    }));
+            )
+    );
     @Override
     public List<Employee> getAllEmployees() {
         return employeeList;
