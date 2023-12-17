@@ -16,4 +16,14 @@ module com.example.btl {
     exports com.nhom7.main;
     opens com.nhom7.menu to javafx.fxml;
     exports com.nhom7.menu;
+    opens com.nhom7.login to javafx.fxml;
+    exports com.nhom7.login;
+    opens com.nhom7.edit to javafx.fxml;
+    exports com.nhom7.edit;
+    opens com.nhom7.dbsubsystem to javafx.fxml;
+    exports com.nhom7.dbsubsystem;
+    opens com.nhom7.hrsubsystem to javafx.fxml;
+    exports com.nhom7.hrsubsystem;
+    opens com.nhom7.entity to javafx.fxml;
+    exports com.nhom7.entity;
 }

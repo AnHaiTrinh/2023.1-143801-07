@@ -1,8 +1,6 @@
 package com.nhom7.login.auth;
 
-import com.nhom7.entity.employee.Employee;
-import com.nhom7.entity.employee.department.DepartmentFactory;
-import com.nhom7.entity.employee.title.TitleFactory;
+import com.nhom7.entity.Employee;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,8 +24,8 @@ public class DBAuthService implements IAuthService{
                 employee = new Employee(
                         rs.getString("id"),
                         rs.getString("name"),
-                        TitleFactory.instance().createTitle(rs.getString("title")),
-                        DepartmentFactory.instance().createDepartment(rs.getString("department"))
+                        rs.getString("title"),
+                        rs.getString("department")
                 );
             }
         } catch (SQLException e) {

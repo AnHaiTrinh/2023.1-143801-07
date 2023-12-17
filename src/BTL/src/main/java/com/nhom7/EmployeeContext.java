@@ -1,6 +1,6 @@
 package com.nhom7;
 
-import com.nhom7.entity.employee.Employee;
+import com.nhom7.entity.Employee;
 
 public class EmployeeContext {
     private static Employee employee;

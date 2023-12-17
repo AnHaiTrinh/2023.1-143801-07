@@ -1,6 +1,6 @@
 package com.nhom7.hrsubsystem;
 
-import com.nhom7.entity.employee.Employee;
+import com.nhom7.entity.Employee;
 
 import java.util.List;
 
