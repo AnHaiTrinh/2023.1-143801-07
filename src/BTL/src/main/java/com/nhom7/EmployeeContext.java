@@ -1,4 +1,4 @@
-package com.nhom7.login;
+package com.nhom7;
 
 import com.nhom7.entity.employee.Employee;
 
