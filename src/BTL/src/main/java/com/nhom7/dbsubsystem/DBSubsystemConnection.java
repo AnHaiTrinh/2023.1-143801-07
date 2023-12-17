@@ -1,4 +1,4 @@
-package com.nhom7.repository;
+package com.nhom7.dbsubsystem;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

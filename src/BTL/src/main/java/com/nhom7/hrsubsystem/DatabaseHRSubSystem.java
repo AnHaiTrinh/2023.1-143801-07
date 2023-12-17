@@ -13,15 +13,13 @@ import java.sql.SQLException;
 
 public class DatabaseHRSubSystem implements IHRSubSystem {
     @Override
-    public List<Employee> getAllEmployees(int limit, int offset) {
+    public List<Employee> getAllEmployees() {
         try {
             ArrayList<Employee> employeeList = new ArrayList<>();
             Connection connection = DatabaseHRSubsystemConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM employee LIMIT ? OFFSET ?"
+                    "SELECT * FROM employee"
             );
-            statement.setInt(1, limit);
-            statement.setInt(2, offset);
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
                 Employee employee = new Employee(

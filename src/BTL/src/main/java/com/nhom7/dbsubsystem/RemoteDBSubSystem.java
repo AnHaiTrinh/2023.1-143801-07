@@ -1,24 +1,23 @@
-package com.nhom7.repository;
+package com.nhom7.dbsubsystem;
 
 import com.nhom7.entity.attendancelog.AttendanceLog;
 import com.nhom7.entity.attendancelog.type.TypeFactory;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttendanceLogRepository implements IAttendanceLogRepository{
+public class RemoteDBSubSystem implements IDBSubSystem {
 
     @Override
-    public List<AttendanceLog> getAllAttendanceLogs(int limit, int offset) {
+    public List<AttendanceLog> getAllAttendanceLogs() {
         try{
             ArrayList<AttendanceLog> attendanceLogList = new ArrayList<>();
             Connection connection = DBSubsystemConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM attendance_log LIMIT ? OFFSET ?"
+                    "SELECT * FROM attendance_log"
             );
-            statement.setInt(1, limit);
-            statement.setInt(2, offset);
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
                 AttendanceLog attendanceLog = new AttendanceLog(
@@ -64,78 +63,43 @@ public class AttendanceLogRepository implements IAttendanceLogRepository{
         return attendanceLog;
     }
 
-    @Override
-    public List<AttendanceLog> filterAttendanceLogByEmployeeId(String employeeId, int limit, int offset) {
-        try {
-            ArrayList<AttendanceLog> attendanceLogList = new ArrayList<>();
-            Connection connection = DBSubsystemConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM attendance_log WHERE employee_id = ? LIMIT ? OFFSET ?"
-            );
-            statement.setString(1, employeeId);
-            statement.setInt(2, limit);
-            statement.setInt(3, offset);
-            ResultSet rs = statement.executeQuery();
-            while(rs.next()){
-                AttendanceLog attendanceLog = new AttendanceLog(
-                        rs.getInt("id"),
-                        rs.getString("employee_id"),
-                        rs.getDate("day").toLocalDate(),
-                        rs.getTime("time").toLocalTime(),
-                        TypeFactory.instance().createType(rs.getString("type")),
-                        rs.getString("attendance_machine_id")
+    private PreparedStatement constructFilterQuery(Connection connection, String employeeId, LocalDate day) throws SQLException {
+        PreparedStatement statement;
+        if(employeeId == null) {
+            if(day == null) {
+                statement = connection.prepareStatement(
+                        "SELECT * FROM attendance_log"
                 );
-                attendanceLogList.add(attendanceLog);
+            } else {
+                statement = connection.prepareStatement(
+                        "SELECT * FROM attendance_log WHERE day = ?"
+                );
+                statement.setDate(1, Date.valueOf(day));
             }
-            return attendanceLogList;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+
+        } else {
+            if(day == null) {
+                statement = connection.prepareStatement(
+                        "SELECT * FROM attendance_log WHERE employee_id = ?"
+                );
+                statement.setString(1, employeeId);
+            } else {
+                statement = connection.prepareStatement(
+                        "SELECT * FROM attendance_log WHERE employee_id = ? AND day = ?"
+                );
+                statement.setString(1, employeeId);
+                statement.setDate(2, Date.valueOf(day));
+            }
         }
+        return statement;
     }
 
     @Override
-    public List<AttendanceLog> filterAttendanceLogByDay(String day, int limit, int offset) {
-try {
-            ArrayList<AttendanceLog> attendanceLogList = new ArrayList<>();
-            Connection connection = DBSubsystemConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM attendance_log WHERE day = ? LIMIT ? OFFSET ?"
-            );
-            statement.setString(1, day);
-            statement.setInt(2, limit);
-            statement.setInt(3, offset);
-            ResultSet rs = statement.executeQuery();
-            while(rs.next()){
-                AttendanceLog attendanceLog = new AttendanceLog(
-                        rs.getInt("id"),
-                        rs.getString("employee_id"),
-                        rs.getDate("day").toLocalDate(),
-                        rs.getTime("time").toLocalTime(),
-                        TypeFactory.instance().createType(rs.getString("type")),
-                        rs.getString("attendance_machine_id")
-                );
-                attendanceLogList.add(attendanceLog);
-            }
-            return attendanceLogList;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @Override
-    public List<AttendanceLog> filterAttendanceLogByEmployeeIdAndDay(String employeeId, String day, int limit, int offset) {
+    public List<AttendanceLog> filterAttendanceLogByEmployeeIdAndDay(String employeeId, LocalDate day) {
         try {
             ArrayList<AttendanceLog> attendanceLogList = new ArrayList<>();
             Connection connection = DBSubsystemConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM attendance_log WHERE employee_id = ? AND day = ? LIMIT ? OFFSET ?"
-            );
-            statement.setString(1, employeeId);
-            statement.setString(2, day);
-            statement.setInt(3, limit);
-            statement.setInt(4, offset);
+            PreparedStatement statement = constructFilterQuery(connection, employeeId, day);
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
                 AttendanceLog attendanceLog = new AttendanceLog(

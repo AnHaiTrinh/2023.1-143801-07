@@ -8,10 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemoryHRSubSystem implements IHRSubSystem {
-    public MemoryHRSubSystem() {
-    }
 
-    private static final List<Employee> employeeList = List.of(new Employee[]{
+    private static List<Employee> employeeList = List.of(new Employee[]{
             new Employee(
                     "20200673",
                     "Le Anh Vu",
@@ -38,8 +36,8 @@ public class MemoryHRSubSystem implements IHRSubSystem {
             ),
     });
     @Override
-    public List<Employee> getAllEmployees(int limit, int offset) {
-        return employeeList.subList(offset, offset + limit);
+    public List<Employee> getAllEmployees() {
+        return employeeList;
     }
 
     @Override
