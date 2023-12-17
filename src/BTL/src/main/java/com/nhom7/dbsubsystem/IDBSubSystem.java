@@ -1,6 +1,6 @@
 package com.nhom7.dbsubsystem;
 
-import com.nhom7.entity.attendancelog.AttendanceLog;
+import com.nhom7.entity.AttendanceLog;
 
 import java.time.LocalDate;
 import java.util.List;

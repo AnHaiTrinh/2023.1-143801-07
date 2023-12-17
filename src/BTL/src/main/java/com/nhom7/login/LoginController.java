@@ -1,7 +1,7 @@
 package com.nhom7.login;
 
 import com.nhom7.EmployeeContext;
-import com.nhom7.entity.employee.Employee;
+import com.nhom7.entity.Employee;
 import com.nhom7.login.auth.IAuthService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -50,7 +50,7 @@ public class LoginController implements Initializable {
     private void onLoginFail() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText("Login unsuccessful");
+        alert.setHeaderText("Login unsuccessfully");
         alert.setContentText("Please check your employee id and password");
         alert.showAndWait();
     }

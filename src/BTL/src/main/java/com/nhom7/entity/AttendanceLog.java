@@ -1,6 +1,4 @@
-package com.nhom7.entity.attendancelog;
-
-import com.nhom7.entity.attendancelog.type.Type;
+package com.nhom7.entity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -10,7 +8,7 @@ public class AttendanceLog {
     private final String employeeId;
     private final LocalDate day;
     private LocalTime time;
-    private Type type;
+    private String type;
 
     private final String attendanceMachineId;
 
@@ -19,7 +17,7 @@ public class AttendanceLog {
             String employeeId,
             LocalDate day,
             LocalTime time,
-            Type type,
+            String type,
             String attendanceMachineId
     ) {
         this.id = id;
@@ -47,7 +45,7 @@ public class AttendanceLog {
     }
 
     public String getType() {
-        return type.getType();
+        return type;
     }
 
     public String getAttendanceMachineId() {
@@ -58,8 +56,12 @@ public class AttendanceLog {
         this.time = time;
     }
 
-    public void setType(Type type) {
+    public void setType(String type) {
         this.type = type;
+    }
+
+    public String getDayOfWeek() {
+        return day.getDayOfWeek().toString();
     }
 
 }

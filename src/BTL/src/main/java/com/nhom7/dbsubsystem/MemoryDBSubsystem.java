@@ -1,7 +1,6 @@
 package com.nhom7.dbsubsystem;
 
-import com.nhom7.entity.attendancelog.AttendanceLog;
-import com.nhom7.entity.attendancelog.type.TypeFactory;
+import com.nhom7.entity.AttendanceLog;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -9,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemoryDBSubsystem implements IDBSubSystem {
-    private static List<AttendanceLog> attendanceLogList = List.of(new AttendanceLog[]{
+    private static List<AttendanceLog> attendanceLogList = new ArrayList<>(List.of(new AttendanceLog[]{
             new AttendanceLog(
                     1,
                     "20200673",
                     LocalDate.parse("2021-05-01"),
                     LocalTime.parse("07:00:00"),
-                    TypeFactory.instance().createType("CHECKIN"),
+                    "CHECKIN",
                     "1"
             ),
             new AttendanceLog(
@@ -23,7 +22,7 @@ public class MemoryDBSubsystem implements IDBSubSystem {
                     "20200196",
                     LocalDate.parse("2021-05-01"),
                     LocalTime.parse("07:30:00"),
-                    TypeFactory.instance().createType("CHECKIN"),
+                    "CHECKIN",
                     "1"
             ),
             new AttendanceLog(
@@ -31,7 +30,7 @@ public class MemoryDBSubsystem implements IDBSubSystem {
                     "20200673",
                     LocalDate.parse("2021-05-01"),
                     LocalTime.parse("17:00:00"),
-                    TypeFactory.instance().createType("CHECKOUT"),
+                    "CHECKOUT",
                     "1"
             ),
             new AttendanceLog(
@@ -39,7 +38,7 @@ public class MemoryDBSubsystem implements IDBSubSystem {
                     "20200196",
                     LocalDate.parse("2021-05-01"),
                     LocalTime.parse("17:18:02"),
-                    TypeFactory.instance().createType("CHECKOUT"),
+                    "CHECKOUT",
                     "1"
             ),
             new AttendanceLog(
@@ -47,7 +46,7 @@ public class MemoryDBSubsystem implements IDBSubSystem {
                     "20200260",
                     LocalDate.parse("2021-05-02"),
                     LocalTime.parse("08:00:00"),
-                    TypeFactory.instance().createType("CHECKIN"),
+                    "CHECKIN",
                     "2"
             ),
             new AttendanceLog(
@@ -55,10 +54,10 @@ public class MemoryDBSubsystem implements IDBSubSystem {
                     "20200673",
                     LocalDate.parse("2021-05-02"),
                     LocalTime.parse("16:49:31"),
-                    TypeFactory.instance().createType("CHECKOUT"),
+                    "CHECKOUT",
                     "2"
             )
-    });
+    }));
     @Override
     public List<AttendanceLog> getAllAttendanceLogs() {
         return new ArrayList<>(attendanceLogList);

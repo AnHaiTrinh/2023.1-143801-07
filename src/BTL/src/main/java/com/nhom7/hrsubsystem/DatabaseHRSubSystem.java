@@ -1,8 +1,6 @@
 package com.nhom7.hrsubsystem;
 
-import com.nhom7.entity.employee.Employee;
-import com.nhom7.entity.employee.department.DepartmentFactory;
-import com.nhom7.entity.employee.title.TitleFactory;
+import com.nhom7.entity.Employee;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -25,8 +23,8 @@ public class DatabaseHRSubSystem implements IHRSubSystem {
                 Employee employee = new Employee(
                         rs.getString("id"),
                         rs.getString("name"),
-                        TitleFactory.instance().createTitle(rs.getString("title")),
-                        DepartmentFactory.instance().createDepartment(rs.getString("department"))
+                        rs.getString("title"),
+                        rs.getString("department")
                 );
                 employeeList.add(employee);
             }
@@ -51,8 +49,8 @@ public class DatabaseHRSubSystem implements IHRSubSystem {
                 employee = new Employee(
                         rs.getString("id"),
                         rs.getString("name"),
-                        TitleFactory.instance().createTitle(rs.getString("title")),
-                        DepartmentFactory.instance().createDepartment(rs.getString("department"))
+                        rs.getString("title"),
+                        rs.getString("department")
                 );
             }
         } catch (SQLException e) {

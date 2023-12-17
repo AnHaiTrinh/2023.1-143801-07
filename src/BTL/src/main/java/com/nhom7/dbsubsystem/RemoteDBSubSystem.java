@@ -1,7 +1,6 @@
 package com.nhom7.dbsubsystem;
 
-import com.nhom7.entity.attendancelog.AttendanceLog;
-import com.nhom7.entity.attendancelog.type.TypeFactory;
+import com.nhom7.entity.AttendanceLog;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -25,7 +24,7 @@ public class RemoteDBSubSystem implements IDBSubSystem {
                         rs.getString("employee_id"),
                         rs.getDate("day").toLocalDate(),
                         rs.getTime("time").toLocalTime(),
-                        TypeFactory.instance().createType(rs.getString("type")),
+                        rs.getString("type"),
                         rs.getString("attendance_machine_id")
                 );
                 attendanceLogList.add(attendanceLog);
@@ -53,7 +52,7 @@ public class RemoteDBSubSystem implements IDBSubSystem {
                         rs.getString("employee_id"),
                         rs.getDate("day").toLocalDate(),
                         rs.getTime("time").toLocalTime(),
-                        TypeFactory.instance().createType(rs.getString("type")),
+                        rs.getString("type"),
                         rs.getString("attendance_machine_id")
                 );
             }
@@ -107,7 +106,7 @@ public class RemoteDBSubSystem implements IDBSubSystem {
                         rs.getString("employee_id"),
                         rs.getDate("day").toLocalDate(),
                         rs.getTime("time").toLocalTime(),
-                        TypeFactory.instance().createType(rs.getString("type")),
+                        rs.getString("type"),
                         rs.getString("attendance_machine_id")
                 );
                 attendanceLogList.add(attendanceLog);
