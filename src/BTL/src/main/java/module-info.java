@@ -8,9 +8,9 @@ module com.example.btl {
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
-    //requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.sql;
+    requires org.apache.poi.ooxml;
 
     opens com.nhom7.main to javafx.fxml;
     exports com.nhom7.main;
