@@ -26,6 +26,6 @@ module com.example.btl {
     exports com.nhom7.hrsubsystem;
     opens com.nhom7.entity to javafx.fxml;
     exports com.nhom7.entity;
-    opens com.nhom7.attendanceloglist to javafx.fxml;
-    exports com.nhom7.attendanceloglist;
+    opens com.nhom7.import_data to javafx.fxml;
+    exports com.nhom7.import_data;
 }
