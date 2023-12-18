@@ -1,4 +1,4 @@
-package com.nhom7.importData;
+package com.nhom7.import_data;
 
 public class ImportDataController {
 }
