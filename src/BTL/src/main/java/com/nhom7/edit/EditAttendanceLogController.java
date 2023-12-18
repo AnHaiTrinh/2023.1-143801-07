@@ -4,7 +4,6 @@ import com.nhom7.dbsubsystem.IDBSubSystem;
 import com.nhom7.entity.AttendanceLog;
 import com.nhom7.entity.Employee;
 import com.nhom7.hrsubsystem.IHRSubSystem;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -26,18 +25,18 @@ public class EditAttendanceLogController implements Initializable {
     public Label machineIdLabel;
     public TextField timeTextField;
     public Button saveButton;
-    public Button cancelButton;
+    public Button exitButton;
     private AttendanceLog attendanceLog;
 
     private final IDBSubSystem dbSubSystem;
 
     private final IHRSubSystem hrSubSystem;
 
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
+    static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-    public static final List<String> attendanceLogTypes = Arrays.asList("CHECKIN", "CHECKOUT");
+    static final List<String> attendanceLogTypes = Arrays.asList("CHECKIN", "CHECKOUT");
 
     public EditAttendanceLogController(AttendanceLog attendanceLog, IDBSubSystem dbSubSystem, IHRSubSystem hrSubSystem) {
         this.attendanceLog = attendanceLog;
@@ -72,16 +71,17 @@ public class EditAttendanceLogController implements Initializable {
         timeTextField.setText(attendanceLog.getTime().format(TIME_FORMATTER));
     }
 
-    public void handleCancelButtonClicked() {
+    public void handleExitButtonClicked() {
         boolean confirmed = displayConfirmationMessage("Are you sure you want to exit?");
         if (!confirmed) {
             displayInformationMessage("Operation Cancelled");
             return;
         }
-        cancel();
+        exit();
     }
 
     private boolean validateInput() {
+        boolean validated = true;
         String updatedTime = timeTextField.getText();
         try {
             LocalTime.parse(updatedTime, TIME_FORMATTER);
@@ -92,7 +92,7 @@ public class EditAttendanceLogController implements Initializable {
         return attendanceLogTypes.contains(updatedType);
     }
 
-    public boolean save() {
+    private boolean save() {
         AttendanceLog updatedAttendanceLog = new AttendanceLog(
                 attendanceLog.getId(),
                 attendanceLog.getEmployeeId(),
@@ -125,7 +125,7 @@ public class EditAttendanceLogController implements Initializable {
         return alert.getResult() == ButtonType.OK;
     }
 
-    private void displayInformationMessage(String message) {
+    void displayInformationMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setHeaderText("Information");
@@ -133,7 +133,7 @@ public class EditAttendanceLogController implements Initializable {
         alert.showAndWait();
     }
 
-    private void cancel() {
+    private void exit() {
 
     }
 
@@ -163,10 +163,10 @@ public class EditAttendanceLogController implements Initializable {
                     }
                 }
         );
-        cancelButton.setOnKeyPressed(
+        exitButton.setOnKeyPressed(
                 keyEvent -> {
                     if (keyEvent.getCode().equals(KeyCode.ENTER)) {
-                        handleCancelButtonClicked();
+                        handleExitButtonClicked();
                     }
                 }
         );

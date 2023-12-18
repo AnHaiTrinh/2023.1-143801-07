@@ -64,4 +64,17 @@ public class AttendanceLog {
         return day.getDayOfWeek().toString();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof AttendanceLog) {
+            AttendanceLog other = (AttendanceLog) obj;
+            return this.id == other.id
+                    && this.employeeId.equals(other.employeeId)
+                    && this.day.equals(other.day)
+                    && this.time.equals(other.time)
+                    && this.type.equals(other.type)
+                    && this.attendanceMachineId.equals(other.attendanceMachineId);
+        }
+        return false;
+    }
 }
