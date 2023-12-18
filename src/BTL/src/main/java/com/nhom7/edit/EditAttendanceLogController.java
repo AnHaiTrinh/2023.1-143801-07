@@ -28,9 +28,9 @@ public class EditAttendanceLogController implements Initializable {
     public Button exitButton;
     private AttendanceLog attendanceLog;
 
-    private final IDBSubSystem dbSubSystem;
+    private IDBSubSystem dbSubSystem;
 
-    private final IHRSubSystem hrSubSystem;
+    private IHRSubSystem hrSubSystem;
 
     static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -103,7 +103,7 @@ public class EditAttendanceLogController implements Initializable {
         );
         boolean result = dbSubSystem.updateAttendanceLog(updatedAttendanceLog);
         if (result) {
-            attendanceLog = updatedAttendanceLog;
+            setAttendanceLog(updatedAttendanceLog);
         }
         return result;
     }
@@ -171,5 +171,17 @@ public class EditAttendanceLogController implements Initializable {
                 }
         );
         loadInitialData();
+    }
+
+    public void setAttendanceLog(AttendanceLog attendanceLog) {
+        this.attendanceLog = attendanceLog;
+    }
+
+    public void setDbSubSystem(IDBSubSystem dbSubSystem) {
+        this.dbSubSystem = dbSubSystem;
+    }
+
+    public void setHrSubSystem(IHRSubSystem hrSubSystem) {
+        this.hrSubSystem = hrSubSystem;
     }
 }

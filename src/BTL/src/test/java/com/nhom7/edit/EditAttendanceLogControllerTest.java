@@ -1,5 +1,6 @@
 package com.nhom7.edit;
 
+import com.nhom7.dbsubsystem.ErrorDBSubSystem;
 import com.nhom7.dbsubsystem.IDBSubSystem;
 import com.nhom7.dbsubsystem.MemoryDBSubsystem;
 import com.nhom7.entity.AttendanceLog;
@@ -181,6 +182,54 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
         clickOn("#saveButton");
 
         assertAlertPopup("Are you sure you want to save?");
+
+        clickOn("Cancel");
+
+        assertAlertPopup("Operation Cancelled");
+
+        clickOn("OK");
+
+        assertNotUpdatedAttendanceLogIsDisplayed();
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "08:00:00, CHECKIN",
+            "12:14:13, CHECKOUT",
+            "18:09:24, CHECKIN",
+    })
+    void testDbSubSystemError(String time, String type) {
+        controller.setDbSubSystem(new ErrorDBSubSystem());
+
+        enterInput(time, type);
+
+        clickOn("#saveButton");
+
+        assertAlertPopup("Are you sure you want to save?");
+
+        clickOn("OK");
+
+        assertAlertPopup("Cannot save attendance log");
+
+        clickOn("OK");
+
+        assertNotUpdatedAttendanceLogIsDisplayed();
+    }
+
+    @Test
+    void testExitButtonClick() {
+        clickOn("#exitButton");
+
+        assertAlertPopup("Are you sure you want to exit?");
+
+        clickOn("OK");
+    }
+
+    @Test
+    void testCancelExitButtonClick() {
+        clickOn("#exitButton");
+
+        assertAlertPopup("Are you sure you want to exit?");
 
         clickOn("Cancel");
 
