@@ -120,6 +120,7 @@
       <artifactId>poi-ooxml</artifactId>
       <version>5.2.3</version>
     </dependency>
+<<<<<<< HEAD
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-all</artifactId>
@@ -150,6 +151,8 @@
       <artifactId>log4j-api</artifactId>
       <version>2.14.1</version>
     </dependency>
+=======
+>>>>>>> 756c15769f629487ac0434d7af4dc7cdfa1cb949
   </dependencies>
 
   <build>
