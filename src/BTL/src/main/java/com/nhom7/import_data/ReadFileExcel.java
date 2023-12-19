@@ -1,51 +1,47 @@
 package com.nhom7.import_data;
 
-import java.io.*;
-import java.net.URL;
-import java.util.Iterator;
-
-import org.apache.poi.EncryptedDocumentException;
+import com.nhom7.entity.AttendanceLog;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-public class ReadFileExcel implements FileReadService{
-    public void readFileData(String url) throws IOException {
-        System.out.println(url);
-        try (InputStream inputStream = new URL(url).openStream()) {
-            Workbook workbook = WorkbookFactory.create(inputStream);
-            // Assuming only one sheet in the Excel file
-            Sheet sheet = workbook.getSheetAt(0);
-            // Loop through rows and cells to print the content
-            for (Row row : sheet) {
-                for (Cell cell : row) {
-                    switch (cell.getCellType()) {
-                        case STRING:
-                            System.out.print(cell.getStringCellValue() + "\t");
-                            break;
-                        case NUMERIC:
-                            System.out.print(cell.getNumericCellValue() + "\t");
-                            break;
-                        case BOOLEAN:
-                            System.out.print(cell.getBooleanCellValue() + "\t");
-                            break;
-                        case FORMULA:
-                            System.out.print(cell.getCellFormula() + "\t");
-                            break;
-                        case BLANK:
-                            System.out.print("<BLANK>\t");
-                            break;
-                        default:
-                            System.out.print("<UNKNOWN TYPE>\t");
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class ReadFileExcel implements ReadFileService{
+    CheckFileExcel checkFileExcel = new CheckFileExcel();
+    @Override
+    public List<AttendanceLog> readDataFromFile(String url) throws IOException {
+        List<AttendanceLog> attendanceLogList = new ArrayList<>();
+        String result = checkFileExcel.checkErrorFile(url);
+        if( result.equals("success")){
+            try (InputStream inputStream = new URL(url).openStream()) {
+                Workbook workbook = WorkbookFactory.create(inputStream);
+                Sheet sheet = workbook.getSheetAt(0);
+                Iterator<Row> rowIterator = sheet.iterator();
+                boolean isFirstRow = true;
+                while (rowIterator.hasNext()) {
+                    Row row = rowIterator.next();
+                    if (isFirstRow) {
+                        isFirstRow = false;
+                        continue;
                     }
+                    String maNV = String.valueOf((int) row.getCell(0).getNumericCellValue());
+                    LocalDate localDate = LocalDate.ofEpochDay((int) row.getCell(1).getNumericCellValue());
+                    LocalTime localTime = LocalTime.ofSecondOfDay((int) row.getCell(2).getNumericCellValue());
+                    String type = String.valueOf(row.getCell(3).getStringCellValue());
+                    String machineID = String.valueOf((int) row.getCell(4).getNumericCellValue());
+                    AttendanceLog attendanceLog = new AttendanceLog(1, maNV, localDate, localTime, type, machineID);
+                    attendanceLogList.add(attendanceLog);
                 }
-                System.out.println(); // Move to the next line after each row
+                workbook.close();
             }
-
-            workbook.close();
-        } catch (IOException | EncryptedDocumentException e) {
-            e.printStackTrace();
-            throw new IOException("Error reading the Excel file from URL: " + e.getMessage());
+            return attendanceLogList;
         }
+        return null;
     }
-
 }
