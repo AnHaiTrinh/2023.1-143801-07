@@ -10,12 +10,12 @@ import java.io.IOException;
 
 public class SelectFileImportData {
     private FileChooser fileChooser;
-    private ReadFileExcel readFileExcel;
+    private CheckFileExcel checkFileExcel;
     static final FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("data file", "*.csv", "*.xlsx");
 
-    public SelectFileImportData(FileChooser fileChooser, ReadFileExcel readFileExcel) {
+    public SelectFileImportData(FileChooser fileChooser, CheckFileExcel checkFileExcel) {
         this.fileChooser = fileChooser;
-        this.readFileExcel = readFileExcel;
+        this.checkFileExcel = checkFileExcel;
     }
 
     public  void  onMousePressedButtonAcceptImport(MouseEvent event) throws IOException {
@@ -25,6 +25,8 @@ public class SelectFileImportData {
         fileChooser.setTitle("Chọn file import");
         fileChooser.getExtensionFilters().add(extensionFilter);
         File file = fileChooser.showOpenDialog(stage);
-        readFileExcel.readFileData(file.toURI().toString());
+        //String tes = checkFileExcel.checkErrorFile(file.toURI().toString());
+        ReadFileExcel readFileExcel = new ReadFileExcel();
+        readFileExcel.readDataFromFile(file.toURI().toString());
     }
 }
