@@ -18,7 +18,7 @@ public class ReadFileExcel implements ReadFileService{
     public List<AttendanceLog> readDataFromFile(String url) throws IOException {
         List<AttendanceLog> attendanceLogList = new ArrayList<>();
         String result = checkFileExcel.checkErrorFile(url);
-        if (result.equals("success")) {
+        if( result.equals("success")){
             try (InputStream inputStream = new URL(url).openStream()) {
                 Workbook workbook = WorkbookFactory.create(inputStream);
                 Sheet sheet = workbook.getSheetAt(0);
