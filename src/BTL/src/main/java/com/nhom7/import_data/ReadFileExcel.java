@@ -1,34 +1,47 @@
 package com.nhom7.import_data;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import com.nhom7.entity.AttendanceLog;
+import org.apache.poi.ss.usermodel.*;
+
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-public class ReadFileExcel {
-    public ReadFileExcel() {
-
-    }
-    public void ReadFileData(File fileExcel) throws IOException {
-        FileInputStream file = new FileInputStream(fileExcel);
-        XSSFWorkbook _Workbook = new XSSFWorkbook (file);
-        XSSFSheet _Sheet = _Workbook.getSheetAt (0);
-        Iterator<Row> _RowIterator = _Sheet.iterator();
-
-        while (((Iterator<?>) _RowIterator).hasNext()) {
-            Row _Row = _RowIterator.next();
-            Iterator<Cell> _CellIterator = _Row.cellIterator();
-
-            while (_CellIterator.hasNext()) {
-                Cell _Cell = _CellIterator.next();
-                System.out.print(_Cell.toString() + "\t");
+public class ReadFileExcel implements ReadFileService{
+    CheckFileExcel checkFileExcel = new CheckFileExcel();
+    @Override
+    public List<AttendanceLog> readDataFromFile(String url) throws IOException {
+        List<AttendanceLog> attendanceLogList = new ArrayList<>();
+        String result = checkFileExcel.checkErrorFile(url);
+        if( result.equals("success")){
+            try (InputStream inputStream = new URL(url).openStream()) {
+                Workbook workbook = WorkbookFactory.create(inputStream);
+                Sheet sheet = workbook.getSheetAt(0);
+                Iterator<Row> rowIterator = sheet.iterator();
+                boolean isFirstRow = true;
+                while (rowIterator.hasNext()) {
+                    Row row = rowIterator.next();
+                    if (isFirstRow) {
+                        isFirstRow = false;
+                        continue;
+                    }
+                    String maNV = String.valueOf((int) row.getCell(0).getNumericCellValue());
+                    LocalDate localDate = LocalDate.ofEpochDay((int) row.getCell(1).getNumericCellValue());
+                    LocalTime localTime = LocalTime.ofSecondOfDay((int) row.getCell(2).getNumericCellValue());
+                    String type = String.valueOf(row.getCell(3).getStringCellValue());
+                    String machineID = String.valueOf((int) row.getCell(4).getNumericCellValue());
+                    AttendanceLog attendanceLog = new AttendanceLog(1, maNV, localDate, localTime, type, machineID);
+                    attendanceLogList.add(attendanceLog);
+                }
+                workbook.close();
             }
-            System.out.println();
+            return attendanceLogList;
         }
+        return null;
     }
 }
