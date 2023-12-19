@@ -9,17 +9,22 @@ import java.io.File;
 import java.io.IOException;
 
 public class SelectFileImportData {
-    public  void  onMousePressedButtonAcceptImport(MouseEvent event) throws IOException {
+    private FileChooser fileChooser;
+    private ReadFileExcel readFileExcel;
+    static final FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("data file", "*.csv", "*.xlsx");
 
+    public SelectFileImportData(FileChooser fileChooser, ReadFileExcel readFileExcel) {
+        this.fileChooser = fileChooser;
+        this.readFileExcel = readFileExcel;
+    }
+
+    public  void  onMousePressedButtonAcceptImport(MouseEvent event) throws IOException {
     }
     public void onMousePressedButtonSelectFileImport(MouseEvent event) throws IOException{
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Chọn file import");
-        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("data file", "*.csv", "*.xlsx");
         fileChooser.getExtensionFilters().add(extensionFilter);
         File file = fileChooser.showOpenDialog(stage);
-        ReadFileExcel readFileExcel = new ReadFileExcel();
-        readFileExcel.ReadFileData(file);
+        readFileExcel.readFileData(file.toURI().toString());
     }
 }
