@@ -30,18 +30,24 @@ public class ReadFileExcel implements ReadFileService{
                         isFirstRow = false;
                         continue;
                     }
-                    String maNV = String.valueOf((int) row.getCell(0).getNumericCellValue());
-                    LocalDate localDate = LocalDate.ofEpochDay((int) row.getCell(1).getNumericCellValue());
-                    LocalTime localTime = LocalTime.ofSecondOfDay((int) row.getCell(2).getNumericCellValue());
-                    String type = String.valueOf(row.getCell(3).getStringCellValue());
-                    String machineID = String.valueOf((int) row.getCell(4).getNumericCellValue());
-                    AttendanceLog attendanceLog = new AttendanceLog(1, maNV, localDate, localTime, type, machineID);
+                    String maNV = row.getCell(0).getStringCellValue();
+                    LocalDate localDate = LocalDate.parse(row.getCell(1).getStringCellValue());
+                    LocalTime localTime = LocalTime.parse(row.getCell(2).getStringCellValue());
+                    String type = row.getCell(3).getStringCellValue();
+                    String machineID = row.getCell(4).getStringCellValue();
+                    AttendanceLog attendanceLog = new AttendanceLog(maNV, localDate, localTime, type, machineID);
                     attendanceLogList.add(attendanceLog);
                 }
                 workbook.close();
             }
+            catch (Exception e){
+                //e.printStackTrace();
+            }
             return attendanceLogList;
+        }else {
+            ConsoleMessageDisplay consoleMessageDisplay = new ConsoleMessageDisplay();
+            consoleMessageDisplay.displayMessage(result);
+            return  null;
         }
-        return null;
     }
 }
