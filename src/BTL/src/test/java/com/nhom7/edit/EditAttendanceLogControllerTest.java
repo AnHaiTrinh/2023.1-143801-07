@@ -185,7 +185,7 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
 
         clickOn("Cancel");
 
-        assertAlertPopup("Operation Cancelled");
+        assertAlertPopup("Operation cancelled");
 
         clickOn("OK");
 
@@ -233,7 +233,7 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
 
         clickOn("Cancel");
 
-        assertAlertPopup("Operation Cancelled");
+        assertAlertPopup("Operation cancelled");
 
         clickOn("OK");
 

@@ -1,5 +1,6 @@
 package com.nhom7.edit;
 
+import com.nhom7.alert.AlertFactory;
 import com.nhom7.dbsubsystem.IDBSubSystem;
 import com.nhom7.entity.AttendanceLog;
 import com.nhom7.entity.Employee;
@@ -47,23 +48,24 @@ public class EditAttendanceLogController implements Initializable {
     public void handleSaveButtonClicked() {
         boolean validated = validateInput();
         if (!validated) {
-            displayErrorMessage("Invalid input");
+            AlertFactory.getInstance().createAlert("Error", "Invalid input");
             rollback();
             return;
         }
-        boolean confirmed = displayConfirmationMessage("Are you sure you want to save?");
+        boolean confirmed = AlertFactory.getInstance().
+                createAlertAndWaitForRespond("Confirmation", "Are you sure you want to save?");
         if (!confirmed) {
-            displayInformationMessage("Operation Cancelled");
+            AlertFactory.getInstance().createAlert("Information", "Operation cancelled");
             rollback();
             return;
         }
         boolean saved = save();
         if (!saved) {
-            displayErrorMessage("Cannot save attendance log");
+            AlertFactory.getInstance().createAlert("Error", "Cannot save attendance log");
             rollback();
             return;
         }
-        displayInformationMessage("Saved successfully");
+        AlertFactory.getInstance().createAlert("Information", "Saved successfully");
     }
 
     private void rollback() {
@@ -72,16 +74,16 @@ public class EditAttendanceLogController implements Initializable {
     }
 
     public void handleExitButtonClicked() {
-        boolean confirmed = displayConfirmationMessage("Are you sure you want to exit?");
+        boolean confirmed = AlertFactory.getInstance().
+                createAlertAndWaitForRespond("Confirmation", "Are you sure you want to exit?");
         if (!confirmed) {
-            displayInformationMessage("Operation Cancelled");
+            AlertFactory.getInstance().createAlert("Information", "Operation cancelled");
             return;
         }
         exit();
     }
 
     private boolean validateInput() {
-        boolean validated = true;
         String updatedTime = timeTextField.getText();
         try {
             LocalTime.parse(updatedTime, TIME_FORMATTER);
@@ -116,32 +118,16 @@ public class EditAttendanceLogController implements Initializable {
         alert.showAndWait();
     }
 
-    private boolean displayConfirmationMessage(String message) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation");
-        alert.setHeaderText("Confirmation");
-        alert.setContentText(message);
-        alert.showAndWait();
-        return alert.getResult() == ButtonType.OK;
-    }
-
-    void displayInformationMessage(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText("Information");
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
     private void exit() {
-
+        System.out.println("Exit");
     }
 
-    public void loadInitialData(){
+    private void loadInitialData(){
         String employeeId = attendanceLog.getEmployeeId();
         Employee employee = hrSubSystem.getEmployeeById(employeeId);
         if (employee == null) {
-            displayErrorMessage("Cannot find employee with ID " + employeeId);
+            AlertFactory.getInstance()
+                    .createAlert("Error", "There is no employee with ID" + employeeId);
             return;
         }
         employeeIdLabel.setText(employee.getId());
