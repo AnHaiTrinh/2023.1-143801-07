@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class AttendanceLog {
-    private final int id;
+    private int id;
     private final String employeeId;
     private final LocalDate day;
     private LocalTime time;
@@ -21,6 +21,14 @@ public class AttendanceLog {
             String attendanceMachineId
     ) {
         this.id = id;
+        this.employeeId = employeeId;
+        this.day = day;
+        this.time = time;
+        this.type = type;
+        this.attendanceMachineId = attendanceMachineId;
+    }
+
+    public AttendanceLog(String employeeId, LocalDate day, LocalTime time, String type, String attendanceMachineId) {
         this.employeeId = employeeId;
         this.day = day;
         this.time = time;
