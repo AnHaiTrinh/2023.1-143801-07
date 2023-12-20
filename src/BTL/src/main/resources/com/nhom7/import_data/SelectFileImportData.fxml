@@ -30,11 +30,12 @@
     </Button>
     <TableView fx:id="tableView" layoutX="176.0" layoutY="149.0" prefHeight="406.0" prefWidth="678.0" stylesheets="@SelectFileImportData.css">
         <columns>
-            <TableColumn fx:id="maNV" prefWidth="118.4000244140625" text="Mã NV" />
-            <TableColumn fx:id="tenNV" prefWidth="132.79998779296875" text="Tên nhân viên" />
-            <TableColumn fx:id="ngay" prefWidth="142.4000244140625" text="Ngày" />
-            <TableColumn fx:id="gio" prefWidth="144.79998779296875" text="Giờ" />
-            <TableColumn fx:id="loai" prefWidth="142.4000244140625" text="Loại" />
+            <TableColumn fx:id="maNV" prefWidth="90.4000244140625" text="Mã NV" />
+            <TableColumn fx:id="tenNV" prefWidth="140.0" text="Tên nhân viên" />
+            <TableColumn fx:id="ngay" prefWidth="113.5999755859375" text="Ngày" />
+            <TableColumn fx:id="gio" prefWidth="116.800048828125" text="Giờ" />
+            <TableColumn fx:id="loai" prefWidth="99.99993896484375" text="Loại" />
+         <TableColumn fx:id="phongBan" prefWidth="118.4000244140625" text="Phòng ban" />
         </columns>
     </TableView>
     <Button layoutX="696.0" layoutY="89.0" mnemonicParsing="false" onMousePressed="#onMousePressedButtonSearchPathFile" prefHeight="30.0" prefWidth="56.0" textFill="#fafafa">

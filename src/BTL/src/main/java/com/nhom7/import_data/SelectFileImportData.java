@@ -23,17 +23,18 @@ public class SelectFileImportData implements Initializable {
     public CheckFileExcel checkFileExcel;
     public TableView tableView;
     public List<TableColumn> tableColumnList = new ArrayList<TableColumn>();
-    public TableColumn maNV, ngay, gio, loai;
+    public TableColumn maNV, ngay, gio, loai, tenNV, phongBan;
     public TextField labelPathToFile;
     public Button buttonAcceptImport;
     static final FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("data file", "*.csv", "*.xlsx");
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tableColumnList.add(maNV);
-        //tableColumnList.add(tenNV);
+        tableColumnList.add(tenNV);
         tableColumnList.add(ngay);
         tableColumnList.add(gio);
         tableColumnList.add(loai);
+        tableColumnList.add(phongBan);
         buttonAcceptImport.setDisable(true);
     }
     public SelectFileImportData(FileChooser fileChooser, CheckFileExcel checkFileExcel) {
