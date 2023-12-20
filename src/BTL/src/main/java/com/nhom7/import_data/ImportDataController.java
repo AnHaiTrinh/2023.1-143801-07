@@ -1,6 +1,4 @@
-
 package com.nhom7.import_data;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
