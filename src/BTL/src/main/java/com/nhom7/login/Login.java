@@ -14,8 +14,8 @@ public class Login extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader((Login.class.getResource("login-view.fxml")));
-        Scene scene = new Scene(fxmlLoader.load(), 300, 200);
+        FXMLLoader fxmlLoader = new FXMLLoader((Login.class.getResource("LoginPage.fxml")));
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();

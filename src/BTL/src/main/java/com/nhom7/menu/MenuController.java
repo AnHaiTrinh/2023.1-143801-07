@@ -1,10 +1,13 @@
 package com.nhom7.menu;
+import com.nhom7.EmployeeContext;
 import com.nhom7.attendanceloglist.AttendanceLogListController;
 import com.nhom7.attendanceloglist.AttendanceLogListView;
 import com.nhom7.dbsubsystem.MemoryAttendanceLogDBSubsystem;
+import com.nhom7.home.HomePageView;
 import com.nhom7.import_data.CheckFileExcel;
 import com.nhom7.import_data.ImportDataController;
 import com.nhom7.import_data.SelectFileImportData;
+import com.nhom7.login.Login;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -44,6 +47,21 @@ public class MenuController implements Initializable {
         ));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Danh sách chấm công");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void onMousePressedButtonOverView(MouseEvent event) throws IOException{
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HomePageView.class.getResource("HomePage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void onMousePressedButtonLogout(MouseEvent event) throws IOException {
+        EmployeeContext.destroy();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("LoginPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         stage.show();
     }
