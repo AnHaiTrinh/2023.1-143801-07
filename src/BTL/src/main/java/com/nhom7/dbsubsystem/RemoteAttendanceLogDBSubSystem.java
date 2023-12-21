@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RemoteDBSubSystem implements IDBSubSystem {
+public class RemoteAttendanceLogDBSubSystem implements IAttendanceLogDBSubSystem {
 
     @Override
     public List<AttendanceLog> getAllAttendanceLogs() {
@@ -64,7 +64,7 @@ public class RemoteDBSubSystem implements IDBSubSystem {
 
     private PreparedStatement constructFilterQuery(Connection connection, String employeeId, LocalDate day) throws SQLException {
         PreparedStatement statement;
-        if(employeeId == null) {
+        if(employeeId == null || employeeId.isEmpty()) {
             if(day == null) {
                 statement = connection.prepareStatement(
                         "SELECT * FROM attendance_log"
@@ -79,14 +79,14 @@ public class RemoteDBSubSystem implements IDBSubSystem {
         } else {
             if(day == null) {
                 statement = connection.prepareStatement(
-                        "SELECT * FROM attendance_log WHERE employee_id = ?"
+                        "SELECT * FROM attendance_log WHERE employee_id ilike ?"
                 );
-                statement.setString(1, employeeId);
+                statement.setString(1, "%" + employeeId + "%");
             } else {
                 statement = connection.prepareStatement(
                         "SELECT * FROM attendance_log WHERE employee_id = ? AND day = ?"
                 );
-                statement.setString(1, employeeId);
+                statement.setString(1, "%" + employeeId + "%");
                 statement.setDate(2, Date.valueOf(day));
             }
         }

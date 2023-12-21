@@ -8,7 +8,7 @@ import java.util.List;
 
 public class MemoryHRSubSystem implements IHRSubSystem {
 
-    private static final List<Employee> employeeList = Arrays.asList(
+    private static final List<Employee> employeeList = new ArrayList<>(Arrays.asList(
             new Employee(
                     "20200673",
                     "Le Anh Vu",
@@ -33,7 +33,7 @@ public class MemoryHRSubSystem implements IHRSubSystem {
                     "Officer",
                     "Accounting"
             )
-    );
+    ));
     @Override
     public List<Employee> getAllEmployees() {
         return employeeList;
