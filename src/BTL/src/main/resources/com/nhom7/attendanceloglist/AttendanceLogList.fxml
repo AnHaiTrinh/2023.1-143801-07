@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="mainContainer" fx:id="mainContainer" prefHeight="559.0" prefWidth="864.0" stylesheets="@AttendanceLogList.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom7.attendanceloglist.AttendanceLogListController">
+    <fx:include source="../menu/Menu.fxml" />
+    <Label layoutX="176.0" layoutY="31.0" prefHeight="30.0" prefWidth="191.0" text="Quản lý chấm công">
+        <font>
+            <Font name="System Bold" size="20.0" />
+        </font>
+    </Label>
+    <TextField fx:id="searchBar" layoutX="519.0" layoutY="89.0" prefHeight="32.0" prefWidth="178.0" promptText="Search" />
+    <Button fx:id="exportButton" layoutX="755.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#handleButtonExportClicked" prefHeight="32.0" prefWidth="95.0" text="Xuất file" textFill="WHITE">
+        <font>
+            <Font name="System Bold" size="15.0" />
+        </font>
+    </Button>
+    <TableView fx:id="attendanceLogListTable" layoutX="176.0" layoutY="149.0" prefHeight="410.0" prefWidth="674.0">
+        <columns>
+            <TableColumn fx:id="dowColumn" prefWidth="100.0" text="Thứ" />
+            <TableColumn fx:id="dayColumn" prefWidth="100.0" text="Ngày" />
+            <TableColumn fx:id="timeColumn" prefWidth="100.0" text="Giờ" />
+            <TableColumn fx:id="employeeIdColumn" prefWidth="133.0" text="Mã nhân viên" />
+            <TableColumn fx:id="typeColumn" prefWidth="110.0" text="Kiểu" />
+         <TableColumn fx:id="editColumn" prefWidth="65.0" text="Sửa" />
+         <TableColumn fx:id="deleteColumn" prefWidth="65.0" text="Xóa" />
+        </columns>
+    </TableView>
+    <Button fx:id="searchButton" layoutX="703.0" layoutY="89.0" maxHeight="32.0" mnemonicParsing="false" onMouseClicked="#handleButtonSearchClicked" prefHeight="32.0" prefWidth="32.0" textFill="#fafafa">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font>
+        <graphic>
+            <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../icon/icon_timkiem.png" />
+            </ImageView>
+        </graphic>
+    </Button>
+    <DatePicker fx:id="dateFilter" layoutX="372.0" layoutY="89.0" prefHeight="32.0" prefWidth="138.0" />
+    <ComboBox fx:id="displayComboBox" layoutX="176.0" layoutY="89.0" onAction="#onActionPerformedComboBox" prefHeight="32.0" prefWidth="158.0" />
+</AnchorPane>

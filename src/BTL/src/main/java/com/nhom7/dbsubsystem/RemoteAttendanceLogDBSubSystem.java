@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RemoteDBSubSystem implements IDBSubSystem {
+public class RemoteAttendanceLogDBSubSystem implements IAttendanceLogDBSubSystem {
 
     @Override
     public List<AttendanceLog> getAllAttendanceLogs() {

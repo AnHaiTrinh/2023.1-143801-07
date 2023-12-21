@@ -5,7 +5,7 @@ import com.nhom7.entity.AttendanceLog;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface IDBSubSystem {
+public interface IAttendanceLogDBSubSystem {
     public List<AttendanceLog> getAllAttendanceLogs();
 
     public AttendanceLog getAttendanceLogById(int id);

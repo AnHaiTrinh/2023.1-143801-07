@@ -1,6 +1,6 @@
 package com.nhom7.edit;
 
-import com.nhom7.dbsubsystem.MemoryDBSubsystem;
+import com.nhom7.dbsubsystem.MemoryAttendanceLogDBSubsystem;
 import com.nhom7.hrsubsystem.MemoryHRSubSystem;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,8 +16,8 @@ public class EditAttendanceLogView extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditAttendanceLog.fxml"));
         fxmlLoader.setController(
                 new EditAttendanceLogController(
-                        new MemoryDBSubsystem().getAttendanceLogById(1),
-                        new MemoryDBSubsystem(),
+                        new MemoryAttendanceLogDBSubsystem().getAttendanceLogById(1),
+                        new MemoryAttendanceLogDBSubsystem(),
                         new MemoryHRSubSystem()
                 )
         );

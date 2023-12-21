@@ -1,12 +1,13 @@
 package com.nhom7.edit;
 
 import com.nhom7.dbsubsystem.ErrorDBSubSystem;
-import com.nhom7.dbsubsystem.IDBSubSystem;
-import com.nhom7.dbsubsystem.MemoryDBSubsystem;
+import com.nhom7.dbsubsystem.IAttendanceLogDBSubSystem;
+import com.nhom7.dbsubsystem.MemoryAttendanceLogDBSubsystem;
 import com.nhom7.entity.AttendanceLog;
 import com.nhom7.entity.Employee;
 import com.nhom7.hrsubsystem.IHRSubSystem;
 import com.nhom7.hrsubsystem.MemoryHRSubSystem;
+import com.nhom7.config.Settings;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -27,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class EditAttendanceLogControllerTest extends ApplicationTest {
     private EditAttendanceLogController controller;
 
-    private final IDBSubSystem dbSubSystem = new MemoryDBSubsystem();
+    private final IAttendanceLogDBSubSystem dbSubSystem = new MemoryAttendanceLogDBSubsystem();
 
     private final IHRSubSystem hrSubSystem = new MemoryHRSubSystem();
 
@@ -41,8 +42,8 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
     private final AttendanceLog attendanceLog = new AttendanceLog(
             1,
             "20200673",
-            LocalDate.parse("2021-05-01", EditAttendanceLogController.DATE_FORMATTER),
-            LocalTime.parse("07:00:00", EditAttendanceLogController.TIME_FORMATTER),
+            LocalDate.parse("2021-05-01", Settings.DATE_FORMATTER),
+            LocalTime.parse("07:00:00", Settings.TIME_FORMATTER),
             "CHECKIN",
             "1"
     );
@@ -69,7 +70,7 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
 
     void assertNotUpdatedAttendanceLogIsDisplayed() {
         assertEquals(
-                attendanceLog.getTime().format(EditAttendanceLogController.TIME_FORMATTER),
+                attendanceLog.getTime().format(Settings.TIME_FORMATTER),
                 controller.timeTextField.getText()
         );
         assertEquals(
@@ -93,11 +94,11 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
                 attendanceLog.getEmployeeId());
         assertEquals(
                 controller.dayLabel.getText(),
-                attendanceLog.getDay().format(EditAttendanceLogController.DATE_FORMATTER)
+                attendanceLog.getDay().format(Settings.DATE_FORMATTER)
         );
         assertEquals(
                 controller.timeTextField.getText(),
-                attendanceLog.getTime().format(EditAttendanceLogController.TIME_FORMATTER)
+                attendanceLog.getTime().format(Settings.TIME_FORMATTER)
         );
         assertEquals(
                 controller.machineIdLabel.getText(),
@@ -140,11 +141,11 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
 
         clickOn("#saveButton");
 
-        assertAlertPopup("Are you sure you want to save?");
+        assertAlertPopup("Bạn chắc chắn muốn lưu thay đổi?");
 
         clickOn("OK");
 
-        assertAlertPopup("Saved successfully");
+        assertAlertPopup("Lưu thành công");
 
         clickOn("OK");
 
@@ -163,7 +164,7 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
 
         clickOn("#saveButton");
 
-        assertAlertPopup("Invalid input");
+        assertAlertPopup("Đầu vào không hợp lệ");
 
         clickOn("OK");
 
@@ -181,11 +182,11 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
 
         clickOn("#saveButton");
 
-        assertAlertPopup("Are you sure you want to save?");
+        assertAlertPopup("Bạn chắc chắn muốn lưu thay đổi?");
 
         clickOn("Cancel");
 
-        assertAlertPopup("Operation cancelled");
+        assertAlertPopup("Thao tác đã bị hủy");
 
         clickOn("OK");
 
@@ -205,11 +206,11 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
 
         clickOn("#saveButton");
 
-        assertAlertPopup("Are you sure you want to save?");
+        assertAlertPopup("Bạn chắc chắn muốn lưu thay đổi?");
 
         clickOn("OK");
 
-        assertAlertPopup("Cannot save attendance log");
+        assertAlertPopup("Không thể lưu thay đổi");
 
         clickOn("OK");
 
@@ -220,7 +221,7 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
     void testExitButtonClick() {
         clickOn("#exitButton");
 
-        assertAlertPopup("Are you sure you want to exit?");
+        assertAlertPopup("Bạn chắc chắn muốn thoát?");
 
         clickOn("OK");
     }
@@ -229,11 +230,11 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
     void testCancelExitButtonClick() {
         clickOn("#exitButton");
 
-        assertAlertPopup("Are you sure you want to exit?");
+        assertAlertPopup("Bạn chắc chắn muốn thoát?");
 
         clickOn("Cancel");
 
-        assertAlertPopup("Operation cancelled");
+        assertAlertPopup("Thao tác đã bị hủy");
 
         clickOn("OK");
 

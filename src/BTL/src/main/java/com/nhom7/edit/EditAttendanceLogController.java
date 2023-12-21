@@ -1,22 +1,25 @@
 package com.nhom7.edit;
 
 import com.nhom7.alert.AlertFactory;
-import com.nhom7.dbsubsystem.IDBSubSystem;
+import com.nhom7.dbsubsystem.IAttendanceLogDBSubSystem;
 import com.nhom7.entity.AttendanceLog;
 import com.nhom7.entity.Employee;
 import com.nhom7.hrsubsystem.IHRSubSystem;
+import com.nhom7.config.Settings;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditAttendanceLogController implements Initializable {
+    public Pane mainEditPane;
     public Label employeeIdLabel;
     public Label departmentLabel;
     public Label dayLabel;
@@ -27,19 +30,15 @@ public class EditAttendanceLogController implements Initializable {
     public TextField timeTextField;
     public Button saveButton;
     public Button exitButton;
-    private AttendanceLog attendanceLog;
+    private final AttendanceLog attendanceLog;
 
-    private IDBSubSystem dbSubSystem;
+    private IAttendanceLogDBSubSystem dbSubSystem;
 
     private IHRSubSystem hrSubSystem;
 
-    static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-    static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
-
     static final List<String> attendanceLogTypes = Arrays.asList("CHECKIN", "CHECKOUT");
 
-    public EditAttendanceLogController(AttendanceLog attendanceLog, IDBSubSystem dbSubSystem, IHRSubSystem hrSubSystem) {
+    public EditAttendanceLogController(AttendanceLog attendanceLog, IAttendanceLogDBSubSystem dbSubSystem, IHRSubSystem hrSubSystem) {
         this.attendanceLog = attendanceLog;
         this.dbSubSystem = dbSubSystem;
         this.hrSubSystem = hrSubSystem;
@@ -48,36 +47,36 @@ public class EditAttendanceLogController implements Initializable {
     public void handleSaveButtonClicked() {
         boolean validated = validateInput();
         if (!validated) {
-            AlertFactory.getInstance().createAlert("Error", "Invalid input");
+            AlertFactory.getInstance().createAlert("Error", "Đầu vào không hợp lệ");
             rollback();
             return;
         }
         boolean confirmed = AlertFactory.getInstance().
-                createAlertAndWaitForRespond("Confirmation", "Are you sure you want to save?");
+                createAlertAndWaitForRespond("Confirmation", "Bạn chắc chắn muốn lưu thay đổi?");
         if (!confirmed) {
-            AlertFactory.getInstance().createAlert("Information", "Operation cancelled");
+            AlertFactory.getInstance().createAlert("Information", "Thao tác đã bị hủy");
             rollback();
             return;
         }
         boolean saved = save();
         if (!saved) {
-            AlertFactory.getInstance().createAlert("Error", "Cannot save attendance log");
+            AlertFactory.getInstance().createAlert("Error", "Không thể lưu thay đổi");
             rollback();
             return;
         }
-        AlertFactory.getInstance().createAlert("Information", "Saved successfully");
+        AlertFactory.getInstance().createAlert("Information", "Lưu thành công");
     }
 
     private void rollback() {
         typeComboBox.setValue(attendanceLog.getType());
-        timeTextField.setText(attendanceLog.getTime().format(TIME_FORMATTER));
+        timeTextField.setText(attendanceLog.getTime().format(Settings.TIME_FORMATTER));
     }
 
     public void handleExitButtonClicked() {
         boolean confirmed = AlertFactory.getInstance().
-                createAlertAndWaitForRespond("Confirmation", "Are you sure you want to exit?");
+                createAlertAndWaitForRespond("Confirmation", "Bạn chắc chắn muốn thoát?");
         if (!confirmed) {
-            AlertFactory.getInstance().createAlert("Information", "Operation cancelled");
+            AlertFactory.getInstance().createAlert("Information", "Thao tác đã bị hủy");
             return;
         }
         exit();
@@ -86,7 +85,7 @@ public class EditAttendanceLogController implements Initializable {
     private boolean validateInput() {
         String updatedTime = timeTextField.getText();
         try {
-            LocalTime.parse(updatedTime, TIME_FORMATTER);
+            LocalTime.parse(updatedTime, Settings.TIME_FORMATTER);
         } catch (Exception e) {
             return false;
         }
@@ -99,27 +98,20 @@ public class EditAttendanceLogController implements Initializable {
                 attendanceLog.getId(),
                 attendanceLog.getEmployeeId(),
                 attendanceLog.getDay(),
-                LocalTime.parse(timeTextField.getText(), TIME_FORMATTER),
+                LocalTime.parse(timeTextField.getText(), Settings.TIME_FORMATTER),
                 typeComboBox.getValue(),
                 attendanceLog.getAttendanceMachineId()
         );
         boolean result = dbSubSystem.updateAttendanceLog(updatedAttendanceLog);
         if (result) {
-            setAttendanceLog(updatedAttendanceLog);
+            attendanceLog.setTime(updatedAttendanceLog.getTime());
+            attendanceLog.setType(updatedAttendanceLog.getType());
         }
         return result;
     }
 
-    private void displayErrorMessage(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText("Save unsuccessfully");
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
     private void exit() {
-        System.out.println("Exit");
+        ((Stage) mainEditPane.getScene().getWindow()).close();
     }
 
     private void loadInitialData(){
@@ -127,15 +119,15 @@ public class EditAttendanceLogController implements Initializable {
         Employee employee = hrSubSystem.getEmployeeById(employeeId);
         if (employee == null) {
             AlertFactory.getInstance()
-                    .createAlert("Error", "There is no employee with ID" + employeeId);
+                    .createAlert("Error", "Không tìm thấy nhân viên với mã" + employeeId);
             return;
         }
         employeeIdLabel.setText(employee.getId());
         nameLabel.setText(employee.getName());
         departmentLabel.setText(employee.getDepartment());
         dowLabel.setText(attendanceLog.getDayOfWeek());
-        dayLabel.setText(attendanceLog.getDay().format(DATE_FORMATTER));
-        timeTextField.setText(attendanceLog.getTime().format(TIME_FORMATTER));
+        dayLabel.setText(attendanceLog.getDay().format(Settings.DATE_FORMATTER));
+        timeTextField.setText(attendanceLog.getTime().format(Settings.TIME_FORMATTER));
         typeComboBox.getItems().addAll(attendanceLogTypes);
         typeComboBox.setValue(attendanceLog.getType());
         machineIdLabel.setText(attendanceLog.getAttendanceMachineId());
@@ -159,11 +151,7 @@ public class EditAttendanceLogController implements Initializable {
         loadInitialData();
     }
 
-    public void setAttendanceLog(AttendanceLog attendanceLog) {
-        this.attendanceLog = attendanceLog;
-    }
-
-    public void setDbSubSystem(IDBSubSystem dbSubSystem) {
+    public void setDbSubSystem(IAttendanceLogDBSubSystem dbSubSystem) {
         this.dbSubSystem = dbSubSystem;
     }
 

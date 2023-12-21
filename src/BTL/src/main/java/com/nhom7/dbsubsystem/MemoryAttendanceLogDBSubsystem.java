@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MemoryDBSubsystem implements IDBSubSystem {
-    private static final List<AttendanceLog> attendanceLogList = Arrays.asList(
+public class MemoryAttendanceLogDBSubsystem implements IAttendanceLogDBSubSystem {
+    private static final List<AttendanceLog> attendanceLogList = new ArrayList<>(Arrays.asList(
             new AttendanceLog(
                     1,
                     "20200673",
@@ -58,7 +58,7 @@ public class MemoryDBSubsystem implements IDBSubSystem {
                     "CHECKOUT",
                     "2"
             )
-    );
+    ));
     @Override
     public List<AttendanceLog> getAllAttendanceLogs() {
         return new ArrayList<>(attendanceLogList);
@@ -77,8 +77,8 @@ public class MemoryDBSubsystem implements IDBSubSystem {
     public List<AttendanceLog> filterAttendanceLogByEmployeeIdAndDay(String employeeId, LocalDate day) {
         ArrayList<AttendanceLog> filteredAttendanceLogList = new ArrayList<>();
         for(AttendanceLog attendanceLog : attendanceLogList){
-            boolean employeeIdMatch = employeeId == null || attendanceLog.getEmployeeId().equals(employeeId);
-            boolean dayMatch = day == null || attendanceLog.getDay().equals(day);
+            boolean employeeIdMatch = (employeeId == null || attendanceLog.getEmployeeId().contains(employeeId));
+            boolean dayMatch = (day == null || attendanceLog.getDay().equals(day));
             if(employeeIdMatch && dayMatch)
                 filteredAttendanceLogList.add(attendanceLog);
         }
