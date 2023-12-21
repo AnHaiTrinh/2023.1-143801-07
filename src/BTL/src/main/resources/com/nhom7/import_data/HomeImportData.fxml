@@ -28,11 +28,10 @@
             </font></Button>
         <TableView layoutX="176.0" layoutY="149.0" prefHeight="406.0" prefWidth="678.0">
             <columns>
-                <TableColumn prefWidth="103.199951171875" text="Thứ" />
-                <TableColumn prefWidth="127.20001220703125" text="Ngày" />
-                <TableColumn prefWidth="205.60000610351562" text="Giờ" />
-                <TableColumn prefWidth="117.60003662109375" text="Số bản ghi" />
-                <TableColumn prefWidth="126.39996337890625" text="Trạng thái" />
+                <TableColumn prefWidth="181.60003662109375" text="Ngày" />
+                <TableColumn prefWidth="188.0" text="Giờ" />
+                <TableColumn prefWidth="152.79998779296875" text="Số bản ghi" />
+                <TableColumn prefWidth="150.4000244140625" text="Ghi chú" />
             </columns>
         </TableView>
         <Button layoutX="696.0" layoutY="90.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="33.0" textFill="#fafafa">

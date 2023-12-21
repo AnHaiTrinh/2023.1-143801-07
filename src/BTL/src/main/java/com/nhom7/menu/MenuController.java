@@ -1,5 +1,4 @@
 package com.nhom7.menu;
-
 import com.nhom7.attendanceloglist.AttendanceLogListController;
 import com.nhom7.attendanceloglist.AttendanceLogListView;
 import com.nhom7.dbsubsystem.MemoryAttendanceLogDBSubsystem;
