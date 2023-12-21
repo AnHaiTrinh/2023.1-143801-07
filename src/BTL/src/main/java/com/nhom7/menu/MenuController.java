@@ -1,5 +1,8 @@
 package com.nhom7.menu;
 
+import com.nhom7.attendanceloglist.AttendanceLogListController;
+import com.nhom7.attendanceloglist.AttendanceLogListView;
+import com.nhom7.dbsubsystem.MemoryAttendanceLogDBSubsystem;
 import com.nhom7.import_data.CheckFileExcel;
 import com.nhom7.import_data.ImportDataController;
 import com.nhom7.import_data.SelectFileImportData;
@@ -31,6 +34,17 @@ public class MenuController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(ImportDataController.class.getResource("HomeImportData.fxml"));
         fxmlLoader.setController(new ImportDataController());
         Scene scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void onMousePressedButtonManagerAttendanceLog(MouseEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(AttendanceLogListView.class.getResource("AttendanceLogList.fxml"));
+        fxmlLoader.setController(new AttendanceLogListController(
+                new MemoryAttendanceLogDBSubsystem()
+        ));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Danh sách chấm công");
         stage.setScene(scene);
         stage.show();
     }
