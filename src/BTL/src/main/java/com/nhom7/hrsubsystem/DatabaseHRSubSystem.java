@@ -88,7 +88,7 @@ public class DatabaseHRSubSystem implements IHRSubSystem {
             );
             statement.setString(1, id);
             ResultSet rs = statement.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 department = rs.getString("department");
             }
         } catch (SQLException e) {
@@ -96,5 +96,4 @@ public class DatabaseHRSubSystem implements IHRSubSystem {
         }
         return department;
     }
-
 }

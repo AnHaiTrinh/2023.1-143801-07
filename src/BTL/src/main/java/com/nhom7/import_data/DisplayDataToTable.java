@@ -30,6 +30,5 @@ public class DisplayDataToTable {
             String name = new DatabaseHRSubSystem().getEmployeeDepartmentByID(employeeID);
             return new SimpleStringProperty(name);
         });
-
     }
 }
