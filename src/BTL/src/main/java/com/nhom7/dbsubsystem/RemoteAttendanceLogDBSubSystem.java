@@ -64,7 +64,7 @@ public class RemoteAttendanceLogDBSubSystem implements IAttendanceLogDBSubSystem
 
     private PreparedStatement constructFilterQuery(Connection connection, String employeeId, LocalDate day) throws SQLException {
         PreparedStatement statement;
-        if(employeeId == null) {
+        if(employeeId == null || employeeId.isEmpty()) {
             if(day == null) {
                 statement = connection.prepareStatement(
                         "SELECT * FROM attendance_log"
@@ -79,14 +79,14 @@ public class RemoteAttendanceLogDBSubSystem implements IAttendanceLogDBSubSystem
         } else {
             if(day == null) {
                 statement = connection.prepareStatement(
-                        "SELECT * FROM attendance_log WHERE employee_id = ?"
+                        "SELECT * FROM attendance_log WHERE employee_id ilike ?"
                 );
-                statement.setString(1, employeeId);
+                statement.setString(1, "%" + employeeId + "%");
             } else {
                 statement = connection.prepareStatement(
                         "SELECT * FROM attendance_log WHERE employee_id = ? AND day = ?"
                 );
-                statement.setString(1, employeeId);
+                statement.setString(1, "%" + employeeId + "%");
                 statement.setDate(2, Date.valueOf(day));
             }
         }

@@ -55,11 +55,11 @@ public class AttendanceLogListController implements Initializable {
         this.dbSubSystem = dbSubSystem;
     }
 
-    private IAttendanceLogDBSubSystem dbSubSystem = new MemoryAttendanceLogDBSubsystem();
+    private IAttendanceLogDBSubSystem dbSubSystem;
 
-//    public AttendanceLogListController(IAttendanceLogDBSubSystem dbSubSystem) {
-//        this.dbSubSystem = dbSubSystem;
-//    }
+    public AttendanceLogListController(IAttendanceLogDBSubSystem dbSubSystem) {
+        this.dbSubSystem = dbSubSystem;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -154,12 +154,9 @@ public class AttendanceLogListController implements Initializable {
             }
         });
 
-        dateFilter.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (!newValue){
-                    dateFilter.setValue(dateFilter.getConverter().fromString(dateFilter.getEditor().getText()));
-                }
+        dateFilter.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue){
+                dateFilter.setValue(dateFilter.getConverter().fromString(dateFilter.getEditor().getText()));
             }
         });
 
