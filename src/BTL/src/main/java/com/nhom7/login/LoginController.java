@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -28,7 +29,7 @@ public class LoginController implements Initializable {
     @FXML
     private TextField employeeId;
     @FXML
-    private TextField password;
+    private PasswordField password;
 
     private IAuthService authService;
     @Override
