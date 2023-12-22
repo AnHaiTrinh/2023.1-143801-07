@@ -8,6 +8,8 @@ import com.nhom7.import_data.CheckFileExcel;
 import com.nhom7.import_data.ImportDataController;
 import com.nhom7.import_data.SelectFileImportData;
 import com.nhom7.login.Login;
+import com.nhom7.login.LoginController;
+import com.nhom7.login.auth.MockAuthService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -61,7 +63,9 @@ public class MenuController implements Initializable {
         EmployeeContext.destroy();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("LoginPage.fxml"));
+        fxmlLoader.setController(new LoginController(new MockAuthService()));
         Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();
     }

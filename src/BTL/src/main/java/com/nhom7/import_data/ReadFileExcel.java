@@ -47,7 +47,7 @@ public class ReadFileExcel implements ReadFileService{
         }else {
             ConsoleMessageDisplay consoleMessageDisplay = new ConsoleMessageDisplay();
             consoleMessageDisplay.displayMessage(result);
-            return  null;
+            return null;
         }
     }
 }
