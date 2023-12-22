@@ -1,11 +1,16 @@
 package com.nhom7.import_data;
+import com.nhom7.EmployeeContext;
 import com.nhom7.dbsubsystem.RemoteHistoryImportFileDBSystem;
+import com.nhom7.entity.AttendanceLog;
 import com.nhom7.entity.HistoryImportFile;
+import com.nhom7.hrsubsystem.DatabaseHRSubSystem;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -23,11 +28,13 @@ import java.util.ResourceBundle;
 
 public class ImportDataController implements Initializable {
     public TableView<HistoryImportFile> tableViewHistoryImportFile;
-    public TableColumn tableColumnDayHistoryImportFile, tableColumnTimeHistoryImportFile, tableColumnTotalRecordHistoryImportFile;
+    public TableColumn tableColumnDayHistoryImportFile, tableColumnTimeHistoryImportFile,
+            tableColumnTotalRecordHistoryImportFile;
+    public DatePicker datePickerSearchHistoryImportFile;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        DisplayHistoryImportTable();
+        DisplayHistoryImportTable(new RemoteHistoryImportFileDBSystem().getAllHistoryImportFiles());
     }
 
     public void onMousePressedButtonImport(MouseEvent event) throws IOException {
@@ -38,13 +45,16 @@ public class ImportDataController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    public void DisplayHistoryImportTable(){
-        List<HistoryImportFile> historyImportFiles = new RemoteHistoryImportFileDBSystem().getAllHistoryImportFiles();
+    public void DisplayHistoryImportTable(List<HistoryImportFile> historyImportFiles){
         historyImportFiles = FXCollections.observableArrayList(historyImportFiles);
-        System.out.println(1);
         tableViewHistoryImportFile.setItems(FXCollections.observableArrayList(historyImportFiles));
         tableColumnDayHistoryImportFile.setCellValueFactory(new PropertyValueFactory<HistoryImportFile, LocalDate>("day"));
         tableColumnTimeHistoryImportFile.setCellValueFactory(new PropertyValueFactory<HistoryImportFile, LocalTime>("time"));
         tableColumnTotalRecordHistoryImportFile.setCellValueFactory(new PropertyValueFactory<HistoryImportFile, Integer>("totalRecord"));
+    }
+    public void onMousePressedButtonSearchHistoryImportByDay(MouseEvent event){
+        LocalDate day = datePickerSearchHistoryImportFile.getValue();
+        List<HistoryImportFile> historyImportFiles = new RemoteHistoryImportFileDBSystem().filterHistoryImportFileByDay(day);
+        DisplayHistoryImportTable(historyImportFiles);
     }
 }

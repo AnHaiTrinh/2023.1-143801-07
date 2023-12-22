@@ -58,7 +58,10 @@ public class ReadFileExcel implements ReadFileService{
                 consoleMessageDisplay.displayMessage("Cõ lỗi định dạng mã máy");
             } else if (result.equals("errorNull")) {
                 consoleMessageDisplay.displayMessage("Lỗi đường dẫn không xác định");
+            } else{
+                consoleMessageDisplay.displayMessage("Lỗi không xác định");
             }
+
             return null;
         }
     }

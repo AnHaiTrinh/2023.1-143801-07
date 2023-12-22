@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="559.0" prefWidth="864.0" stylesheets="@HomeImportData.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="559.0" prefWidth="864.0" stylesheets="@HomeImportData.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <fx:include source="../menu/Menu.fxml" />
-        <Label layoutX="176.0" layoutY="31.0" prefHeight="22.0" prefWidth="199.0" text="Lịch sử import thông tin">
+        <Label layoutX="176.0" layoutY="30.0" prefHeight="22.0" prefWidth="199.0" text="Lịch sử import thông tin">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font></Label>
-        <Button layoutX="176.0" layoutY="86.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="178.0" text="30/10/2023 - 06/11/2023" textFill="WHITE">
-            <font>
-                <Font name="System Bold" size="12.0" />
-            </font></Button>
-        <TextField layoutX="512.0" layoutY="89.0" prefHeight="32.0" prefWidth="178.0" promptText="Search" />
         <Button fx:id="buttonImport" layoutX="770.0" layoutY="89.0" mnemonicParsing="false" onMousePressed="#onMousePressedButtonImport" prefHeight="32.0" prefWidth="80.0" text="Import" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="12.0" />
@@ -31,25 +26,26 @@
                 <TableColumn fx:id="tableColumnDayHistoryImportFile" prefWidth="181.60003662109375" text="Ngày" />
                 <TableColumn fx:id="tableColumnTimeHistoryImportFile" prefWidth="188.0" text="Giờ" />
                 <TableColumn fx:id="tableColumnTotalRecordHistoryImportFile" prefWidth="152.79998779296875" text="Số bản ghi" />
-                <TableColumn prefWidth="150.4000244140625" text="Ghi chú" />
+                <TableColumn fx:id="tableColumnNameImport" prefWidth="150.4000244140625" text="Ghi chú" />
             </columns>
         </TableView>
-        <Button layoutX="696.0" layoutY="90.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="33.0" textFill="#fafafa">
+        <Button layoutX="682.0" layoutY="90.0" mnemonicParsing="false" onMousePressed="#onMousePressedButtonSearchHistoryImportByDay" prefHeight="22.0" prefWidth="33.0" textFill="#fafafa">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
-            <graphic>
+         <graphic>
                 <ImageView fitHeight="21.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../icon/icon_search.png" />
                     </image>
                 </ImageView>
-            </graphic>
+         </graphic>
         </Button>
         <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="700.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../icon/icon_notification.png" />
             </image>
         </ImageView>
+      <DatePicker fx:id="datePickerSearchHistoryImportFile" layoutX="480.0" layoutY="89.0" prefHeight="32.0" prefWidth="175.0" promptText="Tìm kiếm theo ngày" />
     </children>
 </AnchorPane>

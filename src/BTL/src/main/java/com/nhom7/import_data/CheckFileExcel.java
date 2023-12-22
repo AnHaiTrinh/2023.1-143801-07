@@ -27,7 +27,7 @@ public class CheckFileExcel implements CheckFileService {
                 } else if (!isValidValue.isValidLocalDate(row.getCell(1).getStringCellValue())){
                     return "errorFormatDay";
                 } else if (!isValidValue.isValidLocaTime(row.getCell(2).getStringCellValue())) {
-                    return  "errorFormatTime";
+                    return "errorFormatTime";
                 } else if (row.getCell(3).getCellType() != CellType.STRING) {
                     return "errorFormatType";
                 } else if (row.getCell(4).getCellType() != CellType.STRING) {

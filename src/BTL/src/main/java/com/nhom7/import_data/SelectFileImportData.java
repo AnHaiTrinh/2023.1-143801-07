@@ -1,12 +1,13 @@
 package com.nhom7.import_data;
 
+import com.nhom7.EmployeeContext;
+import com.nhom7.dbsubsystem.RemoteAttendanceLogDBSubSystem;
+import com.nhom7.dbsubsystem.RemoteHistoryImportFileDBSystem;
 import com.nhom7.entity.AttendanceLog;
+import com.nhom7.entity.HistoryImportFile;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -43,7 +44,23 @@ public class SelectFileImportData implements Initializable {
     }
 
     public  void  onMousePressedButtonAcceptImport(MouseEvent event) throws IOException {
-        System.out.println(1);
+        String path = labelPathToFile.getText();
+        ReadFileExcel readFileExcel = new ReadFileExcel();
+        List<AttendanceLog> attendanceLogList = readFileExcel.readDataFromFile(path);
+        RemoteAttendanceLogDBSubSystem remoteAttendanceLogDBSubSystem = new RemoteAttendanceLogDBSubSystem();
+        if (attendanceLogList!= null){
+            for (AttendanceLog attendanceLog: attendanceLogList){
+                remoteAttendanceLogDBSubSystem.addAttendanceLog(attendanceLog);
+            }
+            HistoryImportFile historyImportFile = new HistoryImportFile(java.time.LocalDate.now(),
+                    java.time.LocalTime.now(), attendanceLogList.size());
+            RemoteHistoryImportFileDBSystem remoteHistoryImportFileDBSystem = new RemoteHistoryImportFileDBSystem();
+            remoteHistoryImportFileDBSystem.addHistoryImportFile(historyImportFile);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Thông báo");
+            alert.setHeaderText("Import thành công");
+            alert.showAndWait();
+        }
     }
     public void onMousePressedButtonSelectFileImport(MouseEvent event) throws IOException{
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
