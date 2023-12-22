@@ -8,6 +8,8 @@ public interface IHRSubSystem {
     public List<Employee> getAllEmployees();
 
     public Employee getEmployeeById(String id);
+    public String getEmployeeNameById(String id);
+    public String getEmployeeDepartmentByID(String id);
 }
 
 

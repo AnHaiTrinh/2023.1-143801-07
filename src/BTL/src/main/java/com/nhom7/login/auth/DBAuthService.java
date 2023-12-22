@@ -33,4 +33,11 @@ public class DBAuthService implements IAuthService{
         }
         return employee;
     }
+
+    public static void main(String[] args) {
+        DBAuthService dbAuthService = new DBAuthService();
+        Employee e = dbAuthService.authenticate("20200673", "123456");
+        System.out.println(e.getId());
+    }
+
 }

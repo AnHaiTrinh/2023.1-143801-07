@@ -1,5 +1,4 @@
 package com.nhom7.edit;
-
 import com.nhom7.dbsubsystem.MemoryAttendanceLogDBSubsystem;
 import com.nhom7.hrsubsystem.MemoryHRSubSystem;
 import javafx.application.Application;

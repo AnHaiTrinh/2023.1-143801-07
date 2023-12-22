@@ -47,4 +47,14 @@ public class MemoryHRSubSystem implements IHRSubSystem {
         }
         return null;
     }
+
+    @Override
+    public String getEmployeeNameById(String id) {
+        return null;
+    }
+
+    @Override
+    public String getEmployeeDepartmentByID(String id) {
+        return null;
+    }
 }

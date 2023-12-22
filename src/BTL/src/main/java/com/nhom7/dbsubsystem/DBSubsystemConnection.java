@@ -7,7 +7,6 @@ import java.sql.SQLException;
 public class DBSubsystemConnection {
     private static Connection connection;
     private static final String DB_SUBSYSTEM_URL = System.getenv("DB_SUBSYSTEM_URL");
-
     public static Connection getConnection() throws SQLException {
         if(connection == null || !connection.isValid(15)){
             try {

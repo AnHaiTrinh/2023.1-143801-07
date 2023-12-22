@@ -1,0 +1,34 @@
+.mainContainer {
+    -fx-background-color: #FDEDF9;
+    -fx-control-inner-background-alt: -fx-control-inner-background ;
+}
+
+.button {
+    -fx-background-color: #208F3A;
+}
+
+.table-view .table-column{
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-font-weight: bold;
+}
+
+.table-view .table-column .button{
+    -fx-text-fill: white;
+}
+
+.checkin {
+    -fx-text-fill: green;
+}
+
+.checkout {
+    -fx-text-fill: red;
+}
+
+#buttonAcceptImport{
+    -fx-background-color: #208F3A;
+}
+
+#buttonSelectFileImport{
+    -fx-background-color: #208F3A;
+}
