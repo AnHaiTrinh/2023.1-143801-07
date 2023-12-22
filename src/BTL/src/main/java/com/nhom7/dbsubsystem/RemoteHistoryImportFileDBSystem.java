@@ -1,12 +1,11 @@
 package com.nhom7.dbsubsystem;
-import com.nhom7.entity.AttendanceLog;
 import com.nhom7.entity.HistoryImportFile;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RemoteHistoryImportFileDBSystem implements IAHistoryImportFileDBSystem{
+public class RemoteHistoryImportFileDBSystem implements IHistoryImportFileDBSystem {
     @Override
     public List<HistoryImportFile> getAllHistoryImportFiles() {
         try{

@@ -1,6 +1,8 @@
 package com.nhom7.import_data;
 
 import org.junit.jupiter.api.Test;
+
+import java.io.File;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,8 +12,8 @@ public class CheckFileExcelTest {
     CheckFileExcel checkFileExcel = new CheckFileExcel();
     @Test
     public void testReadFileDataFit() {
-        // Replace with an actual URL of an Excel file for testing
-        String fileURL = "file:/C:/Users/Admin/Desktop/Test/Fit.xlsx";
+        // Set the file URL to point to the assets folder relatively to the project root
+        String fileURL = new File("assets/Fit.xlsx").toURI().toString();
         try {
             assertEquals("success",checkFileExcel.checkErrorFile(fileURL));
         } catch (IOException e) {
@@ -21,7 +23,7 @@ public class CheckFileExcelTest {
     @Test
     public void testReadFileDataErrorDay() {
         // Replace with an actual URL of an Excel file for testing
-        String fileURL = "file:/C:/Users/Admin/Desktop/Test/ErrorDay.xlsx";
+        String fileURL = new File("assets/ErrorDay.xlsx").toURI().toString();
         try {
             assertEquals("errorFormatDay",checkFileExcel.checkErrorFile(fileURL));
         } catch (IOException e) {
@@ -31,7 +33,7 @@ public class CheckFileExcelTest {
     @Test
     public void testReadFileDataErrorMaNV() {
         // Replace with an actual URL of an Excel file for testing
-        String fileURL = "file:/C:/Users/Admin/Desktop/Test/ErrorMaNV.xlsx";
+        String fileURL = new File("assets/ErrorMaNV.xlsx").toURI().toString();
         try {
             assertEquals("errorFormatMaNv",checkFileExcel.checkErrorFile(fileURL));
         } catch (IOException e) {
@@ -41,7 +43,7 @@ public class CheckFileExcelTest {
     @Test
     public void testReadFileDataErrorTime() {
         // Replace with an actual URL of an Excel file for testing
-        String fileURL = "file:/C:/Users/Admin/Desktop/Test/ErrorTime.xlsx";
+        String fileURL = new File("assets/ErrorTime.xlsx").toURI().toString();
         try {
             assertEquals("errorFormatTime",checkFileExcel.checkErrorFile(fileURL));
         } catch (IOException e) {
@@ -51,7 +53,7 @@ public class CheckFileExcelTest {
     @Test
     public void testReadFileDataErrorType() {
         // Replace with an actual URL of an Excel file for testing
-        String fileURL = "file:/C:/Users/Admin/Desktop/Test/ErrorType.xlsx";
+        String fileURL = new File("assets/ErrorType.xlsx").toURI().toString();
         try {
             assertEquals("errorFormatType",checkFileExcel.checkErrorFile(fileURL));
         } catch (IOException e) {
@@ -61,7 +63,7 @@ public class CheckFileExcelTest {
     @Test
     public void testReadFileDataErrorMachineID() {
         // Replace with an actual URL of an Excel file for testing
-        String fileURL = "file:/C:/Users/Admin/Desktop/Test/ErrorMachineID.xlsx";
+        String fileURL = new File("assets/ErrorMachineID.xlsx").toURI().toString();
         try {
             assertEquals("errorFormatMachineID",checkFileExcel.checkErrorFile(fileURL));
         } catch (IOException e) {
@@ -72,9 +74,9 @@ public class CheckFileExcelTest {
     @  Test
     public void testReadFileDataErrorURL() {
         // Replace with an actual URL of an Excel file for testing
-        String fileURL = "com/nhom7/import_data/error_url/Fit.xlsx";
+        String fileURL = new File("error_url/Fit.xlsx").toURI().toString();
         try {
-            assertEquals("errorURL",checkFileExcel.checkErrorFile(fileURL));
+            assertEquals("errorURL", checkFileExcel.checkErrorFile(fileURL));
         } catch (IOException e) {
             fail("IOException occurred: " + e.getMessage());
         }

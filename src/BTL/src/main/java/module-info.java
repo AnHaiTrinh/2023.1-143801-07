@@ -28,8 +28,8 @@ module com.example.btl {
     exports com.nhom7.entity;
     opens com.nhom7.import_data to javafx.fxml;
     exports com.nhom7.import_data;
-    exports com.nhom7.check_value;
-    opens com.nhom7.check_value to javafx.fxml;
+    exports com.nhom7.validate;
+    opens com.nhom7.validate to javafx.fxml;
     exports com.nhom7.attendanceloglist;
     opens com.nhom7.attendanceloglist to javafx.fxml;
 }

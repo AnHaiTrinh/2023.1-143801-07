@@ -6,6 +6,8 @@ import com.nhom7.entity.AttendanceLog;
 import com.nhom7.entity.Employee;
 import com.nhom7.hrsubsystem.IHRSubSystem;
 import com.nhom7.config.Settings;
+import com.nhom7.validate.DateTimeValidator;
+import com.nhom7.validate.OptionValidator;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -83,14 +85,17 @@ public class EditAttendanceLogController implements Initializable {
     }
 
     private boolean validateInput() {
-        String updatedTime = timeTextField.getText();
-        try {
-            LocalTime.parse(updatedTime, Settings.TIME_FORMATTER);
-        } catch (Exception e) {
+        boolean isValidTime = DateTimeValidator.isValidLocalTime(
+                timeTextField.getText(),
+                Settings.TIME_FORMATTER
+        );
+        if (!isValidTime) {
             return false;
         }
-        String updatedType = typeComboBox.getValue();
-        return attendanceLogTypes.contains(updatedType);
+        return OptionValidator.isValidOption(
+                typeComboBox.getValue(),
+                attendanceLogTypes
+        );
     }
 
     private boolean save() {

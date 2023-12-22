@@ -4,11 +4,12 @@ import java.io.*;
 import java.net.URL;
 import java.util.Iterator;
 
-import com.nhom7.check_value.IsValidValue;
+import com.nhom7.config.Settings;
+import com.nhom7.validate.DateTimeValidator;
 import org.apache.poi.ss.usermodel.*;
 
 public class CheckFileExcel implements CheckFileService {
-    IsValidValue isValidValue = new IsValidValue();
+    DateTimeValidator dateTimeValidator = new DateTimeValidator();
     @Override
     public String checkErrorFile(String url) throws IOException {
         try (InputStream inputStream = new URL(url).openStream()) {
@@ -24,9 +25,9 @@ public class CheckFileExcel implements CheckFileService {
                 }
                 if(row.getCell(0).getCellType() != CellType.STRING){
                     return "errorFormatMaNv";
-                } else if (!isValidValue.isValidLocalDate(row.getCell(1).getStringCellValue())){
+                } else if (!dateTimeValidator.isValidLocalDate(row.getCell(1).getStringCellValue(), Settings.DATE_FORMATTER)){
                     return "errorFormatDay";
-                } else if (!isValidValue.isValidLocaTime(row.getCell(2).getStringCellValue())) {
+                } else if (!dateTimeValidator.isValidLocalTime(row.getCell(2).getStringCellValue(), Settings.TIME_FORMATTER)) {
                     return "errorFormatTime";
                 } else if (row.getCell(3).getCellType() != CellType.STRING) {
                     return "errorFormatType";
