@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS employee (
 );
 
 INSERT INTO employee (id, name, password, title, department) VALUES
-('M001', 'Nguyen Van Dai', '123456','HR Manager', 'Human Resource'),
-('M002', 'Tran Tien Thanh', 'password', 'Head of Department', 'Production Factory'),
-('M003', 'Vu Viet Anh', '1', 'Worker', 'Production Factory'),
-('M004', 'Dang Thu Linh', 'abcd', 'Officer', 'Accounting');
+('20200673', 'Le Anh Vu', '123456','HR Manager', 'Human Resource'),
+('20200260', 'Nguyen Kim Hung', 'password', 'Head of Department', 'Production Factory'),
+('20200421', 'Nguyen Van Nam', '1', 'Worker', 'Production Factory'),
+('20200196', 'Trinh An Hai', 'abcd', 'Officer', 'Accounting');
