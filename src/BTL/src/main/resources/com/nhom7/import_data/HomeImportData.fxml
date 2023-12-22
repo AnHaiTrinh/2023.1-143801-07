@@ -26,11 +26,11 @@
             <font>
                 <Font name="System Bold" size="12.0" />
             </font></Button>
-        <TableView layoutX="176.0" layoutY="149.0" prefHeight="406.0" prefWidth="678.0">
+        <TableView fx:id="tableViewHistoryImportFile" layoutX="176.0" layoutY="149.0" prefHeight="406.0" prefWidth="678.0">
             <columns>
                 <TableColumn fx:id="tableColumnDayHistoryImportFile" prefWidth="181.60003662109375" text="Ngày" />
-                <TableColumn fx:id="HistoryImportFtableColumnTimeHistoryImportFile" prefWidth="188.0" text="Giờ" />
-                <TableColumn fx:id="HistoryImportFtableColumnTotalRecordHistoryImportFile" prefWidth="152.79998779296875" text="Số bản ghi" />
+                <TableColumn fx:id="tableColumnTimeHistoryImportFile" prefWidth="188.0" text="Giờ" />
+                <TableColumn fx:id="tableColumnTotalRecordHistoryImportFile" prefWidth="152.79998779296875" text="Số bản ghi" />
                 <TableColumn prefWidth="150.4000244140625" text="Ghi chú" />
             </columns>
         </TableView>

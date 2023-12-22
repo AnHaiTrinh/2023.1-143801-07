@@ -46,7 +46,19 @@ public class ReadFileExcel implements ReadFileService{
             return attendanceLogList;
         }else {
             ConsoleMessageDisplay consoleMessageDisplay = new ConsoleMessageDisplay();
-            consoleMessageDisplay.displayMessage(result);
+            if ( result.equals("errorFormatMaNv")){
+                consoleMessageDisplay.displayMessage("Cõ lỗi định dạng mã nhân viên");
+            } else if (result.equals("errorFormatDay")) {
+                consoleMessageDisplay.displayMessage("Cõ lỗi định dạng ngày");
+            } else if (result.equals("errorFormatTime")) {
+                consoleMessageDisplay.displayMessage("Cõ lỗi định dạng giờ");
+            }else if (result.equals("errorFormatType")) {
+                consoleMessageDisplay.displayMessage("Cõ lỗi định dạng kiểu");
+            }else if (result.equals("errorFormatMachineID")) {
+                consoleMessageDisplay.displayMessage("Cõ lỗi định dạng mã máy");
+            } else if (result.equals("errorNull")) {
+                consoleMessageDisplay.displayMessage("Lỗi đường dẫn không xác định");
+            }
             return null;
         }
     }

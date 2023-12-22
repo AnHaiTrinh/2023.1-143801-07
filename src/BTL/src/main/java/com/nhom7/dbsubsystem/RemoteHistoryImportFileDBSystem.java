@@ -11,7 +11,7 @@ public class RemoteHistoryImportFileDBSystem implements IAHistoryImportFileDBSys
             ArrayList<HistoryImportFile> historyImportFileArrayList = new ArrayList<>();
             Connection connection = DBSubsystemConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM history_import"
+                    "SELECT * FROM history_import order by day DESC"
             );
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
@@ -48,5 +48,4 @@ public class RemoteHistoryImportFileDBSystem implements IAHistoryImportFileDBSys
             return false;
         }
     }
-
 }
