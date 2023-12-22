@@ -29,6 +29,16 @@ public class CheckFileExcelTest {
         }
     }
     @Test
+    public void testReadFileDataErrorMaNV() {
+        // Replace with an actual URL of an Excel file for testing
+        String fileURL = "file:/C:/Users/Admin/Desktop/Test/ErrorMaNV.xlsx";
+        try {
+            assertEquals("errorFormatMaNv",checkFileExcel.checkErrorFile(fileURL));
+        } catch (IOException e) {
+            fail("IOException occurred: " + e.getMessage());
+        }
+    }
+    @Test
     public void testReadFileDataErrorTime() {
         // Replace with an actual URL of an Excel file for testing
         String fileURL = "file:/C:/Users/Admin/Desktop/Test/ErrorTime.xlsx";
@@ -62,7 +72,7 @@ public class CheckFileExcelTest {
     @  Test
     public void testReadFileDataErrorURL() {
         // Replace with an actual URL of an Excel file for testing
-        String fileURL = "file:/C:/Users/Admin/Desktop/ErrorURL.xlsx";
+        String fileURL = "com/nhom7/import_data/error_url/Fit.xlsx";
         try {
             assertEquals("errorURL",checkFileExcel.checkErrorFile(fileURL));
         } catch (IOException e) {

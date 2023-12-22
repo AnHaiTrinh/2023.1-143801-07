@@ -1,10 +1,6 @@
 package com.nhom7.import_data;
-import com.nhom7.EmployeeContext;
 import com.nhom7.dbsubsystem.RemoteHistoryImportFileDBSystem;
-import com.nhom7.entity.AttendanceLog;
 import com.nhom7.entity.HistoryImportFile;
-import com.nhom7.hrsubsystem.DatabaseHRSubSystem;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,7 +18,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
