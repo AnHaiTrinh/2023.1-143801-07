@@ -1,0 +1,46 @@
+/* outer combo-box text */
+#pickTypeOfRecord > .list-cell {
+    -fx-text-fill: white;
+}
+/* Text in the ComboBox's dropdown list */
+#pickTypeOfRecord > .list-view .list-cell {
+    -fx-text-fill: black; /* Replace with your desired color */
+}
+/* Text of the selected item in the dropdown list */
+#pickTypeOfRecord .list-view .list-cell:filled:selected {
+    -fx-text-fill: red; /* Replace with your desired color */
+}
+
+/* outer combo-box text */
+#pickMonth > .list-cell {
+    -fx-text-fill: white;
+}
+/* Text in the ComboBox's dropdown list */
+#pickMonth > .list-view .list-cell {
+    -fx-text-fill: black; /* Replace with your desired color */
+}
+/* Text of the selected item in the dropdown list */
+#pickMonth .list-view .list-cell:filled:selected {
+    -fx-text-fill: red; /* Replace with your desired color */
+}
+
+/* outer combo-box text */
+#pickYear > .list-cell {
+    -fx-text-fill: white;
+}
+/* Text in the ComboBox's dropdown list */
+#pickYear > .list-view .list-cell {
+    -fx-text-fill: black; /* Replace with your desired color */
+}
+/* Text of the selected item in the dropdown list */
+#pickYear .list-view .list-cell:filled:selected {
+    -fx-text-fill: red; /* Replace with your desired color */
+}
+
+#tableOfEmployee .column-header {
+    -fx-pref-height: 50px; /* Set a preferred height for headers */
+}
+#tableOfEmployee .column-header .label {
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+}

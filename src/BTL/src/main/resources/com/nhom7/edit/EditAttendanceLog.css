@@ -3,7 +3,7 @@
     -fx-text-alignment: center;
 }
 
-#buttonPane > .button {
+#buttonPane  .button {
     -fx-background-radius: 5;
 }
 #saveButton {
