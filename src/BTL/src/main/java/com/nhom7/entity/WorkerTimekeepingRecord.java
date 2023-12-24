@@ -1,20 +1,20 @@
 package com.nhom7.entity;
 
 public class WorkerTimekeepingRecord extends TimekeepingRecord{
-    private int totalWorkingHours;
-    private int totalOvertimeHours;
+    private double totalWorkingHours;
+    private double totalOvertimeHours;
 
-    public WorkerTimekeepingRecord(Long idEmployee, String nameEmployee, String department, String month) {
+    public WorkerTimekeepingRecord(String idEmployee, String nameEmployee, String department, String month) {
         super(idEmployee, nameEmployee, department, month);
     }
 
-    public WorkerTimekeepingRecord(Long idEmployee, String nameEmployee, String department, String month, int totalWorkingHours, int totalOvertimeHours) {
+    public WorkerTimekeepingRecord(String idEmployee, String nameEmployee, String department, String month, double totalWorkingHours, double totalOvertimeHours) {
         super(idEmployee, nameEmployee, department, month);
         this.totalWorkingHours = totalWorkingHours;
         this.totalOvertimeHours = totalOvertimeHours;
     }
 
-    public int getTotalWorkingHours() {
+    public double getTotalWorkingHours() {
         return totalWorkingHours;
     }
 
@@ -22,11 +22,11 @@ public class WorkerTimekeepingRecord extends TimekeepingRecord{
         this.totalWorkingHours = totalWorkingHours;
     }
 
-    public int getTotalOvertimeHours() {
+    public double getTotalOvertimeHours() {
         return totalOvertimeHours;
     }
 
-    public void setTotalOvertimeHours(int totalOvertimeHours) {
+    public void setTotalOvertimeHours(double totalOvertimeHours) {
         this.totalOvertimeHours = totalOvertimeHours;
     }
 }

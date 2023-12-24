@@ -2,6 +2,7 @@ package com.nhom7.dbsubsystem;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBSubsystemConnection {
@@ -19,4 +20,11 @@ public class DBSubsystemConnection {
         }
         return connection;
     }
+//    public static ResultSet query(String sql) throws SQLException {
+//        return getConnection().prepareStatement(sql).executeQuery();
+//    }
+    /*PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM employee"
+            );
+            ResultSet rs = statement.executeQuery();*/
 }
