@@ -5,7 +5,7 @@ import com.nhom7.entity.AttendanceLog;
 import java.time.LocalDate;
 import java.util.List;
 
-public class ErrorDBSubSystem implements IAttendanceLogDBSubSystem {
+public class ErrorAttendanceLogDBSubSystem implements IAttendanceLogDBSubSystem {
     @Override
     public List<AttendanceLog> getAllAttendanceLogs() {
         return null;

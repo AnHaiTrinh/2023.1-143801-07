@@ -1,6 +1,6 @@
 package com.nhom7.edit;
 
-import com.nhom7.dbsubsystem.ErrorDBSubSystem;
+import com.nhom7.dbsubsystem.ErrorAttendanceLogDBSubSystem;
 import com.nhom7.dbsubsystem.IAttendanceLogDBSubSystem;
 import com.nhom7.dbsubsystem.MemoryAttendanceLogDBSubsystem;
 import com.nhom7.entity.AttendanceLog;
@@ -200,7 +200,7 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
             "18:09:24, CHECKIN",
     })
     void testDbSubSystemError(String time, String type) {
-        controller.setDbSubSystem(new ErrorDBSubSystem());
+        controller.setDbSubSystem(new ErrorAttendanceLogDBSubSystem());
 
         enterInput(time, type);
 
