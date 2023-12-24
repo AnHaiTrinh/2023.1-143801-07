@@ -6,8 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DatabaseQuery {
-    @SafeVarargs
-    public static <T> ResultSet executeQuery(String query, T... parameters) throws SQLException {
+    public static ResultSet executeQuery(String query, Object... parameters) throws SQLException {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -23,6 +22,8 @@ public class DatabaseQuery {
             for (int i = 0; i < parameters.length; i++) {
                 statement.setObject(i + 1, parameters[i]);
             }
+
+            System.out.println("Statement: "+ statement);
 
             // Thực hiện truy vấn
             resultSet = statement.executeQuery();
