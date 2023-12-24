@@ -21,7 +21,7 @@ public class DisplayDataToTable {
         TableColumn<AttendanceLog, String> columnName = columList.get(1);
         columnName.setCellValueFactory(cellDataFeatures -> {
             String employeeID = cellDataFeatures.getValue().getEmployeeId();
-            String name = new DatabaseHRSubSystem().getEmployeeNameById(employeeID);
+            String name = new DatabaseHRSubSystem().getEmployeeById(employeeID).getName();
             return new SimpleStringProperty(name);
         });
         columList.get(2).setCellValueFactory(new PropertyValueFactory<AttendanceLog, LocalDate>("day"));
@@ -43,7 +43,7 @@ public class DisplayDataToTable {
         TableColumn<AttendanceLog, String> columnPhongBan = columList.get(5);
         columnPhongBan.setCellValueFactory(cellDataFeatures -> {
             String employeeID = cellDataFeatures.getValue().getEmployeeId();
-            String name = new DatabaseHRSubSystem().getEmployeeDepartmentByID(employeeID);
+            String name = new DatabaseHRSubSystem().getEmployeeById(employeeID).getDepartment();
             return new SimpleStringProperty(name);
         });
     }

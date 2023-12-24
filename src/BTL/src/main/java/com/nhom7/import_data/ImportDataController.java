@@ -35,7 +35,7 @@ public class ImportDataController implements Initializable {
     public void onMousePressedButtonImport(MouseEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(ImportDataController.class.getResource("SelectFileImportData.fxml"));
-        fxmlLoader.setController(new SelectFileImportData(new FileChooser(), new CheckFileExcel()));
+        fxmlLoader.setController(new SelectFileImportDataController(new FileChooser(), new CheckFileExcel()));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         stage.show();

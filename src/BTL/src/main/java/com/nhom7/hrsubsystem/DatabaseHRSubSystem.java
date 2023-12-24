@@ -58,42 +58,4 @@ public class DatabaseHRSubSystem implements IHRSubSystem {
         }
         return employee;
     }
-
-    @Override
-    public String getEmployeeNameById(String id) {
-        String name = null;
-        try {
-            Connection connection = DatabaseHRSubsystemConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(
-                    "SELECT name FROM employee WHERE id = ?"
-            );
-            statement.setString(1, id);
-            ResultSet rs = statement.executeQuery();
-            if(rs.next()){
-                name = rs.getString("name");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return name;
-    }
-
-    @Override
-    public String getEmployeeDepartmentByID(String id) {
-        String department = null;
-        try {
-            Connection connection = DatabaseHRSubsystemConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(
-                    "SELECT department FROM employee WHERE id = ?"
-            );
-            statement.setString(1, id);
-            ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
-                department = rs.getString("department");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return department;
-    }
 }

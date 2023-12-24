@@ -12,7 +12,6 @@ public class MenuView extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Employee Manager");
         stage.setScene(scene);
         stage.show();
     }
