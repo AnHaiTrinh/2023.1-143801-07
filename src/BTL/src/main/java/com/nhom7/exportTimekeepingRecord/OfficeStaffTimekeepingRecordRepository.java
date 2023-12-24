@@ -13,7 +13,7 @@ public class OfficeStaffTimekeepingRecordRepository {
         List<OfficeStaffTimekeepingRecord> list = new ArrayList<>();
         try {
             ResultSet resultSet = DatabaseQuery.executeQuery(
-                    "SELECT * FROM office_staff_timekeeping_record WHERE department = '?' AND month = '?';"
+                    "SELECT * FROM office_staff_timekeeping_record WHERE department = ? AND month = ?;"
                     , unit, month);
             while(resultSet.next()){
                 OfficeStaffTimekeepingRecord officeStaffTimekeepingRecord = new OfficeStaffTimekeepingRecord(

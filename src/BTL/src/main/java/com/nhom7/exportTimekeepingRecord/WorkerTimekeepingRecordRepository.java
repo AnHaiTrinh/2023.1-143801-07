@@ -14,7 +14,7 @@ public class WorkerTimekeepingRecordRepository {
         List<WorkerTimekeepingRecord> list = new ArrayList<>();
         try {
             ResultSet resultSet = DatabaseQuery.executeQuery(
-                    "SELECT * FROM worker_timekeeping_record WHERE department = '?' AND month = '?';"
+                    "SELECT * FROM worker_timekeeping_record WHERE department = ? AND month = ?;"
             , unit, month);
             while(resultSet.next()){
                 WorkerTimekeepingRecord workerTimekeepingRecord = new WorkerTimekeepingRecord(
