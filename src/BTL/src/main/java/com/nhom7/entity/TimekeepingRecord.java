@@ -1,23 +1,23 @@
 package com.nhom7.entity;
 
 public abstract class TimekeepingRecord {
-    private Long idEmployee;
+    private String idEmployee;
     private String nameEmployee;
     private String department;
     private String month;
 
-    public TimekeepingRecord(Long idEmployee, String nameEmployee, String department, String month) {
+    public TimekeepingRecord(String idEmployee, String nameEmployee, String department, String month) {
         this.idEmployee = idEmployee;
         this.nameEmployee = nameEmployee;
         this.department = department;
         this.month = month;
     }
 
-    public Long getIdEmployee() {
+    public String getIdEmployee() {
         return idEmployee;
     }
 
-    public void setIdEmployee(Long idEmployee) {
+    public void setIdEmployee(String idEmployee) {
         this.idEmployee = idEmployee;
     }
 
