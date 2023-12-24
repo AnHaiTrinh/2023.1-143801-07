@@ -1,19 +1,18 @@
 package com.nhom7.exportTimekeepingRecord;
 
+import com.nhom7.alert.AlertFactory;
 import com.nhom7.entity.OfficeStaffTimekeepingRecord;
 import com.nhom7.entity.WorkerTimekeepingRecord;
 import com.nhom7.exportHelper.ExportHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class ExportTimekeepingRecordController {
 
@@ -83,6 +82,17 @@ public class ExportTimekeepingRecordController {
         //pickUnit
         pickUnit.getItems().addAll(WorkerTimekeepingRecordRepository.getAllWorkerUnit());
         pickUnit.getItems().addAll(OfficeStaffTimekeepingRecordRepository.getAllOfficeStaffUnit());
+        pickUnit.setButtonCell(new ListCell<String>() {
+            @Override
+            protected void updateItem(String item, boolean empty){
+                super.updateItem(item, empty);
+                if(empty || item == null){
+                    setText("Chọn đơn vị");
+                }else{
+                    setText(item);
+                }
+            }
+        });
     }
 
 
@@ -115,12 +125,22 @@ public class ExportTimekeepingRecordController {
         //if user choose worker
         if(chooseTypeOfUnit.getValue().equals("Công nhân")){
             workerTable.getItems().clear();
-            workerTable.getItems().addAll(WorkerTimekeepingRecordRepository.getListWorkerTimekeepingRecordsByUnitAndMonth(pickUnit.getValue(), monthAndYear));
+            List<WorkerTimekeepingRecord> list = WorkerTimekeepingRecordRepository.getListWorkerTimekeepingRecordsByUnitAndMonth(pickUnit.getValue(), monthAndYear);
+            if(list.isEmpty()){
+                AlertFactory.getInstance().createAlert("Information", "Không có dữ liệu theo yêu cầu của bạn");
+            }else {
+                workerTable.getItems().addAll(list);
+            }
         }
         //if user choose officer
         else if(chooseTypeOfUnit.getValue().equals("Nhân viên văn phòng")){
             officerTable.getItems().clear();
-            officerTable.getItems().addAll(OfficeStaffTimekeepingRecordRepository.getListOfficeStaffTimekeepingRecordsByUnitAndMonth(pickUnit.getValue(), monthAndYear));
+            List<OfficeStaffTimekeepingRecord> list = OfficeStaffTimekeepingRecordRepository.getListOfficeStaffTimekeepingRecordsByUnitAndMonth(pickUnit.getValue(), monthAndYear);
+            if (list.isEmpty()) {
+                AlertFactory.getInstance().createAlert("Information", "Không có dữ liệu theo yêu cầu của bạn");
+            } else {
+                officerTable.getItems().addAll(list);
+            }
         }
     }
 
@@ -150,5 +170,18 @@ public class ExportTimekeepingRecordController {
                 ExportHelper.exportToCsv(officerTable, "Sheet1", file.getAbsolutePath());
             }
         }
+    }
+
+    public void chooseUnit(ActionEvent actionEvent) {
+        String unit = pickUnit.getValue();
+        if (unit == null) return;
+        List<String> listOfWorkerUnit = WorkerTimekeepingRecordRepository.getAllWorkerUnit();
+        if(listOfWorkerUnit.contains(unit)){
+            chooseTypeOfUnit.setValue("Công nhân");
+        }
+        else{
+            chooseTypeOfUnit.setValue("Nhân viên văn phòng");
+        }
+        pickUnit.setValue(unit);
     }
 }
