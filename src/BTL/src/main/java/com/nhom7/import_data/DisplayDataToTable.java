@@ -3,7 +3,6 @@ import com.nhom7.entity.AttendanceLog;
 import com.nhom7.hrsubsystem.DatabaseHRSubSystem;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
