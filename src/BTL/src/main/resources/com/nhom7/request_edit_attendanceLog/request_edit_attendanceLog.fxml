@@ -73,7 +73,7 @@
             </font>
         </Text>
         <Button fx:id="saveButton" layoutX="349.0" layoutY="499.0" mnemonicParsing="false" onMouseClicked="#handleSaveButtonClicked" prefHeight="31.0" prefWidth="109.0" style="-fx-background-color: #208F3A;" text="Gửi" textFill="WHITE" />
-        <Button fx:id="cancelButton" layoutX="627.0" layoutY="499.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="109.0" style="-fx-background-color: #A9A7A7;" text="Hủy bỏ" textFill="#fffefe" />
+        <Button fx:id="cancelButton" layoutX="627.0" layoutY="499.0" mnemonicParsing="false" onMouseClicked="#handleCancelButtonClicked" prefHeight="31.0" prefWidth="109.0" style="-fx-background-color: #A9A7A7;" text="Hủy bỏ" textFill="#fffefe" />
         <TextArea fx:id="noteTextArea" layoutX="567.0" layoutY="365.0" prefHeight="116.0" prefWidth="249.0" />
         <ComboBox fx:id="requestEditAttendanceLogTypes" layoutX="214.0" layoutY="183.0" onAction="#selectEditAttendanceLogType" prefHeight="34.0" prefWidth="250.0" style="-fx-background-color: white; -fx-border-color: black;" />
         <Text layoutX="214.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Loại yêu cầu" wrappingWidth="95.88916015625">

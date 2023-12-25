@@ -27,13 +27,13 @@ class RequestEditAttendanceLogControllerTest extends ApplicationTest {
     private RequestEditAttendanceLogController controller;
     private final IRequestEditAttendanceLogDBSubSystem dbSubSystem = new MemoryRequestEditAttendanceLogDBSubSystem();
     private final IHRSubSystem hrSubSystem = new MemoryHRSubSystem();
-    private final Employee employee2 = new Employee(
+    private final Employee employee1 = new Employee(
             "20200260",
             "Nguyen Kim Hung",
             "Head of Department",
             "Production Factory"
     );
-    private final Employee employee1 = new Employee(
+    private final Employee employee2 = new Employee(
         "20200673",
         "Le Anh Vu",
         "HR Manager",
@@ -83,12 +83,13 @@ class RequestEditAttendanceLogControllerTest extends ApplicationTest {
         );
     }
 
-//    void assertRequestEditAttendanceLogIsSync(){
-//        RequestEditAttendanceLog newRequestEditAttendanceLog = dbSubSystem.getRequestEditAttendanceLogById(idCount);
-//        assertEquals(
-//
-//        );
-//    }
+    void assertRequestEditAttendanceLogIsSync(RequestEditAttendanceLog newRequestEditAttendanceLog){
+
+        RequestEditAttendanceLog requestEditAttendanceLog = dbSubSystem.getRequestEditAttendanceLogById(idCount);
+        assertEquals(
+            requestEditAttendanceLog, newRequestEditAttendanceLog
+        );
+    }
 
     @Test
     void testCorrectEmployeeInfoLoaded(){
@@ -142,23 +143,46 @@ class RequestEditAttendanceLogControllerTest extends ApplicationTest {
         clickOn("#saveButton");
         assertAlertPopup("Khi bạn gửi, thông báo sẽ được gửi đến bộ phận nhân sự!");
         clickOn("OK");
-//        idCount++;
-//        RequestEditAttendanceLog newRequestEditAttendanceLog = new RequestEditAttendanceLog(
-//                idCount,
-//                employee1.getId(),
-//                LocalDate.parse("2021-05-01", Settings.DATE_FORMATTER),
-//                LocalTime.parse("07:00:00", Settings.TIME_FORMATTER),
-//                null,
-//                "Thêm chấm công",
-//                "Quên chấm công",
-//                "",
-//                "1"
-//        );
         assertAlertPopup("Gửi yêu cầu thành công");
         clickOn("OK");
 
         assertAddRequestEditAttendanceLogIsDisplay(time, requestEditAttendanceLogType, attendanceMachineId);
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "08:00:00, Thêm chấm công, 2",
+    })
+    void testSaveData(String time, String requestEditAttendanceLogType, String attendanceMachineId){
+        enterAddRemoveInput(time, requestEditAttendanceLogType, attendanceMachineId);
+        clickOn("#saveButton");
+        assertAlertPopup("Khi bạn gửi, thông báo sẽ được gửi đến bộ phận nhân sự!");
+        clickOn("OK");
+        idCount++;
+        RequestEditAttendanceLog newRequestEditAttendanceLog = new RequestEditAttendanceLog(
+                idCount,
+                employee1.getId(),
+                LocalDate.parse("2021-05-01", Settings.DATE_FORMATTER),
+                LocalTime.parse("07:00:00", Settings.TIME_FORMATTER),
+                null,
+                "Thêm chấm công",
+                "Quên chấm công",
+                "",
+                "1"
+        );
+        assertAddRequestEditAttendanceLogIsDisplay(time, requestEditAttendanceLogType, attendanceMachineId);
+        boolean result = dbSubSystem.addRequestEditAttendanceLog(newRequestEditAttendanceLog);
+        if (result){
+            assertAlertPopup("Gửi yêu cầu thành công");
+            clickOn("OK");
+            assertRequestEditAttendanceLogIsSync(newRequestEditAttendanceLog);
+        }
+        else{
+            assertAlertPopup("Không thể gửi yêu cầu");
+            clickOn("OK");
+        }
+    }
+
 
     // Test yêu cầu chỉnh sửa chấm công
     @ParameterizedTest
@@ -174,6 +198,27 @@ class RequestEditAttendanceLogControllerTest extends ApplicationTest {
         clickOn("OK");
 
         assertAlertPopup("Gửi yêu cầu thành công");
+        clickOn("OK");
+
+        assertAddRequestEditAttendanceLogIsDisplay(time, timeChange, requestEditAttendanceLogType, attendanceMachineId);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "08:00:00, 07:59:00, Chỉnh sửa chấm công, 2",
+            "11:54:13, 12:11:03, Chỉnh sửa chấm công, 1",
+            "17:59:24, 18:02:12, Chỉnh sửa chấm công, 1",
+    })
+    void testCancelSendRequestEditAttendanceLog(String time, String timeChange, String requestEditAttendanceLogType, String attendanceMachineId) {
+        enterEditInput(time, timeChange, requestEditAttendanceLogType, attendanceMachineId);
+        clickOn("#saveButton");
+
+        assertAlertPopup("Khi bạn gửi, thông báo sẽ được gửi đến bộ phận nhân sự!");
+
+        clickOn("Cancel");
+
+        assertAlertPopup("Thao tác đã bị hủy");
+
         clickOn("OK");
 
         assertAddRequestEditAttendanceLogIsDisplay(time, timeChange, requestEditAttendanceLogType, attendanceMachineId);

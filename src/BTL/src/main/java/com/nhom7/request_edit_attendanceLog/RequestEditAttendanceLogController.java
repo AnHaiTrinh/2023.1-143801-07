@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -66,6 +67,13 @@ public class RequestEditAttendanceLogController implements Initializable {
                     }
                 }
         );
+        cancelButton.setOnKeyPressed(
+                keyEvent -> {
+                    if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+                        handleCancelButtonClicked();
+                    }
+                }
+        );
         loadInitialData();
     }
 
@@ -78,6 +86,7 @@ public class RequestEditAttendanceLogController implements Initializable {
         fullNameTextField.setText(employee.getName());
         staffCodeTextField.setText(employeeId);
         requestEditAttendanceLogTypes.getItems().addAll(requestEditAttendanceLogItems);
+        //datePicker.setValue(LocalDate.now());
         if (!requestEditAttendanceLogItems.isEmpty()) {
             requestEditAttendanceLogTypes.setValue(requestEditAttendanceLogItems.get(0));
         }
@@ -124,6 +133,29 @@ public class RequestEditAttendanceLogController implements Initializable {
             return;
         }
         AlertFactory.getInstance().createAlert("Information", "Gửi yêu cầu thành công");
+    }
+
+    public void handleCancelButtonClicked() {
+        boolean confirmed = AlertFactory.getInstance().
+                createAlertAndWaitForRespond("Confirmation", "Bạn chắc chắn muốn thoát?");
+        if (!confirmed) {
+            AlertFactory.getInstance().createAlert("Information", "Thao tác đã bị hủy");
+            return;
+        }
+        reset();
+    }
+
+    private void reset() {
+        requestEditAttendanceLogTypes.setValue("Chỉnh sửa chấm công");
+        reasonTextField.setText("");
+        //datePicker.setValue(LocalDate.now());
+        timeTextField.setText("hh:mm:ss");
+        timeTextFieldChange.setVisible(true);
+        timeTextFieldChange.setText("hh:mm:ss");
+        timeChangeLabel.setVisible(true);
+        timeChangeLabel.setText("Thay đổi thành");
+        attendanceMachineId.setValue("1");
+        noteTextArea.setText("");
     }
 
     private boolean validateInput() {
