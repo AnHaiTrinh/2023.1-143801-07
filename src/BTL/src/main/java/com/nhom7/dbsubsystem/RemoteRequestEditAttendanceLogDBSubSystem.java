@@ -7,18 +7,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class RemoteRequestEditAttendanceLogDBSubSystem implements IRequestEditAttendanceLogDBSubSystem{
-    @Override
-    public List<RequestEditAttendanceLog> getAllRequestEditAttendanceLogs() {
-        return null;
-    }
 
     @Override
-    public RequestEditAttendanceLog getRequestEditAttendanceLogById(String id) {
-        return null;
-    }
-
-    @Override
-    public List<RequestEditAttendanceLog> filterRequestEditAttendanceLog(String employeeId, LocalDate day) {
+    public RequestEditAttendanceLog getRequestEditAttendanceLogById(int id) {
         return null;
     }
 
@@ -28,8 +19,8 @@ public class RemoteRequestEditAttendanceLogDBSubSystem implements IRequestEditAt
             Connection connection = DBSubsystemConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO request_edit_attendance_log " +
-                            "(employee_id, day, time, requestEditType, reason, note, attendance_machine_id) " +
-                            "VALUES (?, ?, ?, ?, ?, ?, ?)"
+                            "(employee_id, day, time, timeChange, requestEditType, reason, note, attendance_machine_id) " +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
             );
             statement.setString(1, requestEditAttendanceLog.getEmployeeId());
             statement.setDate(2, Date.valueOf(requestEditAttendanceLog.getDay()));
@@ -44,15 +35,5 @@ public class RemoteRequestEditAttendanceLogDBSubSystem implements IRequestEditAt
             e.printStackTrace();
             return false;
         }
-    }
-
-    @Override
-    public boolean updateRequestEditAttendanceLog(RequestEditAttendanceLog requestEditAttendanceLog) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteRequestEditAttendanceLog(RequestEditAttendanceLog requestEditAttendanceLog) {
-        return false;
     }
 }

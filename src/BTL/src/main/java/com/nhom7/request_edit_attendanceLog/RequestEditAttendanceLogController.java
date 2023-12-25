@@ -8,6 +8,7 @@ import com.nhom7.entity.RequestEditAttendanceLog;
 import com.nhom7.hrsubsystem.IHRSubSystem;
 import com.nhom7.validate.DateTimeValidator;
 import com.nhom7.validate.OptionValidator;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -28,6 +29,8 @@ public class RequestEditAttendanceLogController implements Initializable {
     public ComboBox<String> requestEditAttendanceLogTypes;
     public Button saveButton;
     public Button cancelButton;
+    public Label timeChangeLabel;
+    public TextField timeTextFieldChange;
     public TextField fullNameTextField;
     public TextField staffCodeTextField;
     public DatePicker datePicker;
@@ -40,6 +43,7 @@ public class RequestEditAttendanceLogController implements Initializable {
     private IRequestEditAttendanceLogDBSubSystem dbSubSystem;
     private List<String> requestEditAttendanceLogItems = Arrays.asList("Chỉnh sửa chấm công", "Thêm chấm công", "Xóa chấm công");
     private List<String> attendanceMachineIdItems = Arrays.asList("1", "2", "3");
+    private int idCount = 5;
     public RequestEditAttendanceLogController(String employeeId, IHRSubSystem hrSubSystem, IRequestEditAttendanceLogDBSubSystem dbSubSystem){
         this.employeeId = employeeId;
         this.hrSubSystem = hrSubSystem;
@@ -83,6 +87,25 @@ public class RequestEditAttendanceLogController implements Initializable {
         }
     }
 
+    @FXML
+    public void selectEditAttendanceLogType(){
+        String selectValue = requestEditAttendanceLogTypes.getSelectionModel().getSelectedItem().toString();
+        switch (selectValue){
+            case "Chỉnh sửa chấm công":
+                timeChangeLabel.setVisible(true);
+                timeTextFieldChange.setVisible(true);
+                break;
+            case "Thêm chấm công":
+                timeChangeLabel.setVisible(false);
+                timeTextFieldChange.setVisible(false);
+                break;
+            case "Xóa chấm công":
+                timeChangeLabel.setVisible(false);
+                timeTextFieldChange.setVisible(false);
+                break;
+        }
+    }
+
     public void handleSaveButtonClicked(){
         boolean validated = validateInput();
         if (!validated) {
@@ -97,10 +120,10 @@ public class RequestEditAttendanceLogController implements Initializable {
         }
         boolean saved = save();
         if (!saved) {
-            AlertFactory.getInstance().createAlert("Error", "Không thể lưu thay đổi");
+            AlertFactory.getInstance().createAlert("Error", "Không thể gửi yêu cầu");
             return;
         }
-        AlertFactory.getInstance().createAlert("Information", "Lưu thành công");
+        AlertFactory.getInstance().createAlert("Information", "Gửi yêu cầu thành công");
     }
 
     private boolean validateInput() {
@@ -119,16 +142,27 @@ public class RequestEditAttendanceLogController implements Initializable {
 
     private boolean save() {
         RequestEditAttendanceLog requestEditAttendanceLog = new RequestEditAttendanceLog(
-                0,
+                idCount,
                 employeeId,
                 datePicker.getValue(),
                 LocalTime.parse(timeTextField.getText(), Settings.TIME_FORMATTER),
+                !timeTextFieldChange.getText().isEmpty() ? LocalTime.parse(timeTextFieldChange.getText(), Settings.TIME_FORMATTER) : null,
                 requestEditAttendanceLogTypes.getValue(),
                 reasonTextField.getText(),
                 noteTextArea.getText(),
                 attendanceMachineId.getValue()
         );
         boolean result = dbSubSystem.addRequestEditAttendanceLog(requestEditAttendanceLog);
+        idCount++;
         return result;
+    }
+
+
+    public void setDbSubSystem(IRequestEditAttendanceLogDBSubSystem dbSubSystem) {
+        this.dbSubSystem = dbSubSystem;
+    }
+
+    public void setHrSubSystem(IHRSubSystem hrSubSystem) {
+        this.hrSubSystem = hrSubSystem;
     }
 }

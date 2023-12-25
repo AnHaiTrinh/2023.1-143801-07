@@ -10,6 +10,7 @@ import com.nhom7.import_data.SelectFileImportData;
 import com.nhom7.login.Login;
 import com.nhom7.login.LoginController;
 import com.nhom7.login.auth.MockAuthService;
+import com.nhom7.request_edit_attendanceLog.ManagerAttendanceLogController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -54,7 +55,7 @@ public class MenuController implements Initializable {
     }
     public void onMousePressedButtonOverView(MouseEvent event) throws IOException{
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HomePageView.class.getResource("HomePage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ManagerAttendanceLogController.class.getResource("manager_attendanceLog.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         stage.show();

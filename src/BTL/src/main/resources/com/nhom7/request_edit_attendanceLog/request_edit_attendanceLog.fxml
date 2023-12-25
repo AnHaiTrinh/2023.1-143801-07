@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="864.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <fx:include source="../menu/Menu.fxml" />
         <Pane layoutX="160.0" prefHeight="48.0" prefWidth="704.0" style="-fx-background-color: #208F3A;">
@@ -29,13 +35,13 @@
                 <Font name="System Bold" size="12.0" />
             </font>
         </Text>
-        <TextField fx:id="fullNameTextField" disable="true" layoutX="214.0" layoutY="105.0" prefHeight="31.0" prefWidth="229.0" promptText="Nguyễn Kim Hùng">
+        <TextField fx:id="fullNameTextField" disable="true" layoutX="214.0" layoutY="103.0" prefHeight="31.0" prefWidth="250.0" promptText="Nguyễn Kim Hùng">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font></TextField>
-        <TextField fx:id="staffCodeTextField" disable="true" layoutX="569.0" layoutY="102.0" prefHeight="31.0" prefWidth="229.0" promptText="IT-5647">
+        <TextField fx:id="staffCodeTextField" disable="true" layoutX="569.0" layoutY="102.0" prefHeight="31.0" prefWidth="249.0" promptText="IT-5647">
             <font>
-                <Font size="12.0" />
+                <Font name="System Bold" size="12.0" />
             </font></TextField>
         <Text layoutX="569.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MSNV" wrappingWidth="52.88916015625">
             <font>
@@ -47,7 +53,7 @@
                 <Font name="System Bold" size="12.0" />
             </font>
         </Text>
-        <TextField fx:id="reasonTextField" layoutX="569.0" layoutY="184.0" prefHeight="31.0" prefWidth="229.0" promptText="Lý do">
+        <TextField fx:id="reasonTextField" layoutX="569.0" layoutY="184.0" prefHeight="31.0" prefWidth="249.0" promptText="Lý do">
             <font>
                 <Font size="12.0" />
             </font></TextField>
@@ -68,14 +74,14 @@
         </Text>
         <Button fx:id="saveButton" layoutX="349.0" layoutY="499.0" mnemonicParsing="false" onMouseClicked="#handleSaveButtonClicked" prefHeight="31.0" prefWidth="109.0" style="-fx-background-color: #208F3A;" text="Gửi" textFill="WHITE" />
         <Button fx:id="cancelButton" layoutX="627.0" layoutY="499.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="109.0" style="-fx-background-color: #A9A7A7;" text="Hủy bỏ" textFill="#fffefe" />
-        <TextArea fx:id="noteTextArea" layoutX="567.0" layoutY="354.0" prefHeight="116.0" prefWidth="229.0" />
-        <ComboBox fx:id="requestEditAttendanceLogTypes" layoutX="214.0" layoutY="183.0" prefHeight="33.0" prefWidth="229.0" style="-fx-background-color: white; -fx-border-color: black;" />
+        <TextArea fx:id="noteTextArea" layoutX="567.0" layoutY="365.0" prefHeight="116.0" prefWidth="249.0" />
+        <ComboBox fx:id="requestEditAttendanceLogTypes" layoutX="214.0" layoutY="183.0" onAction="#selectEditAttendanceLogType" prefHeight="34.0" prefWidth="250.0" style="-fx-background-color: white; -fx-border-color: black;" />
         <Text layoutX="214.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Loại yêu cầu" wrappingWidth="95.88916015625">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Text>
-        <DatePicker fx:id="datePicker" layoutX="216.0" layoutY="273.0" prefHeight="31.0" prefWidth="229.0" promptText="yyyy-mm-dd" />
+        <DatePicker fx:id="datePicker" layoutX="216.0" layoutY="273.0" prefHeight="31.0" prefWidth="250.0" promptText="yyyy-mm-dd" />
         <Text layoutX="217.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ngày" wrappingWidth="77.88916015625">
             <font>
                 <Font name="System Bold" size="12.0" />
@@ -86,7 +92,7 @@
                 <Font size="18.0" />
             </font>
         </Text>
-        <TextField fx:id="timeTextField" layoutX="567.0" layoutY="273.0" prefHeight="31.0" prefWidth="229.0" promptText="hh:mm:ss">
+        <TextField fx:id="timeTextField" layoutX="567.0" layoutY="273.0" prefHeight="31.0" prefWidth="78.0" promptText="hh:mm:ss">
             <font>
                 <Font size="12.0" />
             </font>
@@ -96,6 +102,12 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <ComboBox fx:id="attendanceMachineId" layoutX="214.0" layoutY="365.0" prefHeight="33.0" prefWidth="229.0" style="-fx-background-color: white; -fx-border-color: black;" />
+      <ComboBox fx:id="attendanceMachineId" layoutX="214.0" layoutY="365.0" prefHeight="34.0" prefWidth="250.0" style="-fx-background-color: white; -fx-border-color: black;" />
+      <Label fx:id="timeChangeLabel" layoutX="653.0" layoutY="280.0" prefHeight="18.0" prefWidth="85.0" text="Thay đổi thành" />
+      <TextField fx:id="timeTextFieldChange" layoutX="739.0" layoutY="273.0" prefHeight="31.0" prefWidth="78.0" promptText="hh:mm:ss">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </TextField>
     </children>
 </AnchorPane>

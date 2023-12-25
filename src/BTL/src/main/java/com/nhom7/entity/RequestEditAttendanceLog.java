@@ -6,6 +6,7 @@ public class RequestEditAttendanceLog {
     private final String employeeId;
     private final LocalDate day;
     private LocalTime time;
+    private LocalTime timeChange;
     private String requestEditType;
     private String reason;
     private String note;
@@ -17,6 +18,7 @@ public class RequestEditAttendanceLog {
             String employeeId,
             LocalDate day,
             LocalTime time,
+            LocalTime timeChange,
             String requestEditType,
             String reason,
             String note,
@@ -26,6 +28,7 @@ public class RequestEditAttendanceLog {
         this.employeeId = employeeId;
         this.day = day;
         this.time = time;
+        this.timeChange = timeChange;
         this.requestEditType = requestEditType;
         this.reason = reason;
         this.note = note;
@@ -47,6 +50,7 @@ public class RequestEditAttendanceLog {
     public LocalTime getTime() {
         return time;
     }
+    public LocalTime getTimeChange(){return timeChange; }
 
     public String getRequestEditType() {
         return requestEditType;
@@ -58,14 +62,6 @@ public class RequestEditAttendanceLog {
 
     public void setTime(LocalTime time) {
         this.time = time;
-    }
-
-    public void setType(String type) {
-        this.requestEditType = type;
-    }
-
-    public String getDayOfWeek() {
-        return day.getDayOfWeek().toString();
     }
 
     public String getReason(){

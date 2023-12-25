@@ -15,24 +15,21 @@ public class MemoryRequestEditAttendanceLogDBSubSystem implements IRequestEditAt
                     "20200673",
                     LocalDate.parse("2021-05-01"),
                     LocalTime.parse("07:00:00"),
+                    null,
                     "Thêm chấm công",
                     "Quên chấm công",
                     "",
                     "1"
             )
     ));
-    @Override
-    public List<RequestEditAttendanceLog> getAllRequestEditAttendanceLogs() {
-        return new ArrayList<>(requestEditAttendanceLogList);
-    }
 
     @Override
-    public RequestEditAttendanceLog getRequestEditAttendanceLogById(String id) {
-        return null;
-    }
-
-    @Override
-    public List<RequestEditAttendanceLog> filterRequestEditAttendanceLog(String employeeId, LocalDate day) {
+    public RequestEditAttendanceLog getRequestEditAttendanceLogById(int id) {
+        for (RequestEditAttendanceLog requestEditAttendanceLog : requestEditAttendanceLogList){
+            if (requestEditAttendanceLog.getId() == id){
+                return requestEditAttendanceLog;
+            }
+        }
         return null;
     }
 
@@ -40,15 +37,5 @@ public class MemoryRequestEditAttendanceLogDBSubSystem implements IRequestEditAt
     public boolean addRequestEditAttendanceLog(RequestEditAttendanceLog requestEditAttendanceLog) {
         requestEditAttendanceLogList.add(requestEditAttendanceLog);
         return true;
-    }
-
-    @Override
-    public boolean updateRequestEditAttendanceLog(RequestEditAttendanceLog requestEditAttendanceLog) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteRequestEditAttendanceLog(RequestEditAttendanceLog requestEditAttendanceLog) {
-        return false;
     }
 }
