@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class ExportTimekeepingRecordController {
+public class ExportTimekeepingRecordController implements DynamicTable{
 
     @FXML
     private ComboBox<Integer> pickYear;
@@ -101,14 +101,12 @@ public class ExportTimekeepingRecordController {
         if(chooseTypeOfUnit.getValue().equals("Công nhân")){
             pickUnit.getItems().clear();
             pickUnit.getItems().addAll(workerTimekeepingRecordRepository.getAllWorkerUnit());
-            workerTable.setVisible(true);
-            officerTable.setVisible(false);
+            setTable("Công nhân");
         }
         else if(chooseTypeOfUnit.getValue().equals("Nhân viên văn phòng")){
             pickUnit.getItems().clear();
             pickUnit.getItems().addAll(officeStaffTimekeepingRecordRepository.getAllOfficeStaffUnit());
-            workerTable.setVisible(false);
-            officerTable.setVisible(true);
+            setTable("Nhân viên văn phòng");
         }
     }
 
@@ -184,5 +182,17 @@ public class ExportTimekeepingRecordController {
             chooseTypeOfUnit.setValue("Nhân viên văn phòng");
         }
         pickUnit.setValue(unit);
+    }
+
+    @Override
+    public void setTable(String typeOfTable) {
+        if(typeOfTable.equals("Công nhân")){
+            workerTable.setVisible(true);
+            officerTable.setVisible(false);
+        }
+        else if(typeOfTable.equals("Nhân viên văn phòng")){
+            workerTable.setVisible(false);
+            officerTable.setVisible(true);
+        }
     }
 }
