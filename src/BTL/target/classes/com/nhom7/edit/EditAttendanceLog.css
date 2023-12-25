@@ -1,0 +1,16 @@
+#title {
+    -fx-background-color: #208F3A;
+    -fx-text-alignment: center;
+}
+
+#buttonPane > .button {
+    -fx-background-radius: 5;
+}
+#saveButton {
+    -fx-background-color: #01A01A;
+}
+
+#exitButton {
+    -fx-background-color: #A9A7A7;
+}
+
