@@ -32,4 +32,6 @@ module com.example.btl {
     exports com.nhom7.attendanceloglist;
     opens com.nhom7.exportTimekeepingRecord to javafx.fxml;
     exports com.nhom7.exportTimekeepingRecord;
+    opens com.nhom7.import_data to javafx.fxml;
+    exports com.nhom7.import_data;
 }

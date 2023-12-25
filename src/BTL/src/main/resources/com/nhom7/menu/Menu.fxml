@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="menuPane" prefHeight="559.0" prefWidth="159.0" stylesheets="@Menu.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom7.menu.MenuController">
+<Pane fx:id="menuPane" prefHeight="559.0" prefWidth="159.0" stylesheets="@Menu.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom7.menu.MenuController">
      <Label fx:id="titleLabel" alignment="CENTER" prefHeight="45.0" prefWidth="159.0" text="EmployeeManager" textFill="WHITE">
          <graphic>
              <ImageView fitHeight="19.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
@@ -62,7 +62,7 @@
              <Font name="System Bold" size="12.0" />
          </font>
      </Button>
-     <Button layoutY="225.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="159.0" text="Báo cáo thống kê" textFill="WHITE">
+     <Button layoutY="225.0" mnemonicParsing="false" onMousePressed="#onMousePressedButtonExportData" prefHeight="45.0" prefWidth="159.0" text="Báo cáo thống kê" textFill="WHITE">
          <graphic>
              <ImageView fitHeight="19.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                  <Image url="@../icon/icon_thongke.png" />
