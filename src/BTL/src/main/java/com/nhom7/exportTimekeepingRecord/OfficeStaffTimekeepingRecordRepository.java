@@ -8,8 +8,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OfficeStaffTimekeepingRecordRepository {
-    public static List<OfficeStaffTimekeepingRecord> getListOfficeStaffTimekeepingRecordsByUnitAndMonth(String unit, String month) {
+public class OfficeStaffTimekeepingRecordRepository implements IOfficeStaffTimekeepingRecordRepository{
+    @Override
+    public List<OfficeStaffTimekeepingRecord> getListOfficeStaffTimekeepingRecordsByUnitAndMonth(String unit, String month) {
         List<OfficeStaffTimekeepingRecord> list = new ArrayList<>();
         try {
             ResultSet resultSet = DatabaseQuery.executeQuery(
@@ -31,7 +32,8 @@ public class OfficeStaffTimekeepingRecordRepository {
         }
         return list;
     }
-    public static List<String> getAllOfficeStaffUnit(){
+    @Override
+    public List<String> getAllOfficeStaffUnit(){
         List<String> list = new ArrayList<>();
         try {
             ResultSet resultSet = DatabaseQuery.executeQuery(

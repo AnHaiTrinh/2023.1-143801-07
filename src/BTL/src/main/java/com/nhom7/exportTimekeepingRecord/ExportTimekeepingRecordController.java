@@ -52,6 +52,8 @@ public class ExportTimekeepingRecordController {
     private TableColumn<OfficeStaffTimekeepingRecord, Double>  officerLate;
     @FXML
     private ComboBox<String> chooseTypeOfUnit;
+    private final OfficeStaffTimekeepingRecordRepository officeStaffTimekeepingRecordRepository = new OfficeStaffTimekeepingRecordRepository();
+    private final WorkerTimekeepingRecordRepository workerTimekeepingRecordRepository = new WorkerTimekeepingRecordRepository();
 
     public void initialize() {
         //worker table
@@ -80,8 +82,8 @@ public class ExportTimekeepingRecordController {
         pickYear.getItems().addAll(2020,2021,2022,2023,2024,2025,2026,2027,2028,2029);
 
         //pickUnit
-        pickUnit.getItems().addAll(WorkerTimekeepingRecordRepository.getAllWorkerUnit());
-        pickUnit.getItems().addAll(OfficeStaffTimekeepingRecordRepository.getAllOfficeStaffUnit());
+        pickUnit.getItems().addAll(workerTimekeepingRecordRepository.getAllWorkerUnit());
+        pickUnit.getItems().addAll(officeStaffTimekeepingRecordRepository.getAllOfficeStaffUnit());
         pickUnit.setButtonCell(new ListCell<String>() {
             @Override
             protected void updateItem(String item, boolean empty){
@@ -99,13 +101,13 @@ public class ExportTimekeepingRecordController {
     public void chooseTypeOfUnit(ActionEvent actionEvent) {
         if(chooseTypeOfUnit.getValue().equals("Công nhân")){
             pickUnit.getItems().clear();
-            pickUnit.getItems().addAll(WorkerTimekeepingRecordRepository.getAllWorkerUnit());
+            pickUnit.getItems().addAll(workerTimekeepingRecordRepository.getAllWorkerUnit());
             workerTable.setVisible(true);
             officerTable.setVisible(false);
         }
         else if(chooseTypeOfUnit.getValue().equals("Nhân viên văn phòng")){
             pickUnit.getItems().clear();
-            pickUnit.getItems().addAll(OfficeStaffTimekeepingRecordRepository.getAllOfficeStaffUnit());
+            pickUnit.getItems().addAll(officeStaffTimekeepingRecordRepository.getAllOfficeStaffUnit());
             workerTable.setVisible(false);
             officerTable.setVisible(true);
         }
@@ -125,7 +127,7 @@ public class ExportTimekeepingRecordController {
         //if user choose worker
         if(chooseTypeOfUnit.getValue().equals("Công nhân")){
             workerTable.getItems().clear();
-            List<WorkerTimekeepingRecord> list = WorkerTimekeepingRecordRepository.getListWorkerTimekeepingRecordsByUnitAndMonth(pickUnit.getValue(), monthAndYear);
+            List<WorkerTimekeepingRecord> list = workerTimekeepingRecordRepository.getListWorkerTimekeepingRecordsByUnitAndMonth(pickUnit.getValue(), monthAndYear);
             if(list.isEmpty()){
                 AlertFactory.getInstance().createAlert("Information", "Không có dữ liệu theo yêu cầu của bạn");
             }else {
@@ -135,7 +137,7 @@ public class ExportTimekeepingRecordController {
         //if user choose officer
         else if(chooseTypeOfUnit.getValue().equals("Nhân viên văn phòng")){
             officerTable.getItems().clear();
-            List<OfficeStaffTimekeepingRecord> list = OfficeStaffTimekeepingRecordRepository.getListOfficeStaffTimekeepingRecordsByUnitAndMonth(pickUnit.getValue(), monthAndYear);
+            List<OfficeStaffTimekeepingRecord> list = officeStaffTimekeepingRecordRepository.getListOfficeStaffTimekeepingRecordsByUnitAndMonth(pickUnit.getValue(), monthAndYear);
             if (list.isEmpty()) {
                 AlertFactory.getInstance().createAlert("Information", "Không có dữ liệu theo yêu cầu của bạn");
             } else {
@@ -175,7 +177,7 @@ public class ExportTimekeepingRecordController {
     public void chooseUnit(ActionEvent actionEvent) {
         String unit = pickUnit.getValue();
         if (unit == null) return;
-        List<String> listOfWorkerUnit = WorkerTimekeepingRecordRepository.getAllWorkerUnit();
+        List<String> listOfWorkerUnit = workerTimekeepingRecordRepository.getAllWorkerUnit();
         if(listOfWorkerUnit.contains(unit)){
             chooseTypeOfUnit.setValue("Công nhân");
         }

@@ -9,8 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WorkerTimekeepingRecordRepository {
-    public static List<WorkerTimekeepingRecord> getListWorkerTimekeepingRecordsByUnitAndMonth(String unit, String month){
+public class WorkerTimekeepingRecordRepository implements IWorkerTimekeepingRecordRepository{
+    public List<WorkerTimekeepingRecord> getListWorkerTimekeepingRecordsByUnitAndMonth(String unit, String month){
         List<WorkerTimekeepingRecord> list = new ArrayList<>();
         try {
             ResultSet resultSet = DatabaseQuery.executeQuery(
@@ -32,7 +32,7 @@ public class WorkerTimekeepingRecordRepository {
         }
         return list;
     }
-    public static List<String> getAllWorkerUnit(){
+    public List<String> getAllWorkerUnit(){
         List<String> workerUnitList = new ArrayList<>();
         try {
             ResultSet resultSet = DatabaseQuery.executeQuery(
