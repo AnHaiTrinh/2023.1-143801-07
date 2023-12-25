@@ -12,8 +12,6 @@ module com.example.btl {
     requires java.sql;
     requires org.apache.poi.ooxml;
 
-    opens com.nhom7.main to javafx.fxml;
-    exports com.nhom7.main;
     opens com.nhom7.menu to javafx.fxml;
     exports com.nhom7.menu;
     opens com.nhom7.login to javafx.fxml;
@@ -34,4 +32,6 @@ module com.example.btl {
     opens com.nhom7.attendanceloglist to javafx.fxml;
     exports com.nhom7.request_edit_attendanceLog;
     opens com.nhom7.request_edit_attendanceLog to javafx.fxml;
+    exports com.nhom7;
+    opens com.nhom7 to javafx.fxml;
 }

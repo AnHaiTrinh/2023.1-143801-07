@@ -9,8 +9,6 @@ import com.nhom7.request_edit_attendanceLog.ManagerAttendanceLogController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
 
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -66,11 +64,12 @@ public class LoginController implements Initializable {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         stage.show();
-        // Login to home page
+        // App to home page
     }
 
     private void onLoginFail() {
-        AlertFactory.getInstance().createAlert("Error", "Login failed");
+
+        AlertFactory.getInstance().createAlert("Error", "Đăng nhập thất bại");
     }
 
     public void setAuthService(IAuthService authService) {

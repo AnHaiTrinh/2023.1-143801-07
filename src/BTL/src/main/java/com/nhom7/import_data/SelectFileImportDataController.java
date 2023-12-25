@@ -1,6 +1,5 @@
 package com.nhom7.import_data;
 
-import com.nhom7.EmployeeContext;
 import com.nhom7.dbsubsystem.RemoteAttendanceLogDBSubSystem;
 import com.nhom7.dbsubsystem.RemoteHistoryImportFileDBSystem;
 import com.nhom7.entity.AttendanceLog;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class SelectFileImportData implements Initializable {
+public class SelectFileImportDataController implements Initializable {
     private FileChooser fileChooser;
     public CheckFileExcel checkFileExcel;
     public TableView tableView;
@@ -38,7 +37,7 @@ public class SelectFileImportData implements Initializable {
         tableColumnList.add(phongBan);
         buttonAcceptImport.setDisable(true);
     }
-    public SelectFileImportData(FileChooser fileChooser, CheckFileExcel checkFileExcel) {
+    public SelectFileImportDataController(FileChooser fileChooser, CheckFileExcel checkFileExcel) {
         this.fileChooser = fileChooser;
         this.checkFileExcel = checkFileExcel;
     }

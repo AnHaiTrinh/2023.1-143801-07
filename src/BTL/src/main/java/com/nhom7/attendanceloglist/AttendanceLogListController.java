@@ -2,14 +2,12 @@ package com.nhom7.attendanceloglist;
 
 import com.nhom7.alert.AlertFactory;
 import com.nhom7.dbsubsystem.IAttendanceLogDBSubSystem;
-import com.nhom7.dbsubsystem.MemoryAttendanceLogDBSubsystem;
+import com.nhom7.dbsubsystem.RemoteAttendanceLogDBSubSystem;
 import com.nhom7.edit.EditAttendanceLogController;
 import com.nhom7.entity.AttendanceLog;
 import com.nhom7.config.Settings;
-import com.nhom7.hrsubsystem.MemoryHRSubSystem;
+import com.nhom7.hrsubsystem.DatabaseHRSubSystem;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -17,8 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.StringConverter;
 
 import java.io.IOException;
@@ -167,8 +165,8 @@ public class AttendanceLogListController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/nhom7/edit/EditAttendanceLog.fxml"));
         fxmlLoader.setController(new EditAttendanceLogController(
                 attendanceLog,
-                new MemoryAttendanceLogDBSubsystem(),
-                new MemoryHRSubSystem()
+                new RemoteAttendanceLogDBSubSystem(),
+                new DatabaseHRSubSystem()
         ));
         try {
             Parent childScreen = fxmlLoader.load();
@@ -178,7 +176,7 @@ public class AttendanceLogListController implements Initializable {
             Stage childStage = new Stage();
             childStage.setScene(childScene);
             childStage.setTitle("Sửa log chấm công");
-            childStage.initModality(Modality.APPLICATION_MODAL);
+            childStage.initStyle(StageStyle.UNDECORATED); // Remove default buttons
             childStage.initOwner(primaryStage);
 
             mainContainer.setDisable(true);
