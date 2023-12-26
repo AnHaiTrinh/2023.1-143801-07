@@ -2,6 +2,7 @@ package com.nhom7.menu;
 import com.nhom7.EmployeeContext;
 import com.nhom7.attendanceloglist.AttendanceLogListController;
 import com.nhom7.dbsubsystem.MemoryAttendanceLogDBSubsystem;
+import com.nhom7.dbsubsystem.RemoteAttendanceLogDBSubSystem;
 import com.nhom7.importdata.ImportDataController;
 import com.nhom7.login.LoginView;
 import com.nhom7.screen.ScreenSwitch;
@@ -34,7 +35,7 @@ public class MenuController implements Initializable {
                 stage,
                 "/com/nhom7/attendanceloglist/AttendanceLogList.fxml",
                 "Phần mềm quản lý chấm công",
-                new AttendanceLogListController(new MemoryAttendanceLogDBSubsystem())
+                new AttendanceLogListController(new RemoteAttendanceLogDBSubSystem())
         );
     }
     public void onMousePressedButtonOverView(MouseEvent event){

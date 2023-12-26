@@ -1,0 +1,3 @@
+HR_SUBSYSTEM_URL=jdbc:postgresql://localhost:5429/postgres?user=postgres&password=postgres;
+DB_SUBSYSTEM_URL=jdbc:postgresql://localhost:5429/postgres?user=postgres&password=postgres;
+AUTH_SERVICE_URL=jdbc:postgresql://localhost:5429/postgres?user=postgres&password=postgres;
