@@ -1,4 +1,4 @@
-package com.nhom7.import_data;
+package com.nhom7.importdata;
 
 import com.nhom7.alert.AlertFactory;
 import com.nhom7.entity.AttendanceLog;
