@@ -17,9 +17,11 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -51,7 +53,7 @@ public class RequestEditAttendanceLogController implements Initializable {
     }
     public void onMousePressedButtonBackManagerAttendanceLog(MouseEvent event) throws IOException{
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(RequestEditAttendanceLogController.class.getResource("manager_attendanceLog.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(RequestEditAttendanceLogController.class.getResource("overView_attendanceLog.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 864, 559);
         stage.setScene(scene);
         stage.show();
@@ -73,6 +75,25 @@ public class RequestEditAttendanceLogController implements Initializable {
                     }
                 }
         );
+        datePicker.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(LocalDate localDate) {
+                if (localDate != null) {
+                    return localDate.format(Settings.DATE_FORMATTER);
+                } else {
+                    return null;
+                }
+            }
+
+            @Override
+            public LocalDate fromString(String s) {
+                try {
+                    return LocalDate.parse(s, Settings.DATE_FORMATTER);
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        });
         loadInitialData();
     }
 
@@ -85,7 +106,6 @@ public class RequestEditAttendanceLogController implements Initializable {
         fullNameTextField.setText(employee.getName());
         staffCodeTextField.setText(employeeId);
         requestEditAttendanceLogTypes.getItems().addAll(requestEditAttendanceLogItems);
-        //datePicker.setValue(LocalDate.now());
         if (!requestEditAttendanceLogItems.isEmpty()) {
             requestEditAttendanceLogTypes.setValue(requestEditAttendanceLogItems.get(0));
         }
@@ -123,7 +143,7 @@ public class RequestEditAttendanceLogController implements Initializable {
         boolean confirmed = AlertFactory.getInstance().
                 createAlertAndWaitForRespond("Confirmation", "Khi bạn gửi, thông báo sẽ được gửi đến bộ phận nhân sự!");
         if (!confirmed) {
-            AlertFactory.getInstance().createAlert("Information", "Thao tác đã bị hủy");
+            AlertFactory.getInstance().createAlert("Information", "Yêu cầu đã bị hủy");
             return;
         }
         boolean saved = save();
@@ -136,9 +156,9 @@ public class RequestEditAttendanceLogController implements Initializable {
 
     public void handleCancelButtonClicked() {
         boolean confirmed = AlertFactory.getInstance().
-                createAlertAndWaitForRespond("Confirmation", "Bạn chắc chắn muốn thoát?");
+                createAlertAndWaitForRespond("Confirmation", "Bạn chắc chắn muốn hủy bỏ yêu cầu?");
         if (!confirmed) {
-            AlertFactory.getInstance().createAlert("Information", "Thao tác đã bị hủy");
+            AlertFactory.getInstance().createAlert("Information", "Yêu cầu đã bị hủy bỏ");
             return;
         }
         reset();
@@ -147,10 +167,13 @@ public class RequestEditAttendanceLogController implements Initializable {
     private void reset() {
         requestEditAttendanceLogTypes.setValue("Chỉnh sửa chấm công");
         reasonTextField.setText("");
-        //datePicker.setValue(LocalDate.now());
-        timeTextField.setText("hh:mm:ss");
+        datePicker.setValue(null);
+        datePicker.setPromptText("yyyy-mm-dd");
+        timeTextField.setText("");
+        timeTextField.setPromptText("hh:mm:ss");
         timeTextFieldChange.setVisible(true);
-        timeTextFieldChange.setText("hh:mm:ss");
+        timeTextFieldChange.setText("");
+        timeTextFieldChange.setPromptText("hh:mm:ss");
         timeChangeLabel.setVisible(true);
         timeChangeLabel.setText("Thay đổi thành");
         attendanceMachineId.setValue("1");

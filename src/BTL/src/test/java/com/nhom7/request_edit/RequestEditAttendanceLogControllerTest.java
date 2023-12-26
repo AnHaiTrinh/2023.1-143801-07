@@ -9,6 +9,7 @@ import com.nhom7.hrsubsystem.IHRSubSystem;
 import com.nhom7.hrsubsystem.MemoryHRSubSystem;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ import org.testfx.matcher.control.LabeledMatchers;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -48,7 +50,11 @@ class RequestEditAttendanceLogControllerTest extends ApplicationTest {
         stage.show();
     }
 
-    void assertAddRequestEditAttendanceLogIsDisplay(String time, String requestEditAttendanceLogType, String attendanceMachineId){
+    void assertAddRequestEditAttendanceLogIsDisplay(String date, String time, String requestEditAttendanceLogType, String attendanceMachineId){
+        assertEquals(
+                date,
+                controller.datePicker.getValue().toString()
+        );
         assertEquals(
                 time,
                 controller.timeTextField.getText()
@@ -63,7 +69,11 @@ class RequestEditAttendanceLogControllerTest extends ApplicationTest {
         );
     }
 
-    void assertAddRequestEditAttendanceLogIsDisplay(String time, String timeChange, String requestEditAttendanceLogType, String attendanceMachineId){
+    void assertAddRequestEditAttendanceLogIsDisplay(String date, String time, String timeChange, String requestEditAttendanceLogType, String attendanceMachineId){
+        assertEquals(
+                date,
+                controller.datePicker.getValue().toString()
+        );
         assertEquals(
                 time,
                 controller.timeTextField.getText()
@@ -102,7 +112,9 @@ class RequestEditAttendanceLogControllerTest extends ApplicationTest {
         );
     }
 
-    private void enterAddRemoveInput(String time, String requestEditAttendanceLogType, String attendanceMachineId){
+    private void enterAddRemoveInput(String date, String time, String requestEditAttendanceLogType, String attendanceMachineId){
+        DatePicker datePicker = lookup("#datePicker").queryAs(DatePicker.class);
+        interact(() -> datePicker.setValue(LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
         TextField timeTextField = lookup("#timeTextField").queryAs(TextField.class);
         interact(() -> timeTextField.setText(time));
         clickOn("#requestEditAttendanceLogTypes");
@@ -111,7 +123,9 @@ class RequestEditAttendanceLogControllerTest extends ApplicationTest {
         clickOn(attendanceMachineId);
     }
 
-    private void enterEditInput(String time, String timeChange, String requestEditAttendanceLogType, String attendanceMachineId){
+    private void enterEditInput(String date, String time, String timeChange, String requestEditAttendanceLogType, String attendanceMachineId){
+        DatePicker datePicker = lookup("#datePicker").queryAs(DatePicker.class);
+        interact(() -> datePicker.setValue(LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
         TextField timeTextField = lookup("#timeTextField").queryAs(TextField.class);
         interact(() -> timeTextField.setText(time));
         TextField timeTextFieldChange = lookup("#timeTextFieldChange").queryAs(TextField.class);
@@ -132,28 +146,28 @@ class RequestEditAttendanceLogControllerTest extends ApplicationTest {
     // Test yêu cầu thêm/xóa chấm công
     @ParameterizedTest
     @CsvSource({
-            "08:00:00, Thêm chấm công, 2",
-            "18:09:24, Xóa chấm công, 1",
-            "07:43:00, Thêm chấm công, 3",
-            "07:43:00, Xóa chấm công, 3",
+            "2022-12-23, 08:00:00, Thêm chấm công, 2",
+            "2023-02-21, 18:09:24, Xóa chấm công, 1",
+            "2022-07-03, 07:43:00, Thêm chấm công, 3",
+            "2022-12-23, 07:43:00, Xóa chấm công, 3",
     })
-    void testValidInput(String time, String requestEditAttendanceLogType, String attendanceMachineId){
-        enterAddRemoveInput(time, requestEditAttendanceLogType, attendanceMachineId);
+    void testValidInput(String date, String time, String requestEditAttendanceLogType, String attendanceMachineId){
+        enterAddRemoveInput(date, time, requestEditAttendanceLogType, attendanceMachineId);
         clickOn("#saveButton");
         assertAlertPopup("Khi bạn gửi, thông báo sẽ được gửi đến bộ phận nhân sự!");
         clickOn("OK");
         assertAlertPopup("Gửi yêu cầu thành công");
         clickOn("OK");
 
-        assertAddRequestEditAttendanceLogIsDisplay(time, requestEditAttendanceLogType, attendanceMachineId);
+        assertAddRequestEditAttendanceLogIsDisplay(date, time, requestEditAttendanceLogType, attendanceMachineId);
     }
 
     @ParameterizedTest
     @CsvSource({
-            "08:00:00, Thêm chấm công, 2",
+            "2023-06-04, 08:00:00, Thêm chấm công, 2",
     })
-    void testSaveData(String time, String requestEditAttendanceLogType, String attendanceMachineId){
-        enterAddRemoveInput(time, requestEditAttendanceLogType, attendanceMachineId);
+    void testSaveData(String date, String time, String requestEditAttendanceLogType, String attendanceMachineId){
+        enterAddRemoveInput(date, time, requestEditAttendanceLogType, attendanceMachineId);
         clickOn("#saveButton");
         assertAlertPopup("Khi bạn gửi, thông báo sẽ được gửi đến bộ phận nhân sự!");
         clickOn("OK");
@@ -169,7 +183,7 @@ class RequestEditAttendanceLogControllerTest extends ApplicationTest {
                 "",
                 "1"
         );
-        assertAddRequestEditAttendanceLogIsDisplay(time, requestEditAttendanceLogType, attendanceMachineId);
+        assertAddRequestEditAttendanceLogIsDisplay(date, time, requestEditAttendanceLogType, attendanceMachineId);
         boolean result = dbSubSystem.addRequestEditAttendanceLog(newRequestEditAttendanceLog);
         if (result){
             assertAlertPopup("Gửi yêu cầu thành công");
@@ -186,12 +200,12 @@ class RequestEditAttendanceLogControllerTest extends ApplicationTest {
     // Test yêu cầu chỉnh sửa chấm công
     @ParameterizedTest
     @CsvSource({
-            "08:00:00, 07:59:00, Chỉnh sửa chấm công, 2",
-            "11:54:13, 12:11:03, Chỉnh sửa chấm công, 1",
-            "17:59:24, 18:02:12, Chỉnh sửa chấm công, 1",
+            "2023-01-01, 08:00:00, 07:59:00, Chỉnh sửa chấm công, 2",
+            "2023-01-01, 11:54:13, 12:11:03, Chỉnh sửa chấm công, 1",
+            "2023-01-01, 17:59:24, 18:02:12, Chỉnh sửa chấm công, 1",
     })
-    void testValidInput(String time, String timeChange, String requestEditAttendanceLogType, String attendanceMachineId){
-        enterEditInput(time, timeChange, requestEditAttendanceLogType, attendanceMachineId);
+    void testValidInput(String date, String time, String timeChange, String requestEditAttendanceLogType, String attendanceMachineId){
+        enterEditInput(date, time, timeChange, requestEditAttendanceLogType, attendanceMachineId);
         clickOn("#saveButton");
         assertAlertPopup("Khi bạn gửi, thông báo sẽ được gửi đến bộ phận nhân sự!");
         clickOn("OK");
@@ -199,27 +213,27 @@ class RequestEditAttendanceLogControllerTest extends ApplicationTest {
         assertAlertPopup("Gửi yêu cầu thành công");
         clickOn("OK");
 
-        assertAddRequestEditAttendanceLogIsDisplay(time, timeChange, requestEditAttendanceLogType, attendanceMachineId);
+        assertAddRequestEditAttendanceLogIsDisplay(date, time, timeChange, requestEditAttendanceLogType, attendanceMachineId);
     }
 
     @ParameterizedTest
     @CsvSource({
-            "08:00:00, 07:59:00, Chỉnh sửa chấm công, 2",
-            "11:54:13, 12:11:03, Chỉnh sửa chấm công, 1",
-            "17:59:24, 18:02:12, Chỉnh sửa chấm công, 1",
+            "2023-01-01, 08:00:00, 07:59:00, Chỉnh sửa chấm công, 2",
+            "2023-01-01, 11:54:13, 12:11:03, Chỉnh sửa chấm công, 1",
+            "2023-01-01, 17:59:24, 18:02:12, Chỉnh sửa chấm công, 1",
     })
-    void testCancelSendRequestEditAttendanceLog(String time, String timeChange, String requestEditAttendanceLogType, String attendanceMachineId) {
-        enterEditInput(time, timeChange, requestEditAttendanceLogType, attendanceMachineId);
+    void testCancelSendRequestEditAttendanceLog(String date, String time, String timeChange, String requestEditAttendanceLogType, String attendanceMachineId) {
+        enterEditInput(date, time, timeChange, requestEditAttendanceLogType, attendanceMachineId);
         clickOn("#saveButton");
 
         assertAlertPopup("Khi bạn gửi, thông báo sẽ được gửi đến bộ phận nhân sự!");
 
         clickOn("Cancel");
 
-        assertAlertPopup("Thao tác đã bị hủy");
+        assertAlertPopup("Yêu cầu đã bị hủy");
 
         clickOn("OK");
 
-        assertAddRequestEditAttendanceLogIsDisplay(time, timeChange, requestEditAttendanceLogType, attendanceMachineId);
+        assertAddRequestEditAttendanceLogIsDisplay(date, time, timeChange, requestEditAttendanceLogType, attendanceMachineId);
     }
 }

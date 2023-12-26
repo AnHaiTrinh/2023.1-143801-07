@@ -5,10 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class ManagerAttendanceLogView extends Application {
+public class OverViewAttendanceLogView extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(ManagerAttendanceLogView.class.getResource("manager_attendanceLog.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(OverViewAttendanceLogView.class.getResource("overView_attendanceLog.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 864, 559);
         stage.setScene(scene);
         stage.show();

@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ManagerAttendanceLogController {
+public class OverViewAttendanceLogController {
     public void onMousePressedButtonRequestEditAttendanceLog(MouseEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(RequestEditAttendanceLogController.class.getResource("request_edit_attendanceLog.fxml"));

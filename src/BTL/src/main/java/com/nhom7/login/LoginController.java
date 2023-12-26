@@ -4,7 +4,7 @@ import com.nhom7.EmployeeContext;
 import com.nhom7.alert.AlertFactory;
 import com.nhom7.entity.Employee;
 import com.nhom7.login.auth.IAuthService;
-import com.nhom7.request_edit.ManagerAttendanceLogController;
+import com.nhom7.request_edit.OverViewAttendanceLogController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -59,7 +59,7 @@ public class LoginController implements Initializable {
     private void onLoginSuccess(Employee authenticatedEmployee) throws IOException {
         EmployeeContext.create(authenticatedEmployee);
         Stage stage = (Stage) paneLoginPage.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(ManagerAttendanceLogController.class.getResource("manager_attendanceLog.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(OverViewAttendanceLogController.class.getResource("overView_attendanceLog.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         stage.show();
