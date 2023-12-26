@@ -1,23 +1,20 @@
 package com.nhom7.menu;
 import com.nhom7.EmployeeContext;
 import com.nhom7.attendanceloglist.AttendanceLogListController;
-import com.nhom7.dbsubsystem.MemoryAttendanceLogDBSubsystem;
-import com.nhom7.exportTimekeepingRecord.ExportTimekeepingRecordView;
-import com.nhom7.import_data.ImportDataController;
+import com.nhom7.dbsubsystem.RemoteAttendanceLogDBSubSystem;
+import com.nhom7.importdata.ImportDataController;
 import com.nhom7.login.LoginView;
 import com.nhom7.screen.ScreenSwitch;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MenuController implements Initializable {
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -37,7 +34,7 @@ public class MenuController implements Initializable {
                 stage,
                 "/com/nhom7/attendanceloglist/AttendanceLogList.fxml",
                 "Phần mềm quản lý chấm công",
-                new AttendanceLogListController(new MemoryAttendanceLogDBSubsystem())
+                new AttendanceLogListController(new RemoteAttendanceLogDBSubSystem())
         );
     }
     public void onMousePressedButtonOverView(MouseEvent event){
@@ -50,7 +47,7 @@ public class MenuController implements Initializable {
         );
     }
 
-    public void onMousePressedButtonExportData(MouseEvent event) throws IOException {
+    public void onMousePressedButtonExportData(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         ScreenSwitch.switchScreen(
                 stage,

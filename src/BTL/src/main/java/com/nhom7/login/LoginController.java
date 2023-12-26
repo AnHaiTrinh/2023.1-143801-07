@@ -3,8 +3,9 @@ package com.nhom7.login;
 import com.nhom7.EmployeeContext;
 import com.nhom7.alert.AlertFactory;
 import com.nhom7.entity.Employee;
-import com.nhom7.home.HomePageView;
 import com.nhom7.login.auth.IAuthService;
+import com.nhom7.requestedit.ManagerAttendanceLogController;
+import com.nhom7.screen.ScreenSwitch;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -59,11 +60,12 @@ public class LoginController implements Initializable {
     private void onLoginSuccess(Employee authenticatedEmployee) throws IOException {
         EmployeeContext.create(authenticatedEmployee);
         Stage stage = (Stage) paneLoginPage.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HomePageView.class.getResource("HomePage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
-        // App to home page
+        ScreenSwitch.switchScreen(
+                stage,
+                "/com/nhom7/requestedit/manager_attendanceLog.fxml",
+                "Phần mềm quản lý chấm công",
+                null
+        );
     }
 
     private void onLoginFail() {

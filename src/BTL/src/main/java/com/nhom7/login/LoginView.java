@@ -1,6 +1,7 @@
 package com.nhom7.login;
 
 import com.nhom7.login.auth.DBAuthService;
+import com.nhom7.login.auth.MockAuthService;
 import com.nhom7.screen.ScreenSwitch;
 import javafx.stage.Stage;
 
@@ -15,7 +16,7 @@ public class LoginView {
                 stage,
                 "/com/nhom7/login/LoginPage.fxml",
                 "Login",
-                new LoginController(new DBAuthService())
+                new LoginController(new MockAuthService())
         );
     }
 }

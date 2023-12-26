@@ -1,4 +1,4 @@
-package com.nhom7.import_data;
+package com.nhom7.importdata;
 
 import java.io.*;
 import java.net.URL;
@@ -8,8 +8,7 @@ import com.nhom7.config.Settings;
 import com.nhom7.validate.DateTimeValidator;
 import org.apache.poi.ss.usermodel.*;
 
-public class CheckFileExcel implements CheckFileService {
-    @Override
+public class CheckFileExcel{
     public String checkErrorFile(String url) throws IOException {
         try (InputStream inputStream = new URL(url).openStream()) {
             Workbook workbook = WorkbookFactory.create(inputStream);

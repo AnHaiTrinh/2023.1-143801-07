@@ -8,7 +8,6 @@ module com.example.btl {
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
-    //requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.sql;
     requires org.apache.poi.poi;
@@ -26,14 +25,16 @@ module com.example.btl {
     exports com.nhom7.hrsubsystem;
     opens com.nhom7.entity to javafx.fxml;
     exports com.nhom7.entity;
+    opens com.nhom7.importdata to javafx.fxml;
+    exports com.nhom7.importdata;
     opens com.nhom7.attendanceloglist to javafx.fxml;
     exports com.nhom7.attendanceloglist;
     opens com.nhom7.exportTimekeepingRecord to javafx.fxml;
     exports com.nhom7.exportTimekeepingRecord;
-    opens com.nhom7.import_data to javafx.fxml;
-    exports com.nhom7.import_data;
     exports com.nhom7.validate;
     opens com.nhom7.validate to javafx.fxml;
+    exports com.nhom7.requestedit;
+    opens com.nhom7.requestedit to javafx.fxml;
     exports com.nhom7;
     opens com.nhom7 to javafx.fxml;
 }

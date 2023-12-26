@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="mainContainer" fx:id="mainContainer" prefHeight="559.0" prefWidth="864.0" stylesheets="@../attendanceloglist/AttendanceLogList.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom7.exportTimekeepingRecord.ExportTimekeepingRecordController">
+<AnchorPane id="mainContainer" fx:id="mainContainer" prefHeight="559.0" prefWidth="864.0" stylesheets="@../attendanceloglist/AttendanceLogList.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom7.exportTimekeepingRecord.ExportTimekeepingRecordController">
     <fx:include source="../menu/Menu.fxml" />
     <Label layoutX="176.0" layoutY="10.0" prefHeight="30.0" prefWidth="191.0" text="Báo cáo thống kê">
         <font>
