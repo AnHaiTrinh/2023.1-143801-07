@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="862.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom7.request_edit.ManagerAttendanceLogController">
+    <children>
+        <fx:include source="../menu/Menu.fxml" />
+        <Text layoutX="175.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tổng quan" wrappingWidth="171.1328125">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Text>
+        <TextField disable="true" layoutX="175.0" layoutY="52.0" prefHeight="17.0" prefWidth="147.0" promptText="Nguyen Kim Hung">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></TextField>
+        <Button fx:id="requestEditAttendanceLogClick" layoutX="343.0" layoutY="52.0" mnemonicParsing="false" onMousePressed="#onMousePressedButtonRequestEditAttendanceLog" prefHeight="25.0" prefWidth="196.0" style="-fx-background-color: green;" text="Yêu cầu chỉnh sửa chấm công" textFill="#fffdfd">
+            <graphic>
+                <ImageView fitHeight="16.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icon/icon_edit.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <font>
+                <Font size="12.0" />
+            </font>
+        </Button>
+        <Button layoutX="559.0" layoutY="52.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" style="-fx-background-color: green;" text="Thiết lập chấm công" textFill="#fffdfd">
+            <graphic>
+                <ImageView fitHeight="14.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icon/icon_fingerprint.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <font>
+                <Font size="12.0" />
+            </font>
+        </Button>
+        <Button layoutX="725.0" layoutY="52.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: green;" text="Chọn tháng" textFill="#fffdfd">
+            <graphic>
+                <ImageView fitHeight="18.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../icon/icon_december.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+            <font>
+                <Font size="12.0" />
+            </font>
+        </Button>
+        <Pane layoutX="169.0" layoutY="106.0" prefHeight="424.0" prefWidth="664.0">
+            <children>
+                <BorderPane layoutX="178.0" layoutY="14.0" prefHeight="56.0" prefWidth="334.0">
+                    <bottom>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="01/12/2023 - 31/12/2023" wrappingWidth="181.376953125" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font size="12.0" />
+                            </font></Text>
+                    </bottom>
+                    <center>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bảng chấm công tháng 12, 2023" wrappingWidth="275.234375" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Text>
+                    </center>
+                    <left>
+                        <ImageView fitHeight="46.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                            <image>
+                                <Image url="@../icon/icon_previous.png" />
+                            </image>
+                        </ImageView>
+                    </left>
+                    <right>
+                        <ImageView fitHeight="107.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                            <image>
+                                <Image url="@../icon/icon_next.png" />
+                            </image>
+                        </ImageView>
+                    </right>
+                </BorderPane>
+                <Pane layoutX="6.0" layoutY="89.0" prefHeight="340.0" prefWidth="659.0">
+                    <children>
+                        <TableView prefHeight="340.0" prefWidth="659.0">
+                            <columns>
+                                <TableColumn prefWidth="95.0" text="THỨ HAI" />
+                                <TableColumn prefWidth="96.0" text="THỨ BA" />
+                                <TableColumn prefWidth="85.0" text="THỨ TƯ" />
+                                <TableColumn prefWidth="83.0" text="THỨ NĂM" />
+                                <TableColumn prefWidth="111.0" text="THỨ SÁU" />
+                                <TableColumn prefWidth="91.0" text="THỨ BẢY" />
+                                <TableColumn prefWidth="96.0" text="CHỦ NHẬT" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </Pane>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
