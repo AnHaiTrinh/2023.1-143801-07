@@ -1,11 +1,9 @@
-package com.nhom7.import_data;
+package com.nhom7.importdata;
 
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

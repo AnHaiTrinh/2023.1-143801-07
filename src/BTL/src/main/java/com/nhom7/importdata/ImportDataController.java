@@ -1,12 +1,10 @@
-package com.nhom7.import_data;
+package com.nhom7.importdata;
 import com.nhom7.dbsubsystem.RemoteHistoryImportFileDBSystem;
 import com.nhom7.entity.HistoryImportFile;
 import com.nhom7.screen.ScreenSwitch;
 import javafx.collections.FXCollections;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -37,7 +35,7 @@ public class ImportDataController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         ScreenSwitch.switchScreen(
                 stage,
-                "/com/nhom7/import_data/SelectFileImportData.fxml",
+                "/com/nhom7/importdata/SelectFileImportData.fxml",
                 "Chọn file",
                 new SelectFileImportDataController(new FileChooser(), new CheckFileExcel())
         );

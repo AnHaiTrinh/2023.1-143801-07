@@ -1,4 +1,4 @@
-package com.nhom7.import_data;
+package com.nhom7.importdata;
 
 import java.io.*;
 import java.net.URL;
