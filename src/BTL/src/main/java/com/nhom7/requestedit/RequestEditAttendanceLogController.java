@@ -6,13 +6,12 @@ import com.nhom7.config.Settings;
 import com.nhom7.dbsubsystem.IRequestEditAttendanceLogDBSubSystem;
 import com.nhom7.entity.RequestEditAttendanceLog;
 import com.nhom7.hrsubsystem.IHRSubSystem;
+import com.nhom7.screen.ScreenSwitch;
 import com.nhom7.validate.DateTimeValidator;
 import com.nhom7.validate.OptionValidator;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -38,22 +37,21 @@ public class RequestEditAttendanceLogController implements Initializable {
     public TextField reasonTextField;
     public TextArea noteTextArea;
     public ComboBox<String> attendanceMachineId;
-    private String employeeId;
-    private IHRSubSystem hrSubSystem;
     private IRequestEditAttendanceLogDBSubSystem dbSubSystem;
     private List<String> requestEditAttendanceLogItems = Arrays.asList("Chỉnh sửa chấm công", "Thêm chấm công", "Xóa chấm công");
     private List<String> attendanceMachineIdItems = Arrays.asList("1", "2", "3");
     private int idCount = 5;
-    public RequestEditAttendanceLogController(IHRSubSystem hrSubSystem, IRequestEditAttendanceLogDBSubSystem dbSubSystem){
-        this.hrSubSystem = hrSubSystem;
+    public RequestEditAttendanceLogController(IRequestEditAttendanceLogDBSubSystem dbSubSystem){
         this.dbSubSystem = dbSubSystem;
     }
     public void onMousePressedButtonBackManagerAttendanceLog(MouseEvent event) throws IOException{
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(RequestEditAttendanceLogController.class.getResource("manager_attendanceLog.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 864, 559);
-        stage.setScene(scene);
-        stage.show();
+        ScreenSwitch.switchScreen(
+                stage,
+                "/com/nhom7/home/HomePage.fxml",
+                "Phần mềm quản lý chấm công",
+                null
+        );
     }
 
     @Override
@@ -185,9 +183,5 @@ public class RequestEditAttendanceLogController implements Initializable {
 
     public void setDbSubSystem(IRequestEditAttendanceLogDBSubSystem dbSubSystem) {
         this.dbSubSystem = dbSubSystem;
-    }
-
-    public void setHrSubSystem(IHRSubSystem hrSubSystem) {
-        this.hrSubSystem = hrSubSystem;
     }
 }

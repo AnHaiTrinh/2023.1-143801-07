@@ -4,11 +4,8 @@ import com.nhom7.EmployeeContext;
 import com.nhom7.alert.AlertFactory;
 import com.nhom7.entity.Employee;
 import com.nhom7.login.auth.IAuthService;
-import com.nhom7.requestedit.ManagerAttendanceLogController;
 import com.nhom7.screen.ScreenSwitch;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -62,7 +59,7 @@ public class LoginController implements Initializable {
         Stage stage = (Stage) paneLoginPage.getScene().getWindow();
         ScreenSwitch.switchScreen(
                 stage,
-                "/com/nhom7/requestedit/manager_attendanceLog.fxml",
+                "/com/nhom7/home/HomePage.fxml",
                 "Phần mềm quản lý chấm công",
                 null
         );

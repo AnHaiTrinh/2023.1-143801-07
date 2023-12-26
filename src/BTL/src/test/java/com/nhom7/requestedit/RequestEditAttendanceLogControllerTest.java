@@ -6,8 +6,6 @@ import com.nhom7.dbsubsystem.IRequestEditAttendanceLogDBSubSystem;
 import com.nhom7.dbsubsystem.MemoryRequestEditAttendanceLogDBSubSystem;
 import com.nhom7.entity.Employee;
 import com.nhom7.entity.RequestEditAttendanceLog;
-import com.nhom7.hrsubsystem.IHRSubSystem;
-import com.nhom7.hrsubsystem.MemoryHRSubSystem;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -26,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class RequestEditAttendanceLogControllerTest extends ApplicationTest {
     private RequestEditAttendanceLogController controller;
     private final IRequestEditAttendanceLogDBSubSystem dbSubSystem = new MemoryRequestEditAttendanceLogDBSubSystem();
-    private final IHRSubSystem hrSubSystem = new MemoryHRSubSystem();
     private final Employee employee1 = new Employee(
             "20200260",
             "Nguyen Kim Hung",
@@ -44,8 +41,8 @@ class RequestEditAttendanceLogControllerTest extends ApplicationTest {
     public void start (javafx.stage.Stage stage) throws Exception{
         EmployeeContext.destroy();
         EmployeeContext.create(employee1);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("request_edit_attendanceLog.fxml"));
-        controller = new RequestEditAttendanceLogController(hrSubSystem, dbSubSystem);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("requestEditAttendanceLog.fxml"));
+        controller = new RequestEditAttendanceLogController(dbSubSystem);
         fxmlLoader.setController(controller);
         stage.setScene(new Scene(fxmlLoader.load()));
         stage.show();

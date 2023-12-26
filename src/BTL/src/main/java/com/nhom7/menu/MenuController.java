@@ -23,7 +23,7 @@ public class MenuController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         ScreenSwitch.switchScreen(
                 stage,
-                "/com/nhom7/import_data/HomeImportData.fxml",
+                "/com/nhom7/importdata/HomeImportData.fxml",
                 "Phần mềm quản lý chấm công",
                 new ImportDataController()
         );
@@ -51,7 +51,7 @@ public class MenuController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         ScreenSwitch.switchScreen(
                 stage,
-                "/com/nhom7/exportTimekeepingRecord/ExportTimekeepingRecord.fxml",
+                "/com/nhom7/exportfile/ExportTimekeepingRecord.fxml",
                 "Phần mềm quản lý chấm công",
                 null
         );
