@@ -5,6 +5,7 @@ import com.nhom7.entity.OfficeStaffTimekeepingRecord;
 import com.nhom7.entity.WorkerTimekeepingRecord;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
@@ -13,63 +14,64 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class ExportTimekeepingRecordController implements DynamicTable{
+public class ExportTimekeepingRecordController implements DynamicTable {
 
     @FXML
-    private ComboBox<Integer> pickYear;
+    public ComboBox<Integer> pickYear;
     @FXML
-    private ComboBox<String> pickUnit;
+    public ComboBox<String> pickUnit;
     @FXML
-    private ComboBox<Integer> pickMonth;
+    public ComboBox<Integer> pickMonth;
     @FXML
-    private TableView<WorkerTimekeepingRecord> workerTable;
+    public ComboBox<String> chooseTypeOfUnit = new ComboBox<>();
     @FXML
-    private TableColumn<WorkerTimekeepingRecord, String> workerId;
+    public TableView<WorkerTimekeepingRecord> workerTable;
     @FXML
-    private TableColumn<WorkerTimekeepingRecord, String> workerName;
+    public TableColumn<WorkerTimekeepingRecord, String> workerId = new TableColumn<>();
     @FXML
-    private TableColumn<WorkerTimekeepingRecord, String> workerUnit;
+    public TableColumn<WorkerTimekeepingRecord, String> workerName = new TableColumn<>();
     @FXML
-    private TableColumn<WorkerTimekeepingRecord, String> workerMonth;
+    public TableColumn<WorkerTimekeepingRecord, String> workerUnit = new TableColumn<>();
     @FXML
-    private TableColumn<WorkerTimekeepingRecord, Double> workerWork;
+    public TableColumn<WorkerTimekeepingRecord, String> workerMonth = new TableColumn<>();
     @FXML
-    private TableColumn<WorkerTimekeepingRecord, Double> workerOvertime;
+    public TableColumn<WorkerTimekeepingRecord, Double> workerWork = new TableColumn<>();
     @FXML
-    private TableView<OfficeStaffTimekeepingRecord> officerTable;
+    public TableColumn<WorkerTimekeepingRecord, Double> workerOvertime = new TableColumn<>();
     @FXML
-    private TableColumn<OfficeStaffTimekeepingRecord, String> officerId;
+    public TableView<OfficeStaffTimekeepingRecord> officerTable;
     @FXML
-    private TableColumn<OfficeStaffTimekeepingRecord, String> officerName;
+    public TableColumn<OfficeStaffTimekeepingRecord, String> officerId = new TableColumn<>();
     @FXML
-    private TableColumn<OfficeStaffTimekeepingRecord, String> officerUnit;
+    public TableColumn<OfficeStaffTimekeepingRecord, String> officerName = new TableColumn<>();
     @FXML
-    private TableColumn<OfficeStaffTimekeepingRecord, String> officerMonth;
+    public TableColumn<OfficeStaffTimekeepingRecord, String> officerUnit = new TableColumn<>();
     @FXML
-    private TableColumn<OfficeStaffTimekeepingRecord, Integer>  officerSession;
+    public TableColumn<OfficeStaffTimekeepingRecord, String> officerMonth = new TableColumn<>();
     @FXML
-    private TableColumn<OfficeStaffTimekeepingRecord, Double>  officerLate;
+    public TableColumn<OfficeStaffTimekeepingRecord, Integer>  officerSession = new TableColumn<>();
     @FXML
-    private ComboBox<String> chooseTypeOfUnit;
-    private final OfficeStaffTimekeepingRecordRepository officeStaffTimekeepingRecordRepository = new OfficeStaffTimekeepingRecordRepository();
-    private final WorkerTimekeepingRecordRepository workerTimekeepingRecordRepository = new WorkerTimekeepingRecordRepository();
+    public TableColumn<OfficeStaffTimekeepingRecord, Double>  officerLate = new TableColumn<>();
+
+    public OfficeStaffTimekeepingRecordRepository officeStaffTimekeepingRecordRepository = new OfficeStaffTimekeepingRecordRepository();
+    public WorkerTimekeepingRecordRepository workerTimekeepingRecordRepository = new WorkerTimekeepingRecordRepository();
 
     public void initialize() {
         //worker table
-        workerId.setCellValueFactory(new PropertyValueFactory<WorkerTimekeepingRecord, String>("idEmployee"));
-        workerName.setCellValueFactory(new PropertyValueFactory<WorkerTimekeepingRecord, String>("nameEmployee"));
-        workerUnit.setCellValueFactory(new PropertyValueFactory<WorkerTimekeepingRecord, String>("department"));
-        workerMonth.setCellValueFactory(new PropertyValueFactory<WorkerTimekeepingRecord, String>("month"));
-        workerWork.setCellValueFactory(new PropertyValueFactory<WorkerTimekeepingRecord, Double>("totalWorkingHours"));
-        workerOvertime.setCellValueFactory(new PropertyValueFactory<WorkerTimekeepingRecord, Double>("totalOvertimeHours"));
+        workerId.setCellValueFactory(new PropertyValueFactory<>("idEmployee"));
+        workerName.setCellValueFactory(new PropertyValueFactory<>("nameEmployee"));
+        workerUnit.setCellValueFactory(new PropertyValueFactory<>("department"));
+        workerMonth.setCellValueFactory(new PropertyValueFactory<>("month"));
+        workerWork.setCellValueFactory(new PropertyValueFactory<>("totalWorkingHours"));
+        workerOvertime.setCellValueFactory(new PropertyValueFactory<>("totalOvertimeHours"));
 
         //officer table
-        officerId.setCellValueFactory(new PropertyValueFactory<OfficeStaffTimekeepingRecord, String>("idEmployee"));
-        officerName.setCellValueFactory(new PropertyValueFactory<OfficeStaffTimekeepingRecord, String>("nameEmployee"));
-        officerUnit.setCellValueFactory(new PropertyValueFactory<OfficeStaffTimekeepingRecord, String>("department"));
-        officerMonth.setCellValueFactory(new PropertyValueFactory<OfficeStaffTimekeepingRecord, String>("month"));
-        officerSession.setCellValueFactory(new PropertyValueFactory<OfficeStaffTimekeepingRecord, Integer>("totalWorkSessions"));
-        officerLate.setCellValueFactory(new PropertyValueFactory<OfficeStaffTimekeepingRecord, Double>("totalArrivingLateOrLeavingEarlyHours"));
+        officerId.setCellValueFactory(new PropertyValueFactory<>("idEmployee"));
+        officerName.setCellValueFactory(new PropertyValueFactory<>("nameEmployee"));
+        officerUnit.setCellValueFactory(new PropertyValueFactory<>("department"));
+        officerMonth.setCellValueFactory(new PropertyValueFactory<>("month"));
+        officerSession.setCellValueFactory(new PropertyValueFactory<>("totalWorkSessions"));
+        officerLate.setCellValueFactory(new PropertyValueFactory<>("totalArrivingLateOrLeavingEarlyHours"));
 
         //chooseTypeOfUnit
         chooseTypeOfUnit.getItems().addAll("Công nhân", "Nhân viên văn phòng");
@@ -83,13 +85,13 @@ public class ExportTimekeepingRecordController implements DynamicTable{
         //pickUnit
         pickUnit.getItems().addAll(workerTimekeepingRecordRepository.getAllWorkerUnit());
         pickUnit.getItems().addAll(officeStaffTimekeepingRecordRepository.getAllOfficeStaffUnit());
-        pickUnit.setButtonCell(new ListCell<String>() {
+        pickUnit.setButtonCell(new ListCell<>() {
             @Override
-            protected void updateItem(String item, boolean empty){
+            protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
-                if(empty || item == null){
+                if (empty || item == null) {
                     setText("Chọn đơn vị");
-                }else{
+                } else {
                     setText(item);
                 }
             }
@@ -97,7 +99,7 @@ public class ExportTimekeepingRecordController implements DynamicTable{
     }
 
 
-    public void chooseTypeOfUnit(ActionEvent actionEvent) {
+    public void chooseTypeOfUnit() {
         if(chooseTypeOfUnit.getValue().equals("Công nhân")){
             pickUnit.getItems().clear();
             pickUnit.getItems().addAll(workerTimekeepingRecordRepository.getAllWorkerUnit());
@@ -110,7 +112,7 @@ public class ExportTimekeepingRecordController implements DynamicTable{
         }
     }
 
-    public void search(ActionEvent actionEvent) {
+    public void search() {
         //check if user choose all field
         if(pickUnit.getValue() == null || pickMonth.getValue() == null || pickYear.getValue() == null){
             //alert user to choose all field
@@ -143,7 +145,7 @@ public class ExportTimekeepingRecordController implements DynamicTable{
         }
     }
 
-    public void exportExcel(ActionEvent actionEvent) throws IOException {
+    public void exportExcel() throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Files", "*.xlsx"));
         File file = fileChooser.showSaveDialog(null);
@@ -157,7 +159,7 @@ public class ExportTimekeepingRecordController implements DynamicTable{
         }
     }
 
-    public void exportCsv(ActionEvent actionEvent) throws IOException {
+    public void exportCsv() throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Csv Files", "*.csv"));
         File file = fileChooser.showSaveDialog(null);
@@ -171,7 +173,7 @@ public class ExportTimekeepingRecordController implements DynamicTable{
         }
     }
 
-    public void chooseUnit(ActionEvent actionEvent) {
+    public void chooseUnit() {
         String unit = pickUnit.getValue();
         if (unit == null) return;
         List<String> listOfWorkerUnit = workerTimekeepingRecordRepository.getAllWorkerUnit();
