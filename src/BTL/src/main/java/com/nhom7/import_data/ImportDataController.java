@@ -1,6 +1,7 @@
 package com.nhom7.import_data;
 import com.nhom7.dbsubsystem.RemoteHistoryImportFileDBSystem;
 import com.nhom7.entity.HistoryImportFile;
+import com.nhom7.screen.ScreenSwitch;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -34,11 +35,12 @@ public class ImportDataController implements Initializable {
 
     public void onMousePressedButtonImport(MouseEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(ImportDataController.class.getResource("SelectFileImportData.fxml"));
-        fxmlLoader.setController(new SelectFileImportDataController(new FileChooser(), new CheckFileExcel()));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+        ScreenSwitch.switchScreen(
+                stage,
+                "/com/nhom7/import_data/SelectFileImportData.fxml",
+                "Chọn file",
+                new SelectFileImportDataController(new FileChooser(), new CheckFileExcel())
+        );
     }
     public void DisplayHistoryImportTable(List<HistoryImportFile> historyImportFiles){
         historyImportFiles = FXCollections.observableArrayList(historyImportFiles);

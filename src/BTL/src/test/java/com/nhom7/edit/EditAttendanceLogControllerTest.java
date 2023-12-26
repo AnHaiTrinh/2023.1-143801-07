@@ -1,6 +1,6 @@
 package com.nhom7.edit;
 
-import com.nhom7.dbsubsystem.ErrorDBSubSystem;
+import com.nhom7.dbsubsystem.ErrorAttendanceLogDBSubSystem;
 import com.nhom7.dbsubsystem.IAttendanceLogDBSubSystem;
 import com.nhom7.dbsubsystem.MemoryAttendanceLogDBSubsystem;
 import com.nhom7.entity.AttendanceLog;
@@ -19,37 +19,22 @@ import org.testfx.framework.junit5.ApplicationTest;
 
 import org.testfx.matcher.control.LabeledMatchers;
 
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class EditAttendanceLogControllerTest extends ApplicationTest {
     private EditAttendanceLogController controller;
 
     private final IAttendanceLogDBSubSystem dbSubSystem = new MemoryAttendanceLogDBSubsystem();
-
     private final IHRSubSystem hrSubSystem = new MemoryHRSubSystem();
-
-    private final Employee employee = new Employee(
-            "20200673",
-            "Le Anh Vu",
-            "HR Manager",
-            "Human Resource"
-    );
-
-    private final AttendanceLog attendanceLog = new AttendanceLog(
-            1,
-            "20200673",
-            LocalDate.parse("2021-05-01", Settings.DATE_FORMATTER),
-            LocalTime.parse("07:00:00", Settings.TIME_FORMATTER),
-            "CHECKIN",
-            "1"
-    );
+    private Employee employee;
+    private AttendanceLog attendanceLog;
+    private final int attendanceLogId = 1;
 
     @Override
     public void start (javafx.stage.Stage stage) throws Exception {
+        attendanceLog = dbSubSystem.getAttendanceLogById(attendanceLogId);
+        employee = hrSubSystem.getEmployeeById(attendanceLog.getEmployeeId());
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditAttendanceLog.fxml"));
         controller = new EditAttendanceLogController(attendanceLog, dbSubSystem, hrSubSystem);
         fxmlLoader.setController(controller);
@@ -77,6 +62,11 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
                 attendanceLog.getType(),
                 controller.typeComboBox.getValue()
         );
+    }
+
+    void assertAttendanceLogIsSync() {
+        AttendanceLog newAttendanceLog = dbSubSystem.getAttendanceLogById(attendanceLogId);
+        assertEquals(attendanceLog, newAttendanceLog);
     }
 
 
@@ -150,6 +140,7 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
         clickOn("OK");
 
         assertUpdatedAttendanceLogIsDisplayed(time, type);
+        assertAttendanceLogIsSync();
     }
 
     @ParameterizedTest
@@ -169,6 +160,7 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
         clickOn("OK");
 
         assertNotUpdatedAttendanceLogIsDisplayed();
+        assertAttendanceLogIsSync();
     }
 
     @ParameterizedTest
@@ -191,6 +183,7 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
         clickOn("OK");
 
         assertNotUpdatedAttendanceLogIsDisplayed();
+        assertAttendanceLogIsSync();
     }
 
     @ParameterizedTest
@@ -200,7 +193,7 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
             "18:09:24, CHECKIN",
     })
     void testDbSubSystemError(String time, String type) {
-        controller.setDbSubSystem(new ErrorDBSubSystem());
+        controller.setDbSubSystem(new ErrorAttendanceLogDBSubSystem());
 
         enterInput(time, type);
 
@@ -215,6 +208,7 @@ class EditAttendanceLogControllerTest extends ApplicationTest {
         clickOn("OK");
 
         assertNotUpdatedAttendanceLogIsDisplayed();
+        assertAttendanceLogIsSync();
     }
 
     @Test

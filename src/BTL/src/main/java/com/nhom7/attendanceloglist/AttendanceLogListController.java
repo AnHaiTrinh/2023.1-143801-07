@@ -2,11 +2,11 @@ package com.nhom7.attendanceloglist;
 
 import com.nhom7.alert.AlertFactory;
 import com.nhom7.dbsubsystem.IAttendanceLogDBSubSystem;
-import com.nhom7.dbsubsystem.MemoryAttendanceLogDBSubsystem;
+import com.nhom7.dbsubsystem.RemoteAttendanceLogDBSubSystem;
 import com.nhom7.edit.EditAttendanceLogController;
 import com.nhom7.entity.AttendanceLog;
 import com.nhom7.config.Settings;
-import com.nhom7.hrsubsystem.MemoryHRSubSystem;
+import com.nhom7.hrsubsystem.DatabaseHRSubSystem;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -165,8 +165,8 @@ public class AttendanceLogListController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/nhom7/edit/EditAttendanceLog.fxml"));
         fxmlLoader.setController(new EditAttendanceLogController(
                 attendanceLog,
-                new MemoryAttendanceLogDBSubsystem(),
-                new MemoryHRSubSystem()
+                new RemoteAttendanceLogDBSubSystem(),
+                new DatabaseHRSubSystem()
         ));
         try {
             Parent childScreen = fxmlLoader.load();
