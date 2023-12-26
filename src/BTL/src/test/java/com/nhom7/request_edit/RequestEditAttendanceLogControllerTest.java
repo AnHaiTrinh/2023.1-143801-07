@@ -1,4 +1,4 @@
-package com.nhom7.request_edit_attendanceLog;
+package com.nhom7.request_edit;
 
 import com.nhom7.config.Settings;
 import com.nhom7.dbsubsystem.IRequestEditAttendanceLogDBSubSystem;
@@ -7,7 +7,6 @@ import com.nhom7.entity.Employee;
 import com.nhom7.entity.RequestEditAttendanceLog;
 import com.nhom7.hrsubsystem.IHRSubSystem;
 import com.nhom7.hrsubsystem.MemoryHRSubSystem;
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;

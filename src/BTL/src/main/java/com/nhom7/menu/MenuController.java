@@ -41,7 +41,7 @@ public class MenuController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         ScreenSwitch.switchScreen(
                 stage,
-                "/com/nhom7/request_edit_attendanceLog/manager_attendanceLog.fxml",
+                "/com/nhom7/request_edit/manager_attendanceLog.fxml",
                 "Phần mềm quản lý chấm công",
                 null
         );
