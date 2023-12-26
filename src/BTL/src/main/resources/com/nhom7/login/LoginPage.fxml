@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="anchorPaneLoginPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@LoginPage.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
+   <Pane fx:id="paneLoginPage" layoutX="82.0" layoutY="58.0" prefHeight="283.0" prefWidth="435.0">
+      <Label layoutX="108.0" layoutY="66.0" text="Hệ thống quản lý chấm công">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="employeeId" layoutX="88.0" layoutY="117.0" prefHeight="26.0" prefWidth="258.0" promptText="Mã nhân viên*" />
+      <Button layoutX="130.0" layoutY="216.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="35.0" prefWidth="172.0" text="Đăng nhập" textOverrun="CLIP">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="45.0" fitWidth="54.0" layoutX="203.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icon/icon_main.png" />
+         </image>
+      </ImageView>
+      <PasswordField fx:id="password" layoutX="88.0" layoutY="165.0" prefHeight="25.0" prefWidth="258.0" promptText="Mật khẩu*" />
+   </Pane>
+</AnchorPane>
