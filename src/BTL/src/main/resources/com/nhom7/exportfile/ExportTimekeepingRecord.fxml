@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="mainContainer" fx:id="mainContainer" prefHeight="559.0" prefWidth="864.0" stylesheets="@../attendanceloglist/AttendanceLogList.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nhom7.exportfile.ExportTimekeepingRecordController">
+    <fx:include source="../menu/Menu.fxml" />
+    <Label layoutX="176.0" layoutY="10.0" prefHeight="30.0" prefWidth="191.0" text="Báo cáo thống kê">
+        <font>
+            <Font name="System Bold" size="20.0" />
+        </font>
+    </Label>
+    <TextField fx:id="searchBar" layoutX="519.0" layoutY="89.0" prefHeight="32.0" prefWidth="178.0" promptText="Search" visible="false" />
+    <Button fx:id="exportExcelButton" layoutX="560.0" layoutY="105.0" mnemonicParsing="false" onAction="#exportExcel" prefHeight="32.0" prefWidth="135.0" style="-fx-background-color: #208F3A;" text="Xuất file excel" textFill="WHITE">
+        <font>
+            <Font name="System Bold" size="15.0" />
+        </font>
+    </Button>
+    <TableView id="tableOfEmployee" fx:id="workerTable" layoutX="176.0" layoutY="145.0" prefHeight="391.0" prefWidth="674.0" stylesheets="@ExportTimekeepingRecord.css">
+        <columns>
+            <TableColumn fx:id="workerId" prefWidth="77.0" text="Mã nhân viên" />
+            <TableColumn fx:id="workerName" prefWidth="163.0" text="Họ tên" />
+            <TableColumn fx:id="workerUnit" prefWidth="121.0" text="Đơn vị" />
+            <TableColumn fx:id="workerMonth" prefWidth="111.0" text="Tháng" />
+            <TableColumn fx:id="workerWork" prefWidth="100.0" text="Tổng số giờ làm việc" />
+            <TableColumn fx:id="workerOvertime" prefWidth="100.0" text="Tổng số giờ tăng ca" />
+        </columns>
+    </TableView>
+    <Button fx:id="searchButton" layoutX="796.0" layoutY="65.0" maxHeight="32.0" mnemonicParsing="false" onAction="#search" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: #208F3A;" textFill="#fafafa">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font>
+        <graphic>
+            <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../icon/icon_timkiem.png" />
+            </ImageView>
+        </graphic>
+    </Button>
+    <DatePicker id="pickMonth" fx:id="dateFilter" layoutX="372.0" layoutY="89.0" prefHeight="32.0" prefWidth="158.0" promptText="Chọn tháng" stylesheets="@ExportTimekeepingRecord.css" visible="false" />
+    <ComboBox id="pickTypeOfRecord" fx:id="chooseTypeOfUnit" layoutX="175.0" layoutY="65.0" onAction="#chooseTypeOfUnit" prefHeight="32.0" prefWidth="180.0" promptText="Chọn loại đơn vị" style="-fx-background-color: #208F3A;" stylesheets="@ExportTimekeepingRecord.css" />
+   <ChoiceBox prefWidth="150.0" visible="false" />
+   <ComboBox id="pickMonth" fx:id="pickMonth" layoutX="570.0" layoutY="65.0" prefHeight="32.0" prefWidth="90.0" promptText="Tháng" style="-fx-background-color: #208F3A;" stylesheets="@ExportTimekeepingRecord.css" />
+   <ComboBox id="pickYear" fx:id="pickYear" layoutX="675.0" layoutY="65.0" prefHeight="32.0" prefWidth="100.0" promptText="Năm" style="-fx-background-color: #208F3A;" stylesheets="@ExportTimekeepingRecord.css" />
+   <ComboBox id="pickMonth" fx:id="pickUnit" layoutX="370.0" layoutY="65.0" onAction="#chooseUnit" prefHeight="32.0" prefWidth="180.0" promptText="Chọn đơn vị" style="-fx-background-color: #208F3A;" stylesheets="@ExportTimekeepingRecord.css" />
+   <TableView id="tableOfEmployee" fx:id="officerTable" layoutX="176.0" layoutY="145.0" prefHeight="391.0" prefWidth="674.0" stylesheets="@ExportTimekeepingRecord.css">
+      <columns>
+         <TableColumn fx:id="officerId" prefWidth="77.0" text="Mã nhân viên" />
+         <TableColumn fx:id="officerName" prefWidth="163.0" text="Họ tên" />
+         <TableColumn fx:id="officerUnit" prefWidth="121.0" text="Đơn vị" />
+         <TableColumn fx:id="officerMonth" prefWidth="111.0" text="Tháng" />
+         <TableColumn fx:id="officerSession" prefWidth="100.0" text="Tổng số buổi làm" />
+         <TableColumn fx:id="officerLate" prefWidth="100.0" text="Tổng số giờ đi muộn về sớm" />
+      </columns>
+   </TableView>
+   <Button fx:id="exportCsvButton" layoutX="710.0" layoutY="105.0" mnemonicParsing="false" onAction="#exportCsv" prefHeight="32.0" prefWidth="135.0" style="-fx-background-color: #208F3A;" text="Xuất file csv" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="15.0" />
+      </font>
+   </Button>
+</AnchorPane>

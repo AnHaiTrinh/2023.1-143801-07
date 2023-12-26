@@ -10,6 +10,7 @@ module com.example.btl {
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
     requires java.sql;
+    requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
 
     opens com.nhom7.menu to javafx.fxml;
@@ -26,12 +27,16 @@ module com.example.btl {
     exports com.nhom7.entity;
     opens com.nhom7.importdata to javafx.fxml;
     exports com.nhom7.importdata;
+    opens com.nhom7.attendanceloglist to javafx.fxml;
+    exports com.nhom7.attendanceloglist;
+    opens com.nhom7.exportfile to javafx.fxml;
+    exports com.nhom7.exportfile;
     exports com.nhom7.validate;
     opens com.nhom7.validate to javafx.fxml;
-    exports com.nhom7.attendanceloglist;
-    opens com.nhom7.attendanceloglist to javafx.fxml;
     exports com.nhom7.requestedit;
     opens com.nhom7.requestedit to javafx.fxml;
     exports com.nhom7;
     opens com.nhom7 to javafx.fxml;
+    exports com.nhom7.home;
+    opens com.nhom7.home to javafx.fxml;
 }

@@ -41,11 +41,22 @@ public class MenuController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         ScreenSwitch.switchScreen(
                 stage,
-                "/com/nhom7/requestedit/manager_attendanceLog.fxml",
+                "/com/nhom7/home/HomePage.fxml",
                 "Phần mềm quản lý chấm công",
                 null
         );
     }
+
+    public void onMousePressedButtonExportData(MouseEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        ScreenSwitch.switchScreen(
+                stage,
+                "/com/nhom7/exportfile/ExportTimekeepingRecord.fxml",
+                "Phần mềm quản lý chấm công",
+                null
+        );
+    }
+
     public void onMousePressedButtonLogout(MouseEvent event) {
         EmployeeContext.destroy();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

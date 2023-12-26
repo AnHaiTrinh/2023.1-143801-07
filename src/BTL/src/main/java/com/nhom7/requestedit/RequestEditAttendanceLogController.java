@@ -1,18 +1,17 @@
 package com.nhom7.requestedit;
 
+import com.nhom7.EmployeeContext;
 import com.nhom7.alert.AlertFactory;
 import com.nhom7.config.Settings;
 import com.nhom7.dbsubsystem.IRequestEditAttendanceLogDBSubSystem;
-import com.nhom7.entity.Employee;
 import com.nhom7.entity.RequestEditAttendanceLog;
 import com.nhom7.hrsubsystem.IHRSubSystem;
+import com.nhom7.screen.ScreenSwitch;
 import com.nhom7.validate.DateTimeValidator;
 import com.nhom7.validate.OptionValidator;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -38,23 +37,21 @@ public class RequestEditAttendanceLogController implements Initializable {
     public TextField reasonTextField;
     public TextArea noteTextArea;
     public ComboBox<String> attendanceMachineId;
-    private String employeeId;
-    private IHRSubSystem hrSubSystem;
     private IRequestEditAttendanceLogDBSubSystem dbSubSystem;
     private List<String> requestEditAttendanceLogItems = Arrays.asList("Chỉnh sửa chấm công", "Thêm chấm công", "Xóa chấm công");
     private List<String> attendanceMachineIdItems = Arrays.asList("1", "2", "3");
     private int idCount = 5;
-    public RequestEditAttendanceLogController(String employeeId, IHRSubSystem hrSubSystem, IRequestEditAttendanceLogDBSubSystem dbSubSystem){
-        this.employeeId = employeeId;
-        this.hrSubSystem = hrSubSystem;
+    public RequestEditAttendanceLogController(IRequestEditAttendanceLogDBSubSystem dbSubSystem){
         this.dbSubSystem = dbSubSystem;
     }
     public void onMousePressedButtonBackManagerAttendanceLog(MouseEvent event) throws IOException{
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(RequestEditAttendanceLogController.class.getResource("manager_attendanceLog.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 864, 559);
-        stage.setScene(scene);
-        stage.show();
+        ScreenSwitch.switchScreen(
+                stage,
+                "/com/nhom7/home/HomePage.fxml",
+                "Phần mềm quản lý chấm công",
+                null
+        );
     }
 
     @Override
@@ -77,13 +74,8 @@ public class RequestEditAttendanceLogController implements Initializable {
     }
 
     private void loadInitialData(){
-        Employee employee = hrSubSystem.getEmployeeById(employeeId);
-        if (employee == null){
-            AlertFactory.getInstance().createAlert("Error", "Không tìm thấy nhân viên theo mã");
-            return;
-        }
-        fullNameTextField.setText(employee.getName());
-        staffCodeTextField.setText(employeeId);
+        fullNameTextField.setText(EmployeeContext.getName());
+        staffCodeTextField.setText(EmployeeContext.getId());
         requestEditAttendanceLogTypes.getItems().addAll(requestEditAttendanceLogItems);
         //datePicker.setValue(LocalDate.now());
         if (!requestEditAttendanceLogItems.isEmpty()) {
@@ -174,7 +166,7 @@ public class RequestEditAttendanceLogController implements Initializable {
     private boolean save() {
         RequestEditAttendanceLog requestEditAttendanceLog = new RequestEditAttendanceLog(
                 idCount,
-                employeeId,
+                EmployeeContext.getId(),
                 datePicker.getValue(),
                 LocalTime.parse(timeTextField.getText(), Settings.TIME_FORMATTER),
                 !timeTextFieldChange.getText().isEmpty() ? LocalTime.parse(timeTextFieldChange.getText(), Settings.TIME_FORMATTER) : null,
@@ -191,9 +183,5 @@ public class RequestEditAttendanceLogController implements Initializable {
 
     public void setDbSubSystem(IRequestEditAttendanceLogDBSubSystem dbSubSystem) {
         this.dbSubSystem = dbSubSystem;
-    }
-
-    public void setHrSubSystem(IHRSubSystem hrSubSystem) {
-        this.hrSubSystem = hrSubSystem;
     }
 }
