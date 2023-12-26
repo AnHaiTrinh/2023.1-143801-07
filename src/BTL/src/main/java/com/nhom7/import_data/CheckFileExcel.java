@@ -9,7 +9,6 @@ import com.nhom7.validate.DateTimeValidator;
 import org.apache.poi.ss.usermodel.*;
 
 public class CheckFileExcel implements CheckFileService {
-    DateTimeValidator dateTimeValidator = new DateTimeValidator();
     @Override
     public String checkErrorFile(String url) throws IOException {
         try (InputStream inputStream = new URL(url).openStream()) {
@@ -25,9 +24,9 @@ public class CheckFileExcel implements CheckFileService {
                 }
                 if(row.getCell(0).getCellType() != CellType.STRING){
                     return "errorFormatMaNv";
-                } else if (!dateTimeValidator.isValidLocalDate(row.getCell(1).getStringCellValue(), Settings.DATE_FORMATTER)){
+                } else if (!DateTimeValidator.isValidLocalDate(row.getCell(1).getStringCellValue(), Settings.DATE_FORMATTER)){
                     return "errorFormatDay";
-                } else if (!dateTimeValidator.isValidLocalTime(row.getCell(2).getStringCellValue(), Settings.TIME_FORMATTER)) {
+                } else if (!DateTimeValidator.isValidLocalTime(row.getCell(2).getStringCellValue(), Settings.TIME_FORMATTER)) {
                     return "errorFormatTime";
                 } else if (row.getCell(3).getCellType() != CellType.STRING) {
                     return "errorFormatType";

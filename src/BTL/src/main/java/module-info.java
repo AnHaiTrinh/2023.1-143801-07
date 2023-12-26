@@ -14,8 +14,6 @@ module com.example.btl {
     requires org.apache.poi.poi;
     requires org.apache.poi.ooxml;
 
-    opens com.nhom7.main to javafx.fxml;
-    exports com.nhom7.main;
     opens com.nhom7.menu to javafx.fxml;
     exports com.nhom7.menu;
     opens com.nhom7.login to javafx.fxml;
@@ -34,4 +32,8 @@ module com.example.btl {
     exports com.nhom7.exportTimekeepingRecord;
     opens com.nhom7.import_data to javafx.fxml;
     exports com.nhom7.import_data;
+    exports com.nhom7.validate;
+    opens com.nhom7.validate to javafx.fxml;
+    exports com.nhom7;
+    opens com.nhom7 to javafx.fxml;
 }

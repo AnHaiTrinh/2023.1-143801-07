@@ -1,5 +1,6 @@
 package com.nhom7.import_data;
 
+import com.nhom7.alert.AlertFactory;
 import com.nhom7.entity.AttendanceLog;
 import org.apache.poi.ss.usermodel.*;
 
@@ -45,21 +46,28 @@ public class ReadFileExcel implements ReadFileService{
             }
             return attendanceLogList;
         }else {
-            ConsoleMessageDisplay consoleMessageDisplay = new ConsoleMessageDisplay();
-            if ( result.equals("errorFormatMaNv")){
-                consoleMessageDisplay.displayMessage("Cõ lỗi định dạng mã nhân viên");
-            } else if (result.equals("errorFormatDay")) {
-                consoleMessageDisplay.displayMessage("Cõ lỗi định dạng ngày");
-            } else if (result.equals("errorFormatTime")) {
-                consoleMessageDisplay.displayMessage("Cõ lỗi định dạng giờ");
-            }else if (result.equals("errorFormatType")) {
-                consoleMessageDisplay.displayMessage("Cõ lỗi định dạng kiểu");
-            }else if (result.equals("errorFormatMachineID")) {
-                consoleMessageDisplay.displayMessage("Cõ lỗi định dạng mã máy");
-            } else if (result.equals("errorNull")) {
-                consoleMessageDisplay.displayMessage("Lỗi đường dẫn không xác định");
-            } else{
-                consoleMessageDisplay.displayMessage("Lỗi không xác định");
+            switch (result) {
+                case "errorFormatMaNv":
+                    AlertFactory.getInstance().createAlert("Error", "Cõ lỗi định dạng mã nhân viên");
+                    break;
+                case "errorFormatDay":
+                    AlertFactory.getInstance().createAlert("Error", "Cõ lỗi định dạng ngày");
+                    break;
+                case "errorFormatTime":
+                    AlertFactory.getInstance().createAlert("Error", "Cõ lỗi định dạng giờ");
+                    break;
+                case "errorFormatType":
+                    AlertFactory.getInstance().createAlert("Error", "Cõ lỗi định dạng kiểu");
+                    break;
+                case "errorFormatMachineID":
+                    AlertFactory.getInstance().createAlert("Error", "Cõ lỗi định dạng mã máy");
+                    break;
+                case "errorNull":
+                    AlertFactory.getInstance().createAlert("Error", "Lỗi đường dẫn không xác định");
+                    break;
+                default:
+                    AlertFactory.getInstance().createAlert("Error", "Lỗi không xác định");
+                    break;
             }
 
             return null;
