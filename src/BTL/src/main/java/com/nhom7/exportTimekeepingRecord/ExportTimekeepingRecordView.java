@@ -2,7 +2,6 @@ package com.nhom7.exportTimekeepingRecord;
 
 import com.nhom7.attendanceloglist.AttendanceLogListController;
 import com.nhom7.dbsubsystem.MemoryAttendanceLogDBSubsystem;
-import com.nhom7.main.HelloApplication;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
