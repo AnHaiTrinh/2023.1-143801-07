@@ -1,7 +1,6 @@
 package com.nhom7.menu;
 import com.nhom7.EmployeeContext;
 import com.nhom7.attendanceloglist.AttendanceLogListController;
-import com.nhom7.dbsubsystem.MemoryAttendanceLogDBSubsystem;
 import com.nhom7.dbsubsystem.RemoteAttendanceLogDBSubSystem;
 import com.nhom7.importdata.ImportDataController;
 import com.nhom7.login.LoginView;
@@ -42,7 +41,7 @@ public class MenuController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         ScreenSwitch.switchScreen(
                 stage,
-                "/com/nhom7/request_edit/manager_attendanceLog.fxml",
+                "/com/nhom7/requestedit/manager_attendanceLog.fxml",
                 "Phần mềm quản lý chấm công",
                 null
         );

@@ -1,4 +1,4 @@
-package com.nhom7.request_edit;
+package com.nhom7.requestedit;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

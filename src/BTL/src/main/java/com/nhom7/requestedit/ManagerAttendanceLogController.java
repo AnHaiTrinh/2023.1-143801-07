@@ -1,4 +1,4 @@
-package com.nhom7.request_edit;
+package com.nhom7.requestedit;
 
 import com.nhom7.dbsubsystem.MemoryRequestEditAttendanceLogDBSubSystem;
 import com.nhom7.hrsubsystem.MemoryHRSubSystem;

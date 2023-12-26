@@ -4,7 +4,7 @@ import com.nhom7.EmployeeContext;
 import com.nhom7.alert.AlertFactory;
 import com.nhom7.entity.Employee;
 import com.nhom7.login.auth.IAuthService;
-import com.nhom7.request_edit.ManagerAttendanceLogController;
+import com.nhom7.requestedit.ManagerAttendanceLogController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;

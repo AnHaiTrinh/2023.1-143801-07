@@ -30,8 +30,8 @@ module com.example.btl {
     opens com.nhom7.validate to javafx.fxml;
     exports com.nhom7.attendanceloglist;
     opens com.nhom7.attendanceloglist to javafx.fxml;
-    exports com.nhom7.request_edit;
-    opens com.nhom7.request_edit to javafx.fxml;
+    exports com.nhom7.requestedit;
+    opens com.nhom7.requestedit to javafx.fxml;
     exports com.nhom7;
     opens com.nhom7 to javafx.fxml;
 }
