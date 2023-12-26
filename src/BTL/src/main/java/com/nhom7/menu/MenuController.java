@@ -2,7 +2,7 @@ package com.nhom7.menu;
 import com.nhom7.EmployeeContext;
 import com.nhom7.attendanceloglist.AttendanceLogListController;
 import com.nhom7.dbsubsystem.MemoryAttendanceLogDBSubsystem;
-import com.nhom7.import_data.ImportDataController;
+import com.nhom7.importdata.ImportDataController;
 import com.nhom7.login.LoginView;
 import com.nhom7.screen.ScreenSwitch;
 import javafx.fxml.Initializable;
@@ -23,7 +23,7 @@ public class MenuController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         ScreenSwitch.switchScreen(
                 stage,
-                "/com/nhom7/import_data/HomeImportData.fxml",
+                "/com/nhom7/importdata/HomeImportData.fxml",
                 "Phần mềm quản lý chấm công",
                 new ImportDataController()
         );
