@@ -24,7 +24,6 @@ public class ExportHelper {
             }
             // Fill data
             ObservableList<T> items = tableView.getItems();
-            System.out.println("itemsize: " + items.size());
             for (int rowIdx = 0; rowIdx < items.size(); rowIdx++) {
                 Row row = sheet.createRow(rowIdx + 1);
                 T item = items.get(rowIdx);
@@ -66,7 +65,6 @@ public class ExportHelper {
         // Save file
         try (FileWriter writer = new FileWriter(filePath)) {
             writer.write(csvContent.toString());
-            System.out.println("CSV file exported successfully");
         }
     }
 }
