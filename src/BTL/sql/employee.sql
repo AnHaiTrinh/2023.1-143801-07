@@ -11,5 +11,7 @@ INSERT INTO employee (id, name, password, title, department) VALUES
 ('20200260', 'Nguyen Kim Hung', 'password', 'Head of Department', 'Production Factory'),
 ('20200421', 'Nguyen Van Nam', '1', 'Worker', 'Production Factory'),
 ('20200196', 'Trinh An Hai', 'abcd', 'Officer', 'Accounting'),
-('M001', 'Tran Van Cuong', '123456','HR Manager', 'Human Resource'),
-('M003', 'Le Van Cuong', '1', 'Worker', 'Production Factory');
+('M0000001', 'Tran Van Cuong', '123456','HR Manager', 'Human Resource'),
+('M0000002', 'Tran Van Cuong', '123456','HR Manager', 'Human Resource'),
+('M0000003', 'Le Van Cuong', '1', 'Worker', 'Production Factory'),
+('M0000004', 'Tran Van Cuong', '123456','HR Manager', 'Human Resource');

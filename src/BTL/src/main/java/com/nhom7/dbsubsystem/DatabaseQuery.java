@@ -23,8 +23,6 @@ public class DatabaseQuery {
                 statement.setObject(i + 1, parameters[i]);
             }
 
-            System.out.println("Statement: "+ statement);
-
             // Thực hiện truy vấn
             resultSet = statement.executeQuery();
 
