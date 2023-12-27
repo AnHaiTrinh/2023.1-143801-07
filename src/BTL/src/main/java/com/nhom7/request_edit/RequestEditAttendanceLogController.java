@@ -188,6 +188,13 @@ public class RequestEditAttendanceLogController implements Initializable {
         if (!isValidTime) {
             return false;
         }
+//        boolean isValidDay = DateTimeValidator.isValidLocalDate(
+//                datePicker.toString(),
+//                Settings.DATE_FORMATTER
+//        );
+//        if (!isValidDay){
+//            return false;
+//        }
         return OptionValidator.isValidOption(
                 requestEditAttendanceLogTypes.getValue(),
                 requestEditAttendanceLogItems
